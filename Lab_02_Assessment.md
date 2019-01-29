@@ -2,7 +2,7 @@
 
 #### Total score: _100.0_ / _100.0_
 
-Run on January 29, 00:12:10 AM.
+Run on January 29, 01:22:41 AM.
 
 
 #### Necessary Files and Structure
@@ -29,9 +29,9 @@ Run on January 29, 00:12:10 AM.
 
 +  _2.5_ / _2.5_ : Pass: Check that no files with extension ".out" exist in directory "."
 
-+  _2.5_ / _2.5_ : Pass: Check that file/directory "duck" does not exist.
-
 +  _2.5_ / _2.5_ : Pass: Check that file/directory "ducks" does not exist.
+
++  _2.5_ / _2.5_ : Pass: Check that file/directory "duck" does not exist.
 
 
 ### Test that code compiles and creates the correct files
