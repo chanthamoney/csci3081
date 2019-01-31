@@ -1,4 +1,4 @@
-# 3081 HW02 C++ The Build Process and Makefiles
+# 3081 Lab02 C++ The Build Process and Makefiles
 
 ## What You Will Learn
 1. How to retrieve new class materials and merge them into your repository.
@@ -17,7 +17,7 @@ Now, we want to get the new class materials from the shared-upstream repository.
 $ git status
 On branch <branch name>
 Your branch is up to date with 'origin/<branch name>'
-    
+
 nothing to commit, working tree clean
 ```
 The output should begin with the branch you are currently on. If it says _On branch support-code_, you are all set. (NOTE: If your status output does not look like above and instead this message is displayed "Changes not staged for commit", you will _not_ be able to change branches. Follow the instructions given by git to _add_ and to _commit_ these changes.)
@@ -347,7 +347,11 @@ __A side note: Notice the format of the commit message. We will discuss this mor
 
 ### Reading the Feedback
 
+<<<<<<< HEAD
 Pushing to the server triggers the automated grading system (if all is working!). Soon your repo will contain a feedback file, letting you know if you have passed all tests of the assignment.
+=======
+Pushing to the server triggers the automated grading system (if all is working!). Soon your repo will contain a feedback file, letting you know if you have passed a _majority_ of our tests for the assignment. __Take note that from this lab onwards the Assessment will contain _more_ tests than the Feedback. Passing all of the Feedback tests will assure you _most but NOT ALL_ of the points for the Assessment.__
+>>>>>>> 7e3a7610a359ec48cb0018ef344e41d1a2c89fce
 
     $ git pull
 
