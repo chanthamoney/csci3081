@@ -10,21 +10,21 @@
 class Point2 {
 public:
    //constructor
-  Point2(double x1 = 0.0, double y1 = 0.0);
+  Point2(double x = 0.0, double y = 0.0);
   //class functions
   double DistanceBetween(Point2 obj);
   void Print();
   int Quadrant();
   //getter function
   double getX(){
-    return x;
+    return x_;
   }
   double getY(){
-    return y;
+    return y_;
   }
 private:
-  double x;
-  double y;
+  double x_;
+  double y_;
 };
 
 #endif

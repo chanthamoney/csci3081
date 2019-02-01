@@ -2,9 +2,9 @@
 #include <cmath>
 #include "point2.h"
 
-Point2::Point2(double x1, double y1){
-  x = x1;
-  y = y1;
+Point2::Point2(double x, double y){
+  x_ = x;
+  y_ = y;
 }
 
 double Point2::DistanceBetween(Point2 obj) {
@@ -23,28 +23,28 @@ double Point2::DistanceBetween(Point2 obj) {
 }
 
 void Point2::Print() {
-  std::cout << x;
-  std::cout << y;
+  std::cout << "[" << x_ << ",";
+  std::cout << y_ <<"]";
 }
 //TODO: CHECK ONE MORE TIME
 int Point2::Quadrant() {
-  if (x == 0 && y == 0){
+  if (x_ == 0 && y_ == 0){
       return 0;
   }
 
-  if (x > 0 && y >= 0){
+  if (x_ > 0 && y_ >= 0){
     return 1;
   }
 
-  if (x <= 0 && y > 0){
+  if (x_ <= 0 && y_ > 0){
     return 2;
   }
 
-  if (x < 0 && y <= 0){
+  if (x_ < 0 && y_ <= 0){
     return 3;
   }
 
-  if (x >= 0 && y <0){
+  if (x_ >= 0 && y_ <0){
     return 4;
   }
   return 0;
