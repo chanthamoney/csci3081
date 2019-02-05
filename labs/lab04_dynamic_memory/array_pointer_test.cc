@@ -19,14 +19,14 @@ ArrayPointerTest::ArrayPointerTest(int count) {
   //     Duck * ducks2_;
   //     Duck * ducks3_[kMaxDuckCount];
   //     Duck ** ducks4_;
-
+  // NOTE FOR CASSANDRA: THE DUCK IS INTITALIZE IN STACK. THE HEAP IS THE FUNCTION GOING note
   cout << "Initializing ducks1." << endl;
   // Write code here to create count_ ducks for array ducks1 (if required)
 	//do not to initialize because we already put objs is
   cout << "Initializing ducks2\n" ;
   // Write code here to create count_ ducks for array ducks2 (if required)
 	ducks2_ = new Duck[count_]; //need to intialize because no objs  in
-	//Here we need to set duck2 to  equal the array 
+	//Here we need to set duck2 to  equal the array
   cout << "Initializing ducks3\n";
   // Write code here to create count_ ducks for array ducks3 (if required)
 	for (int i=0; i<count_; i++){
@@ -94,7 +94,7 @@ ArrayPointerTest::~ArrayPointerTest() {
   //     Duck * ducks2_;
   //     Duck * ducks3_[kMaxDuckCount];
   //     Duck ** ducks4_;
-
+  cout << sizeof(ducks1_[1]) << "HERE";
   cout << "In ArrayPointerTest destructor." << endl << endl ;
 
   cout << "Deleting ducks1\n";
@@ -125,7 +125,7 @@ void ArrayPointerTest::DisplayContents() {
   for (int i=0; i<count_; i++) {
     ducks1_[i].PerformQuack();
   }
-  
+
   cout << "ducks2" << endl;
   for (int i=0; i<count_; i++) {
     ducks2_[i].PerformQuack();
@@ -140,5 +140,5 @@ void ArrayPointerTest::DisplayContents() {
   for (int i=0; i<count_; i++) {
     ducks4_[i]->PerformQuack();
   }
-  
+
 }
