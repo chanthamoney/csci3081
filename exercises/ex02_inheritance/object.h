@@ -8,8 +8,11 @@ using std::endl;
 
 class ObjectClass {
 public:
-  ObjectClass() : var_a_(10), var_b_(15) {}
-  ObjectClass(int a, int b) : var_a_(a), var_b_(b) {}
+  ObjectClass() : var_a_(10), var_b_(15) {} //no arg
+  ObjectClass(int a, int b) : var_a_(a), var_b_(b) {} // two arg
+  int getVarA() { return var_a_; }
+  void setVarA(int a) { var_a_ = a; }
+  int getVarB() { return var_b_; }
   void Print() {
     cout << "in ObjectClass. ";
     cout << "priv, prot =  " << var_a_ << ' '<< var_b_ << endl;

@@ -1,0 +1,16 @@
+Question 1:
+Attempting to print var_a_ and var_b_ will result in a compliation error, which seems reasonable. Briefly explain why it doesn't
+compile?
+We did not declare var_a_ and var_b_ in the scope.
+If we uncomment int var_b_ and int var_a_ in the
+protected and private we can compile.
+
+Question 2: The ComposedClass contains an ObjectClass object to which var_a_ and var_b_ belong,
+ and yet when you try to print them out, those lines will not compile.
+Briefly explain why.
+For our context, those variables are private and not have been inherited from the Object class.
+We need to inherit it.
+
+Question 3: ComposedClass probably needs to interact with object_ members. how will you give
+ComposedClass access?
+Make it a friend?
