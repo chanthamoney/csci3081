@@ -139,5 +139,9 @@ in ObjectClass. priv, prot =  10 15
 Derived 4,5 : in derivedClass...
 var_a_ 4
 var_b_ 5
+<<<<<<< HEAD
 in ObjectClass. priv, prot =  4 5
+=======
+in ObjectClass. priv, prot =  10 15
+>>>>>>> support-code
 ```
