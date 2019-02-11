@@ -17,7 +17,7 @@ public:
     std::cout << "making a copy of overnight" << std::endl;
   }
   ~Overnight();
-  void Transport();
+  void Transport() override;
 };
 
 #endif  // OVERNIGHT_H_
