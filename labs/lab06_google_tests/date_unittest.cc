@@ -99,13 +99,6 @@ TEST_F(DateTest, OperatorPlusTest){
   EXPECT_EQ((October+1).GetUsDate(), "11-01-2019");
   EXPECT_EQ((November+1).GetUsDate(), "12-01-2019");
   EXPECT_EQ((December+1).GetUsDate(), "01-01-2020");
-
-
-  EXPECT_EQ((ind_day+0).GetUsDate(), "07-04-1776");
-  EXPECT_EQ((ind_day+(-2)).GetUsDate(), "07-02-1776");
-  EXPECT_EQ((ind_day+365).GetUsDate(), "07-04-1777");
-  EXPECT_EQ((ind_day+(365*4)).GetUsDate(), "07-03-1780");
-
 }
 
 TEST_F(DateTest, OperatorMinusTest){
@@ -156,7 +149,36 @@ TEST_F(DateTest, OperatorMinusTest){
 
 TEST_F(DateTest, DaysBetweenTests) {
   Date new_year2016(2016, 1, 1);
-  Date March(2016, 3, 1);
+  Date March2016(2016, 3, 1);
+
+  Date Birthday(1998, 7, 17);
+  Date DayAfterBirthday(1998, 7, 18);
+
+  Date JanuaryFirst(2019, 1, 1);
+  Date FebruaryFirst(2019, 2, 1);
+  Date MarchFirst(2019, 3, 1);
+  Date AprilFirst(2019, 4, 1);
+  Date MayFirst(2019, 5, 1);
+  Date JuneFirst(2019, 6, 1);
+  Date JulyFirst(2019, 7, 1);
+  Date AugustFirst(2019, 8, 1);
+  Date SeptemberFirst(2019, 9, 1);
+  Date OctoberFirst(2019, 10, 1);
+  Date NovemberFirst(2019, 11, 1);
+  Date DecemberFirst(2019, 12, 1);
+
+  Date JanuaryLast(2019, 1, 31);
+  Date FebruaryLast(2019, 2, 28);
+  Date MarchLast(2019, 3, 31);
+  Date AprilLast(2019, 4, 30);
+  Date MayLast(2019, 5, 31);
+  Date JuneLast(2019, 6, 30);
+  Date JulyLast(2019, 7, 31);
+  Date AugustLast(2019, 8, 31);
+  Date SeptemberLast(2019, 9, 30);
+  Date OctoberLast(2019, 10, 31);
+  Date NovemberLast(2019, 11, 30);
+  Date DecemberLast(2019, 12, 31);
 
   EXPECT_EQ(first_day.GetUsDate(), "09-04-2018") << "First day of class not setup properly";
   EXPECT_EQ(last_day.GetUsDate(), "12-11-2018") << "Last day of class not setup properly";
@@ -164,7 +186,21 @@ TEST_F(DateTest, DaysBetweenTests) {
   EXPECT_EQ(first_day.DaysBetween(first_day), 0);
   EXPECT_EQ(new_year.DaysBetween(new_year18), 365);
   EXPECT_EQ(new_year18.DaysBetween(new_year), 365);
-  EXPECT_EQ(new_year2016.DaysBetween(March), 60);
+  EXPECT_EQ(Birthday.DaysBetween(DayAfterBirthday), 1);
+  EXPECT_EQ(new_year2016.DaysBetween(March2016), 60);
+  EXPECT_EQ(JanuaryFirst.DaysBetween(JanuaryLast), 30);
+  EXPECT_EQ(FebruaryFirst.DaysBetween(FebruaryLast), 27);
+  EXPECT_EQ(MarchFirst.DaysBetween(MarchLast), 30);
+  EXPECT_EQ(AprilFirst.DaysBetween(AprilLast), 29);
+  EXPECT_EQ(MayFirst.DaysBetween(MayLast), 30);
+  EXPECT_EQ(JuneFirst.DaysBetween(JuneLast), 29);
+  EXPECT_EQ(JulyFirst.DaysBetween(JulyLast), 30);
+  EXPECT_EQ(AugustFirst.DaysBetween(AugustLast), 30);
+  EXPECT_EQ(SeptemberFirst.DaysBetween(SeptemberLast), 29);
+  EXPECT_EQ(OctoberFirst.DaysBetween(OctoberLast), 30);
+  EXPECT_EQ(NovemberFirst.DaysBetween(NovemberLast), 29);
+  EXPECT_EQ(DecemberFirst.DaysBetween(DecemberLast), 30);
+
 }
 
 
