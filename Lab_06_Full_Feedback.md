@@ -1,6 +1,6 @@
 ### Feedback for Lab 06
 
-Run on February 10, 16:40:32 PM.
+Run on February 10, 20:23:08 PM.
 
 
 #### System Files and Lab Directory Structure
@@ -40,12 +40,32 @@ Run on February 10, 16:40:32 PM.
 + Pass: Check that file "date_unittest" exists.
 
 + Pass: Get all google tests.
-    3 tests found.
+    8 tests found.
 
 
 
 
 #### Results
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.ConstructorDateTest.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.OperatorPlusTest.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.OperatorMinusTest.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.DaysBetweenTests.
+
+
 
 + Pass: Check that a GoogleTest test passes.
     passes the test: DateTest.PrintDateTests.
@@ -58,7 +78,12 @@ Run on February 10, 16:40:32 PM.
 
 
 + Pass: Check that a GoogleTest test passes.
-    passes the test: DateTest.DaysBetweenTests.
+    passes the test: DateTest.PrintUSDateTests.
+
+
+
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.PrintUsDateTestsWithoutNewline.
 
 
 
@@ -70,8 +95,7 @@ Run on February 10, 16:40:32 PM.
 
 #### Testing Mutant 1 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - Dates constructed with epoch are about 70 years in the future
++ Pass: At least one test failed for Mutant 1
 
 
 #### Testing Mutant 2 for failure
@@ -81,20 +105,17 @@ Run on February 10, 16:40:32 PM.
 
 #### Testing Mutant 3 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - Dates from GetDate are missing a character
++ Pass: At least one test failed for Mutant 3
 
 
 #### Testing Mutant 4 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - Today's date month off by one
++ Pass: At least one test failed for Mutant 4
 
 
 #### Testing Mutant 5 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - 1/1/2016 to 3/1/2016 is 60 days, but this version returns 59
++ Pass: At least one test failed for Mutant 5
 
 
 #### Testing Mutant 6 for failure
@@ -104,8 +125,7 @@ Run on February 10, 16:40:32 PM.
 
 #### Testing Mutant 7 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - operator-: Probably a copy paste error
++ Pass: At least one test failed for Mutant 7
 
 
 #### Testing Mutant 8 for failure
