@@ -1,6 +1,6 @@
 ### Feedback for Lab 07
 
-Run on February 17, 17:24:09 PM.
+Run on February 17, 17:35:04 PM.
 
 
 #### Necessary Files and Structure
@@ -27,37 +27,18 @@ Run on February 17, 17:24:09 PM.
 
 #### Google Style Compliance I
 
-+ Fail: Cpplint checking for for Google C++ compliance
-
-/export/scratch/cpplint-gitbot/./src/mainpage.h:13:  #ifndef header guard has wrong style, please use: SRC_MAINPAGE_H_  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/mainpage.h:15:  #endif line should be "#endif  // SRC_MAINPAGE_H_"  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/robot_land.h:1:  #ifndef header guard has wrong style, please use: SRC_ROBOT_LAND_H_  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/robot_land.h:172:  #endif line should be "#endif  // SRC_ROBOT_LAND_H_"  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/obstacle.h:8:  #ifndef header guard has wrong style, please use: SRC_OBSTACLE_H_  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/obstacle.h:43:  #endif line should be "#endif  // SRC_OBSTACLE_H_"  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/robot_viewer.h:7:  #ifndef header guard has wrong style, please use: SRC_ROBOT_VIEWER_H_  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/robot_viewer.h:222:  #endif line should be "#endif  // SRC_ROBOT_VIEWER_H_"  [build/header_guard] [5]
++ Pass: Cpplint checking for for Google C++ compliance
 
 
 #### Doxygen
 
-+ Skip: Change into directory "docs".
++ Pass: Change into directory "docs".
 
-  This test was not run because of an earlier failing test.
++ Pass: Generating documentation by running doxygen
 
-+ Skip: Generating documentation by running doxygen
++ Pass: Check that file "../src/mainpage.h" exists.
 
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "html/classrobot__land.html" exists.
 
-+ Skip: Check that file "../src/mainpage.h" exists.
-
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file "html/classrobot__land.html" exists.
-
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file "html/classObstacle.html" exists.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "html/classObstacle.html" exists.
 
