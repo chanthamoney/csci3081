@@ -1,6 +1,6 @@
 ### Feedback for Lab 07
 
-Run on February 15, 17:16:16 PM.
+Run on February 17, 17:11:29 PM.
 
 
 #### Necessary Files and Structure
@@ -13,31 +13,30 @@ Run on February 15, 17:16:16 PM.
 
 + Pass: Change into directory "labs/lab07_style_doxy".
 
-+ Fail: Check that directory "docs" exists.
++ Pass: Check that directory "docs" exists.
 
-     "docs" not found.
-
-+ Skip: Check that file "docs/Doxyfile" exists.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "docs/Doxyfile" exists.
 
 
 #### .gitignore configured properly
 
-+ Skip: Check that file/directory "html" does not exist.
++ Pass: Check that file/directory "html" does not exist.
 
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file/directory "latex" does not exist.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file/directory "latex" does not exist.
 
 
 #### Google Style Compliance I
 
-+ Skip: Cpplint checking for for Google C++ compliance
++ Fail: Cpplint checking for for Google C++ compliance
 
-  This test was not run because of an earlier failing test.
+/export/scratch/cpplint-gitbot/./src/obstacle.h:8:  #ifndef header guard has wrong style, please use: SRC_OBSTACLE_H_  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/obstacle.h:43:  #endif line should be "#endif  // SRC_OBSTACLE_H_"  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/mainpage.h:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+/export/scratch/cpplint-gitbot/./src/mainpage.h:0:  No #ifndef header guard found, suggested CPP variable is: SRC_MAINPAGE_H_  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/robot_viewer.h:7:  #ifndef header guard has wrong style, please use: SRC_ROBOT_VIEWER_H_  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/robot_viewer.h:222:  #endif line should be "#endif  // SRC_ROBOT_VIEWER_H_"  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/robot_land.h:1:  #ifndef header guard has wrong style, please use: SRC_ROBOT_LAND_H_  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/robot_land.h:172:  #endif line should be "#endif  // SRC_ROBOT_LAND_H_"  [build/header_guard] [5]
 
 
 #### Doxygen
