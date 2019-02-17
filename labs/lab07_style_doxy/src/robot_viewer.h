@@ -4,8 +4,8 @@
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
-#ifndef LABS_LAB07_STYLE_DOXY_SRC_ROBOT_VIEWER_H_
-#define LABS_LAB07_STYLE_DOXY_SRC_ROBOT_VIEWER_H_
+#ifndef SRC_ROBOT_VIEWER_H_
+#define SRC_ROBOT_VIEWER_H_
 
 /*******************************************************************************
  * Includes
@@ -219,4 +219,4 @@ class RobotViewer : public GraphicsApp {
   nanogui::Button *pause_btn_;
 };
 
-#endif  // LABS_LAB07_STYLE_DOXY_SRC_ROBOT_VIEWER_H_
+#endif  // SRC_ROBOT_VIEWER_H_

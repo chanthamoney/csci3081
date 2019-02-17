@@ -1,5 +1,5 @@
-#ifndef LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
-#define LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
+#ifndef SRC_ROBOT_LAND_H_
+#define SRC_ROBOT_LAND_H_
 
 /**
  * @file robot_land.h
@@ -169,4 +169,4 @@ class robot_land {
   double sim_time{0.0};
 };
 
-#endif  // LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
+#endif  // SRC_ROBOT_LAND_H_

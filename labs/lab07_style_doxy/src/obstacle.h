@@ -5,8 +5,8 @@
  */
 
 
-#ifndef LABS_LAB07_STYLE_DOXY_SRC_OBSTACLE_H_
-#define LABS_LAB07_STYLE_DOXY_SRC_OBSTACLE_H_
+#ifndef SRC_OBSTACLE_H_
+#define SRC_OBSTACLE_H_
 
 #include <iostream>
 #include <utility>
@@ -40,4 +40,4 @@ class Obstacle {
   std::pair<double, double> pos_;
 };
 
-#endif  // LABS_LAB07_STYLE_DOXY_SRC_OBSTACLE_H_
+#endif  // SRC_OBSTACLE_H_
