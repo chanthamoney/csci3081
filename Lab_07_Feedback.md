@@ -1,6 +1,6 @@
 ### Feedback for Lab 07
 
-Run on February 17, 17:11:29 PM.
+Run on February 17, 17:17:19 PM.
 
 
 #### Necessary Files and Structure
@@ -29,12 +29,11 @@ Run on February 17, 17:11:29 PM.
 
 + Fail: Cpplint checking for for Google C++ compliance
 
-/export/scratch/cpplint-gitbot/./src/obstacle.h:8:  #ifndef header guard has wrong style, please use: SRC_OBSTACLE_H_  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/obstacle.h:43:  #endif line should be "#endif  // SRC_OBSTACLE_H_"  [build/header_guard] [5]
-/export/scratch/cpplint-gitbot/./src/mainpage.h:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
 /export/scratch/cpplint-gitbot/./src/mainpage.h:0:  No #ifndef header guard found, suggested CPP variable is: SRC_MAINPAGE_H_  [build/header_guard] [5]
 /export/scratch/cpplint-gitbot/./src/robot_viewer.h:7:  #ifndef header guard has wrong style, please use: SRC_ROBOT_VIEWER_H_  [build/header_guard] [5]
 /export/scratch/cpplint-gitbot/./src/robot_viewer.h:222:  #endif line should be "#endif  // SRC_ROBOT_VIEWER_H_"  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/obstacle.h:8:  #ifndef header guard has wrong style, please use: SRC_OBSTACLE_H_  [build/header_guard] [5]
+/export/scratch/cpplint-gitbot/./src/obstacle.h:43:  #endif line should be "#endif  // SRC_OBSTACLE_H_"  [build/header_guard] [5]
 /export/scratch/cpplint-gitbot/./src/robot_land.h:1:  #ifndef header guard has wrong style, please use: SRC_ROBOT_LAND_H_  [build/header_guard] [5]
 /export/scratch/cpplint-gitbot/./src/robot_land.h:172:  #endif line should be "#endif  // SRC_ROBOT_LAND_H_"  [build/header_guard] [5]
 
