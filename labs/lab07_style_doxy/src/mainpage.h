@@ -10,3 +10,6 @@
  * This is the introduction for lab07 style doxy.
  *
  */
+#ifndef LABS_LAB07_STYLE_DOXY_SRC_MAINPAGE_H_
+#define LABS_LAB07_STYLE_DOXY_SRC_MAINPAGE_H_
+#endif  // LABS_LAB07_STYLE_DOXY_SRC_MAINPAGE_H_
