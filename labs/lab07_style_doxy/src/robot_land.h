@@ -1,11 +1,11 @@
+#ifndef LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
+#define LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
+
 /**
  * @file robot_land.h
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
-
-#ifndef SRC_ROBOT_LAND_H_
-#define SRC_ROBOT_LAND_H_
 
 /*******************************************************************************
  * Includes
@@ -168,4 +168,5 @@ class robot_land {
 
   double sim_time{0.0};
 };
-#endif  // SRC_ROBOT_LAND_H_
+
+#endif  // LABS_LAB07_STYLE_DOXY_SRC_ROBOT_LAND_H_
