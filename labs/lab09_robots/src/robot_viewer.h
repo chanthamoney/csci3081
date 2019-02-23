@@ -12,6 +12,8 @@
  ******************************************************************************/
 #include <MinGfx-1.0/mingfx.h>
 #include "src/robot_land.h"
+#include "src/robot.h"
+
 
 /*******************************************************************************
  * Namespaces
@@ -87,6 +89,17 @@ class RobotViewer : public GraphicsApp {
    * @brief Handle the user pressing the restart button on the GUI.
    */
   void OnRestartBtnPressed();
+
+  /**
+   * @brief Handle the user pressing the color button on the GUI for robot 0.
+   */
+  void OnColorChangeBtnPressed0();
+
+  /**
+   * @brief Handle the user pressing the color button on the GUI for robot 0.
+   */
+  void OnColorChangeBtnPressed1();
+
 
   /**
    * @brief Handle the user pressing the pause button on the GUI.
@@ -201,7 +214,7 @@ class RobotViewer : public GraphicsApp {
    * @param[in] sensor_angle Angle between sensors relative to robot center.
    * @param[in] sensor_range Range distance in pixels of each sensor.
    */
-  void DrawRobot(NVGcontext *ctx, int id, double xpos, double ypos, double xvel, double yvel, double rad, double sensor_angle, double sensor_range);
+  void DrawRobot(NVGcontext *ctx, Robot * robot);
 
   /**
    * @brief Draw the sensors from a robot using nanogui.

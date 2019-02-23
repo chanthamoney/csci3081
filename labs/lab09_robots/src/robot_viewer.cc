@@ -38,6 +38,8 @@ void RobotViewer::InitNanoGUI() {
   pause_btn_ =
       gui->addButton("Pause", std::bind(&RobotViewer::OnPauseBtnPressed, this));
   gui->addButton("Restart", std::bind(&RobotViewer::OnRestartBtnPressed, this));
+    gui->addButton("Change Robot 0 Color ", std::bind(&RobotViewer::OnColorChangeBtnPressed0, this));
+      gui->addButton("Change Robot 1 Color", std::bind(&RobotViewer::OnColorChangeBtnPressed1, this));
 
   screen()->performLayout();
 
@@ -60,6 +62,20 @@ void RobotViewer::UpdateSimulation(double dt) {
 // The handlers for the menu buttons ...
 void RobotViewer::OnRestartBtnPressed() { robot_land_->set_time(0.0); }
 
+
+void RobotViewer::OnColorChangeBtnPressed0(){
+  //REMEMBER POINTERS GET POINTERS
+  Robot * robots = robot_land_->RobotLand::get_robot(0);
+  bool color = robots->get_color();
+  robots->set_color(!color);
+}
+
+void RobotViewer::OnColorChangeBtnPressed1(){
+  Robot * robots = robot_land_->RobotLand::get_robot(1);
+  bool color = robots->get_color();
+  robots->set_color(!color);
+}
+
 void RobotViewer::OnPauseBtnPressed() {
   paused_ = !paused_;
   if (paused_) {
@@ -71,8 +87,7 @@ void RobotViewer::OnPauseBtnPressed() {
 
 // this function requires an active nanovg drawing context (ctx),
 // so it can only be called from within DrawUsingNanoVG()
-void RobotViewer::DrawRobot(NVGcontext *ctx, int id, double xpos, double ypos,
-                            double xvel, double yvel, double rad, double sensor_angle, double sensor_range) {
+void RobotViewer::DrawRobot(NVGcontext *ctx, Robot * robot) {
   // translate and rotate all graphics calls that follow so that they are
   // centered
   // at the position and heading for this robot
@@ -88,14 +103,20 @@ void RobotViewer::DrawRobot(NVGcontext *ctx, int id, double xpos, double ypos,
   // Put the origin of the coordinate system at the center of the robot, and
   // orient the x-axis to align with the velocity (i.e. heading) of the robot.
   nvgSave(ctx);
-  nvgTranslate(ctx, xpos, ypos);
-  double angle = std::atan2(yvel, xvel);
+  nvgTranslate(ctx, robot->get_position().x_, robot->get_position().y_);
+  double angle = robot->get_direction();
   nvgRotate(ctx, angle);
 
   // robot's circle
   nvgBeginPath(ctx);
-  nvgCircle(ctx, 0.0, 0.0, rad);
-  nvgFillColor(ctx, nvgRGBA(200, 200, 200, 255));
+  nvgCircle(ctx, 0.0, 0.0, robot->get_radius());
+  bool color = robot->get_color();
+  if(color) {
+    nvgFillColor(ctx, nvgRGBA(200, 200, 200, 255)); //WHITE
+  }
+  else{
+    nvgFillColor(ctx, nvgRGBA(122, 0, 25, 255)); //MAROON
+  }
   nvgFill(ctx);
   nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
   nvgStroke(ctx);
@@ -104,11 +125,11 @@ void RobotViewer::DrawRobot(NVGcontext *ctx, int id, double xpos, double ypos,
   nvgSave(ctx);
   nvgRotate(ctx, M_PI / 2.0);
   nvgFillColor(ctx, nvgRGBA(0, 0, 0, 255));
-  std::string text = "Robot " + std::to_string(id);
+  std::string text = "Robot " + std::to_string(robot->get_id());
   nvgText(ctx, 0.0, 10.0, text.c_str(), NULL);
   nvgRestore(ctx);
 
-  DrawRobotSensors(ctx, sensor_angle, sensor_range);
+  DrawRobotSensors(ctx, robot->get_sensor_angle(), robot->get_sensor_range());
 
   nvgRestore(ctx);
 }
@@ -193,13 +214,8 @@ void RobotViewer::DrawUsingNanoVG(NVGcontext *ctx) {
 
   // Draw each robot in robot land
   for (int i = 0; i < robot_land_->get_num_robots(); i++) {
-    double xpos, ypos;
-    robot_land_->get_robot_pos(i, &xpos, &ypos);
 
-    double xvel, yvel;
-    robot_land_->get_robot_vel(i, &xvel, &yvel);
-
-    DrawRobot(ctx, i, xpos, ypos, xvel, yvel, robot_land_->get_robot_radius(), robot_land_->get_robot_sensor_angle(), robot_land_->get_robot_sensor_range());
+    DrawRobot(ctx, robot_land_->get_robot(i));
   }
 }
 

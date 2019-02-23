@@ -1,3 +1,6 @@
+#ifndef SRC_POINT_H_
+#define SRC_POINT_H_
+
 #include <cstdlib>
 
 struct Point {
@@ -10,3 +13,5 @@ public:
     y_ = pos.y_;
   }
 };
+
+#endif /* SRC_POINT_H_ */
