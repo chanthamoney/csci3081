@@ -1,5 +1,17 @@
 ### CSci-3081W Project Support Code Makefile ###
 
+# This Makefile is a bit different from the other project makefiles
+# because it compiles both the project code in the src directory
+# and the google test testing code in the tests code to create an
+# executable called bin/unittest.  This also assumes that google
+# test project has already been compiled into a gtest_main.a library
+# that is available on the system.  This should be the case on the
+# lab machines, but students compiling on their own machines should
+# first build google test and then adjust the GTEST_DIR variable
+# below to point to their local version of google test install dir.
+
+
+
 # File History: This combines Prof. Keefe's Makefiles from past years
 # with TA John Harwell's 3081W Makefiles from Fall 2016, which introduced
 # auto-dependency generation and several other exciting features.
@@ -18,55 +30,77 @@ CXX = g++
 
 ### Section I: Definitions ###
 
-# Root of the source tree for the project (e.g., could be just . or ./src)
-SRCDIR = .
+# Students: Uncomment the lines below to enable more feedback tests as
+# you continue to write your code.  Before turning in your assignment
+# you should be able to uncomment each of the tests and successfully
+# build and run the unittest executable.
+
+# Directory of source files for the project we wish to test
+PROJROOTDIR = ..
+PROJSRCDIR = $(PROJROOTDIR)/src
+
+# Directory of source files for the unit tests themselves
+TESTSRCDIR = .
 
 # Output directories for the build process
 BUILDDIR = ../build
 BINDIR = $(BUILDDIR)/bin
-OBJDIR = $(BUILDDIR)/obj/src
+OBJDIR = $(BUILDDIR)/obj/tests
 
 # The name of the executable to create
-EXEFILE = $(BINDIR)/robotviewer
+EXEFILE = $(BINDIR)/unittest
+
+# Google Test includes its own main() function, so we do not want to
+# compile the project's main function into our tests.  We will filter
+# these files out from the list of project sources.
+# Also, since our tests do not require graphics, we can also filter
+# out the RobotViewer source files and avoid the dependency on the
+# pre-installed graphics libraries on the CSELabs machines, making it
+# a bit easier to develop and test project code on non-CSELabs machines.
+MAINSRCFILES = $(PROJSRCDIR)/main.cc $(PROJSRCDIR)/main.cpp
 
 # The list of files to compile for this project.  Defaults to all
 # of the .cpp and .cc files in the source directory.  (We use both .cpp
 # and .cc in order to support two different popular naming conventions.)
-SRCFILES = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.cc)
+PROJSRCFILES = $(filter-out $(MAINSRCFILES), $(wildcard $(PROJSRCDIR)/*.cpp) $(wildcard $(PROJSRCDIR)/*.cc))
+
+# Same as above, but captures the test files, which are in a different dir.
+TESTSRCFILES = $(wildcard $(TESTSRCDIR)/*.cpp) $(wildcard $(TESTSRCDIR)/*.cc)
 
 # For each of the source files found above, replace .cpp (or .cc) with
 # .o in order to generate the list of .o files make should create.
-OBJFILES = $(notdir $(patsubst %.cpp,%.o,$(patsubst %.cc,%.o,$(SRCFILES))))
+OBJFILES = $(notdir $(patsubst %.cpp,%.o,$(patsubst %.cc,%.o,$(PROJSRCFILES)))) \
+           $(notdir $(patsubst %.cpp,%.o,$(patsubst %.cc,%.o,$(TESTSRCFILES))))
 
 
 # Add -Idirname to add directories to the compiler search path for finding .h files
-INCLUDEDIRS = -I.. -I$(SRCDIR) -isystem$(CS3081DIR)/include -isystem$(CS3081DIR)/include/nanovg -isystem$(CS3081DIR)/include/MinGfx-1.0
+INCLUDEDIRS = -I$(CS3081DIR)/include -I$(PROJROOTDIR) -I$(TESTSRCDIR) -isystem$(CS3081DIR)/include -isystem$(CS3081DIR)/include/nanovg -isystem$(CS3081DIR)/include/MinGfx-1.0
 
 # Add -Ldirname to add directories to the linker search path for finding libraries
 LIBDIRS = -L$(CS3081DIR)/lib -L$(CS3081DIR)/lib/MinGfx-1.0
 
 # Add -llibname to link with external libraries
-LIBS = -lMinGfxd -lnanogui -Wl,-rpath,$(CS3081DIR)/lib
-#-lGL -lGLU
+LIBS = -lgtest_main -lgtest -lgmock -lMinGfxd -lnanogui -Wl,-rpath,$(CS3081DIR)/lib
 
 UNAME = $(shell uname)
 ifeq ($(UNAME), Darwin) # Mac OSX
 	LIBS += -framework opengl
 else # LINUX
-	LIBS += -lGL 
+	LIBS += -lGL
 endif
 
-# Arguments to pass to the C++ compiler.  -c is required, it tells the
-# compiler to output a .o file Optionally include -g to turn on debugging or
-# include -O or -O2 to turn on optimizations instead Optionally include -Wall
-# to turn on most warnings
-CXXFLAGS = -W -Wall -g -std=c++14 -Wno-unused -c $(INCLUDEDIRS)
+# Arguments to pass to the C++ compiler.
+# -c is required, it tells the compiler to output a .o file
+# Optionally include -g to turn on debugging or include -O or -O2 to turn on optimizations instead
+# Optionally include -Wall to turn on most warnings
+CXXFLAGS = -g -Wall -Wextra -pthread -fprofile-arcs -ftest-coverage -c $(INCLUDEDIRS) $(DEFINES) -std=c++14
 
 # Arguments to pass to the C++ linker, such as -L, but not -lfoo, which should go in LDLIBS
-LDFLAGS = $(LIBDIRS)
+LDFLAGS = $(LIBDIRS) -pthread -fprofile-arcs -ftest-coverage
 
 # Library names to pass to the C++ linker, such as -lfoo
 LDLIBS = $(LIBS)
+
 
 ### Section II: Rules ###
 
@@ -94,14 +128,28 @@ $(OBJDIR) $(BINDIR):
 # Since every .cpp (or .cc) file must be compiled into a .o, we will write this
 # recipe using a pattern rule.  Using this recipe, any file that matches the pattern
 # $(SRCDIR)/filename.cpp can be turned into $(OBJDIR)/filename.o.
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJDIR)/%.o: $(PROJSRCDIR)/%.cpp
 	@echo "==== Auto-Generating Dependencies for $<. ===="
 	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	@echo "==== Compiling $< into $@. ===="
 	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
 
 # The same thing will also work for files with a .cc extension
-$(OBJDIR)/%.o: $(SRCDIR)/%.cc
+$(OBJDIR)/%.o: $(PROJSRCDIR)/%.cc
+	@echo "==== Auto-Generating Dependencies for $<. ===="
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	@echo "==== Compiling $< into $@. ===="
+	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
+
+
+# Repeat the two pattern rules above for .cc/.cpp files in the test dir
+$(OBJDIR)/%.o: $(TESTSRCDIR)/%.cpp
+	@echo "==== Auto-Generating Dependencies for $<. ===="
+	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	@echo "==== Compiling $< into $@. ===="
+	$(CXX) $(CXXFLAGS) $(CXXLIBDIRS) -c -o  $@ $<
+
+$(OBJDIR)/%.o: $(TESTSRCDIR)/%.cc
 	@echo "==== Auto-Generating Dependencies for $<. ===="
 	$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
 	@echo "==== Compiling $< into $@. ===="
@@ -149,14 +197,24 @@ $(EXEFILE): $(addprefix $(OBJDIR)/, $(OBJFILES)) | $(BINDIR)
 	$(CXX) $(LDFLAGS) $(addprefix $(OBJDIR)/, $(OBJFILES)) -o $@ $(LDLIBS)
 
 
+
 # Clean up the project, removing ALL files generated during a build.
 clean:
 	@rm -rf $(OBJDIR)
 	@rm -rf $(EXEFILE)
 
+# Check Style
+check-style:
+	@echo "==== Checking style is correct ===="
+	$(ROOTDIR)/cpplint/cpplint.py --root=.. *.cc *.h
+
+check-style-cse:
+	@echo "==== Checking style is correct ===="
+	$(ROOTDIR)/cpplint/cpplint-cse.sh --root=.. *.cc *.h
+
 # External libraries
 $(CS3081DIR):
 	cd $(ROOTDIR)/external; make
 
-clobber:
+clobber: clean
 	cd $(ROOTDIR)/external; make clobber
