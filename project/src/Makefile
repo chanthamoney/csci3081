@@ -27,7 +27,7 @@ BINDIR = $(BUILDDIR)/bin
 OBJDIR = $(BUILDDIR)/obj/src
 
 # The name of the executable to create
-EXEFILE = $(BINDIR)/robotviewer
+EXEFILE = $(BINDIR)/arenaviewer
 
 # The list of files to compile for this project.  Defaults to all
 # of the .cpp and .cc files in the source directory.  (We use both .cpp
@@ -37,6 +37,7 @@ SRCFILES = $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/*.cc)
 # For each of the source files found above, replace .cpp (or .cc) with
 # .o in order to generate the list of .o files make should create.
 OBJFILES = $(notdir $(patsubst %.cpp,%.o,$(patsubst %.cc,%.o,$(SRCFILES))))
+
 
 
 # Add -Idirname to add directories to the compiler search path for finding .h files
@@ -56,17 +57,20 @@ else # LINUX
 	LIBS += -lGL 
 endif
 
-# Arguments to pass to the C++ compiler.  -c is required, it tells the
-# compiler to output a .o file Optionally include -g to turn on debugging or
-# include -O or -O2 to turn on optimizations instead Optionally include -Wall
-# to turn on most warnings
-CXXFLAGS = -W -Wall -g -std=c++14 -Wno-unused -c $(INCLUDEDIRS)
+# Arguments to pass to the C++ compiler.
+# -c is required, it tells the compiler to output a .o file
+CXXFLAGS = -W -Werror -Wall -Wextra -fdiagnostics-color=always -Wno-missing-field-initializers -Wshadow -Wcast-align -Wcast-qual -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs -Wredundant-decls -Wswitch-default -Weffc++ -Wsuggest-override -Wstrict-null-sentinel -Wsign-promo -Wold-style-cast -Woverloaded-virtual -Wctor-dtor-privacy -g -std=c++14 -c $(INCLUDEDIRS)
+
+ifeq ($(UNAME), Darwin)
+CXXFLAGS += -Wno-unknown-warning-option
+endif
 
 # Arguments to pass to the C++ linker, such as -L, but not -lfoo, which should go in LDLIBS
 LDFLAGS = $(LIBDIRS)
 
 # Library names to pass to the C++ linker, such as -lfoo
 LDLIBS = $(LIBS)
+
 
 ### Section II: Rules ###
 
@@ -148,15 +152,23 @@ $(EXEFILE): $(addprefix $(OBJDIR)/, $(OBJFILES)) | $(BINDIR)
 	@echo "==== Linking $@. ===="
 	$(CXX) $(LDFLAGS) $(addprefix $(OBJDIR)/, $(OBJFILES)) -o $@ $(LDLIBS)
 
-
 # Clean up the project, removing ALL files generated during a build.
 clean:
 	@rm -rf $(OBJDIR)
 	@rm -rf $(EXEFILE)
 
+# Check Style
+check-style:
+	@echo "==== Checking style is correct ===="
+	$(ROOTDIR)/cpplint/cpplint.py --root=.. *.cc *.h
+
+check-style-cse:
+	@echo "==== Checking style is correct ===="
+	$(ROOTDIR)/cpplint/cpplint-cse.sh --root=.. *.cc *.h
+
 # External libraries
 $(CS3081DIR):
 	cd $(ROOTDIR)/external; make
 
-clobber:
+clobber: clean
 	cd $(ROOTDIR)/external; make clobber
