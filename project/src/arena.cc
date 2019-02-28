@@ -13,6 +13,8 @@
 
 #include "src/arena.h"
 #include "src/light.h"
+#include "src/braitenberg_vehicle.h"
+#include "src/food.h"
 
 /*******************************************************************************
  * Namespaces
