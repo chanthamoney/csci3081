@@ -68,7 +68,7 @@ class Controller {
 
 
   Controller &operator=(const Controller &other) = delete;
-
+  // Controller (const Controller &control) = delete;
  private:
   double last_dt{0};
   Arena* arena_{nullptr};
