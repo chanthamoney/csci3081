@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 04, 14:53:19 PM.
+Run on March 04, 15:38:25 PM.
 
 + Pass: Checkout devel branch.
 
@@ -29,6 +29,10 @@ Run on March 04, 14:53:19 PM.
 
 
 #### Compile Tests
+
++ Pass: Clean project.
+
+
 
 + Pass: Check that make compiles.
 
