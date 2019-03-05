@@ -13,6 +13,8 @@
 
 #include "src/arena.h"
 #include "src/light.h"
+#include "src/braitenberg_vehicle.h"
+
 
 /*******************************************************************************
  * Namespaces
@@ -241,7 +243,7 @@ void Arena::AdjustEntityOverlap(ArenaMobileEntity * const mobile_e,
     double distance_between = sqrt(delta_x*delta_x + delta_y*delta_y);
     double distance_to_move =
       mobile_e->get_radius() + other_e->get_radius() - distance_between;
-    double angle = atan(delta_y/delta_x);
+    double angle = atan2(delta_y, delta_x); //TODO: IS THIS RIGHT. TEST 8AM
     mobile_e->set_position(
       mobile_e->get_pose().x+cos(angle)*distance_to_move,
       mobile_e->get_pose().y+sin(angle)*distance_to_move);
