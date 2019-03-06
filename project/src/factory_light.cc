@@ -12,11 +12,8 @@
  #include <vector>
  #include <sstream>
  #include "src/common.h"
- #include "src/entity_type.h"
  #include "src/factory_light.h"
- #include "src/params.h"
- #include "src/pose.h"
- #include "src/rgb_color.h"
+
 
 
 /*******************************************************************************
