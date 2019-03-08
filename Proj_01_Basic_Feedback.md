@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 08, 14:47:14 PM.
+Run on March 08, 14:48:26 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -70,6 +70,15 @@ braitenberg_vehicle.cc:51:  An else should appear on the same line as the preced
 braitenberg_vehicle.cc:51:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
 braitenberg_vehicle.cc:51:  Missing space before {  [whitespace/braces] [5]
 braitenberg_vehicle.cc:62:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+braitenberg_vehicle.cc:164:  Should have a space between // and comment  [whitespace/comments] [4]
+braitenberg_vehicle.cc:165:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:169:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:169:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:169:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:173:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:173:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:173:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:176:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
 controller.cc:36:  Extra space for operator !   [whitespace/operators] [4]
 controller.cc:41:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
 controller.cc:41:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
@@ -209,7 +218,7 @@ Done processing params.h
 Done processing pose.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 115
+Total errors found: 124
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/project/src'
