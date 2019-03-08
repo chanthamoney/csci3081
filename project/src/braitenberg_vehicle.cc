@@ -116,7 +116,7 @@ void BraitenbergVehicle::Update() {
     case kAggressive:
       light_wheel_velocity = WheelVelocity(
         get_sensor_reading_right(closest_light_entity_),
-        get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
+        get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
       break;
     case kNone:
     default:
