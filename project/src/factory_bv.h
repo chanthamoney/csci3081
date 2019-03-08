@@ -28,10 +28,12 @@ class factoryBraitenberg : public factoryEntity {
 	public:
 		factoryBraitenberg();
 
-		BraitenbergVehicle* Create() override;
+		BraitenbergVehicle* Create(__unused json_object& config) override;
 
     factoryBraitenberg(const factoryBraitenberg & rhs) = delete;
     factoryBraitenberg operator=(const factoryBraitenberg & rhs) = delete;
+  private:
+    int vehicle_count_ = 0;
 };
 
 NAMESPACE_END(csci3081);

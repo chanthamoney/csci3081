@@ -17,6 +17,16 @@ class FactoryBvTest : public ::testing::Test {
 
  protected:
    csci3081::factoryBraitenberg bv_factory;
+
+   std::string json = "{\"type\": \"Braitenberg\", \"x\":270, \"y\":270, \"r\":15, \"theta\": 215, \"light_behavior\": \"None\", \"food_behavior\": \"Explore\" }";
+   json_value* myconfig = new json_value();
+   std::string err = parse_json(*myconfig, json);
+   // if (! err.empty()) {
+   //   std::cerr << "Parse error: " << err << std::endl;
+   //   delete myconfig;
+   //   myconfig = NULL;
+   // }
+   json_object config = myconfig->get<json_object>();
 };
 
 /*******************************************************************************
@@ -24,7 +34,7 @@ class FactoryBvTest : public ::testing::Test {
  ******************************************************************************/
 
 TEST_F(FactoryBvTest, Constructor){
-  auto bv = bv_factory.Create();
+  auto bv = bv_factory.Create(config);
   // Testing position of bv
   csci3081::Pose bvpose = bv->get_pose();
   int bvx = bvpose.x;

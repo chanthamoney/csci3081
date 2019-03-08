@@ -31,8 +31,10 @@ factoryLight::factoryLight(){}; //TODO: Constructor What should I do..
  * Member Functions
  ******************************************************************************/
 
- Light* factoryLight::Create(){ //create entity here
-   return new Light;
+ Light* factoryLight::Create(__unused json_object& config){ //create entity here
+   Light * light = new Light;
+   light->LoadFromObject(config);
+   return light;
  };
 
 
