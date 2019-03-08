@@ -6,6 +6,7 @@
 #include "src/entity_type.h"
 #include "src/params.h"
 #include "src/factory_food.h"
+#include "src/food.h"
 #include "src/arena_immobile_entity.h"
 #include "src/arena_entity.h"
 
@@ -16,6 +17,16 @@ class FactoryFoodTest : public ::testing::Test {
 
  protected:
    csci3081::factoryFood food_factory;
+
+   std::string json = "{\"type\": \"Food\", \"x\":200, \"y\":200, \"r\":20, \"theta\": 0.0 }";
+   json_value* myconfig = new json_value();
+   std::string err = parse_json(*myconfig, json);
+   // if (!err.empty()) {
+   //   std::cerr << "Parse error: " << err << std::endl;
+   //   delete myconfig;
+   //   myconfig = NULL;
+   // }
+   json_object config = myconfig->get<json_object>();
 };
 
 /*******************************************************************************
@@ -23,7 +34,7 @@ class FactoryFoodTest : public ::testing::Test {
  ******************************************************************************/
 
 TEST_F(FactoryFoodTest, Constructor){
-  auto food = food_factory.Create();
+  auto food = food_factory.Create(config);
   // Testing position of bv
   csci3081::Pose foodPose = food->get_pose();
   int foodx = foodPose.x;

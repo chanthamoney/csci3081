@@ -17,6 +17,17 @@ class FactoryLightTest : public ::testing::Test {
 
  protected:
    csci3081::factoryLight light_factory;
+
+   std::string json = "{\"type\": \"Light\", \"x\":150, \"y\":300, \"r\":25 }";
+   json_value* myconfig = new json_value();
+   std::string err = parse_json(*myconfig, json);
+   // if (! err.empty()) {
+   //   std::cerr << "Parse error: " << err << std::endl;
+   //   delete myconfig;
+   //   myconfig = NULL;
+   // }
+   json_object config = myconfig->get<json_object>();
+
 };
 
 /*******************************************************************************
@@ -24,7 +35,7 @@ class FactoryLightTest : public ::testing::Test {
  ******************************************************************************/
 
 TEST_F(FactoryLightTest, Constructor){
-  auto light = light_factory.Create();
+  auto light = light_factory.Create(config);
   // Testing position of light
   csci3081::Pose lightPose = light->get_pose();
   int lightx = lightPose.x;

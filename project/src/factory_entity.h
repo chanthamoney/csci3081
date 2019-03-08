@@ -27,7 +27,7 @@ NAMESPACE_BEGIN(csci3081);
 class factoryEntity{
 	public:
     virtual ~factoryEntity() {}
-    virtual ArenaEntity* Create() = 0; //TODO: Add json later can be empty for unit test
+    virtual ArenaEntity* Create(__unused json_object& config) = 0;
 
 };
 

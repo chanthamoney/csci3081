@@ -28,7 +28,9 @@ class factoryFood : public factoryEntity {
 	public:
 		factoryFood();
 
-		Food * Create() override;
+		Food * Create(__unused json_object& config) override;
+  private:
+    int food_count_= 0;
 };
 
 NAMESPACE_END(csci3081);
