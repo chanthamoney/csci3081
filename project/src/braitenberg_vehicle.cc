@@ -161,6 +161,19 @@ void BraitenbergVehicle::Update() {
   } else {
     wheel_velocity_ = WheelVelocity(0, 0);
   }
+    //set color of robot
+  if( (light_wheel_velocity.left == 0 && light_wheel_velocity.right == 0)
+    && (food_wheel_velocity.left > 0 && food_wheel_velocity.right >0) ) {
+      set_color({0, 0, 255});
+    }
+  else if( (light_wheel_velocity.left > 0 && light_wheel_velocity.right > 0)
+    && (food_wheel_velocity.left == 0 && food_wheel_velocity.right == 0)) {
+      set_color({255, 204, 51});
+    }
+  else{
+    set_color({122, 0, 25});
+  }
+
 }
 
 std::string BraitenbergVehicle::get_name() const {
