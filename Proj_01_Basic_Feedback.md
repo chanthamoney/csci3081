@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 08, 14:10:45 PM.
+Run on March 08, 14:13:50 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -62,6 +62,14 @@ arena.cc:246:  At least two spaces is best between code and comments  [whitespac
 arena.cc:246:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
 arena.cc:246:  Should have a space between // and comment  [whitespace/comments] [4]
 arena.cc:49:  Add #include <string> for string  [build/include_what_you_use] [4]
+braitenberg_vehicle.cc:46:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:46:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:47:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:47:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:51:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:51:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:51:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:62:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 controller.cc:36:  Extra space for operator !   [whitespace/operators] [4]
 controller.cc:41:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
 controller.cc:41:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
@@ -201,7 +209,7 @@ Done processing params.h
 Done processing pose.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 107
+Total errors found: 115
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/project/src'
