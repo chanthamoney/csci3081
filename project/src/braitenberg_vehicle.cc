@@ -43,14 +43,24 @@ BraitenbergVehicle::BraitenbergVehicle() :
 }
 
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
+  if(collision_time_ != 0){
+    if(collision_time_ == 20){
+      set_heading(static_cast<int>((get_pose().theta - 45)) % 360);
+      collision_time_ = 0;
+    }
+    else{
+        collision_time_++;
+    }
+  }
+
   if (is_moving()) {
     motion_behavior_->UpdatePose(dt, wheel_velocity_);
   }
   UpdateLightSensors();
 }
 
-void BraitenbergVehicle::HandleCollision(__unused EntityType ent_type,
-                                         __unused ArenaEntity * object) {
+void BraitenbergVehicle::HandleCollision(__unused EntityType ent_type, __unused ArenaEntity * object) {
+  collision_time_++;
   set_heading(static_cast<int>((get_pose().theta + 180)) % 360);
 }
 
