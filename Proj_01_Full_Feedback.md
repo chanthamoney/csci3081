@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 11, 12:16:52 PM.
+Run on March 11, 12:35:22 PM.
 
 + Pass: Checkout devel branch.
 
@@ -43,10 +43,6 @@ Run on March 11, 12:16:52 PM.
 
 #### Documentation Tests
 
-+ Fail: Check that file "src/mainpage.h" exists.
-
-     "src/mainpage.h" not found.
-
 + Pass: Check that file "docs/uml_design.pdf" exists.
 
 + Fail: Check that file "docs/design.pdf" exists.
@@ -58,6 +54,39 @@ Run on March 11, 12:16:52 PM.
 
 
 + Pass: Check that file "docs/html/index.html" exists.
+
+
+#### Git Usage
+
++ Pass: Check git commit history
+Sufficient commits (found=50,required=25)
+
++ Pass: Run git ls-remote to check for # of branches in repo
+Sufficient branches (found=10,required=4)
+
++ Pass: Run git ls-remote gather all branches in repo
+
+e327972b0d29dd2d607b476cc329853748e11322	refs/heads/devel
+
+8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
+
+1ef71ec3f2adafb831dcf9c686b013de6e3b03d4	refs/heads/feature/02-add_color_sensor_for_robot
+
+d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
+
+3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
+
+6988e95c1915901fb710874b0034d9425eb70479	refs/heads/master
+
+1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
+
+c3c21c56c0ce281df73641979d47865c588200d7	refs/heads/refactor/02-update_robot_collision_behavior
+
+f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
+
+4df659524279791a45b7c7529058b54b00b66a59	refs/heads/tests
+
+
 
 
 #### Style Tests
