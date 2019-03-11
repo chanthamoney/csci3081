@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 07, 14:50:29 PM.
+Run on March 11, 09:38:27 AM.
 
 + Pass: Checkout devel branch.
 
@@ -72,43 +72,86 @@ arena.cc:246:  At least two spaces is best between code and comments  [whitespac
 arena.cc:246:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
 arena.cc:246:  Should have a space between // and comment  [whitespace/comments] [4]
 arena.cc:49:  Add #include <string> for string  [build/include_what_you_use] [4]
+braitenberg_vehicle.cc:46:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:46:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:47:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:47:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:51:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:51:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:51:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:62:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+braitenberg_vehicle.cc:164:  Should have a space between // and comment  [whitespace/comments] [4]
+braitenberg_vehicle.cc:165:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:169:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:169:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:169:  Missing space before ( in if(  [whitespace/parens] [5]
+braitenberg_vehicle.cc:173:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+braitenberg_vehicle.cc:173:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+braitenberg_vehicle.cc:173:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:176:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
 controller.cc:36:  Extra space for operator !   [whitespace/operators] [4]
 controller.cc:41:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
 controller.cc:41:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
 factory_bv.cc:10:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_bv.cc:31:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-factory_bv.cc:31:  You don't need a ; after a }  [readability/braces] [4]
-factory_bv.cc:31:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-factory_bv.cc:31:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
-factory_bv.cc:31:  Should have a space between // and comment  [whitespace/comments] [4]
-factory_bv.cc:37:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_bv.cc:39:  You don't need a ; after a }  [readability/braces] [4]
-factory_bv.cc:37:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-factory_bv.cc:37:  Should have a space between // and comment  [whitespace/comments] [4]
+factory_bv.cc:32:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+factory_bv.cc:32:  You don't need a ; after a }  [readability/braces] [4]
+factory_bv.cc:32:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+factory_bv.cc:32:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
+factory_bv.cc:32:  Should have a space between // and comment  [whitespace/comments] [4]
 factory_bv.cc:38:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:38:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+factory_bv.cc:61:  You don't need a ; after a }  [readability/braces] [4]
+factory_bv.cc:38:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+factory_bv.cc:38:  Should have a space between // and comment  [whitespace/comments] [4]
 factory_bv.cc:39:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:40:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:41:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:42:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:43:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:44:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:45:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:46:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:47:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:48:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:49:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:50:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:51:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:52:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:53:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:54:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:55:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:56:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:57:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:58:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:59:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:60:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_bv.cc:61:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_food.cc:10:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_food.cc:26:  You don't need a ; after a }  [readability/braces] [4]
-factory_food.cc:26:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-factory_food.cc:26:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
-factory_food.cc:26:  Should have a space between // and comment  [whitespace/comments] [4]
-factory_food.cc:32:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_food.cc:34:  You don't need a ; after a }  [readability/braces] [4]
-factory_food.cc:32:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-factory_food.cc:32:  Should have a space between // and comment  [whitespace/comments] [4]
-factory_food.cc:33:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_food.cc:34:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_food.cc:30:  You don't need a ; after a }  [readability/braces] [4]
+factory_food.cc:30:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+factory_food.cc:30:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
+factory_food.cc:30:  Should have a space between // and comment  [whitespace/comments] [4]
+factory_food.cc:36:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_food.cc:40:  You don't need a ; after a }  [readability/braces] [4]
+factory_food.cc:36:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+factory_food.cc:36:  Should have a space between // and comment  [whitespace/comments] [4]
+factory_food.cc:37:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_food.cc:38:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_food.cc:39:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_food.cc:40:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_light.cc:10:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_light.cc:28:  You don't need a ; after a }  [readability/braces] [4]
 factory_light.cc:28:  At least two spaces is best between code and comments  [whitespace/comments] [2]
 factory_light.cc:28:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
 factory_light.cc:28:  Should have a space between // and comment  [whitespace/comments] [4]
 factory_light.cc:34:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-factory_light.cc:36:  You don't need a ; after a }  [readability/braces] [4]
+factory_light.cc:38:  You don't need a ; after a }  [readability/braces] [4]
 factory_light.cc:34:  At least two spaces is best between code and comments  [whitespace/comments] [2]
 factory_light.cc:34:  Should have a space between // and comment  [whitespace/comments] [4]
 factory_light.cc:35:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_light.cc:36:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_light.cc:37:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+factory_light.cc:38:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 graphics_arena_viewer.cc:39:  Missing spaces around =  [whitespace/operators] [4]
 graphics_arena_viewer.cc:46:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
 graphics_arena_viewer.cc:46:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
@@ -128,25 +171,26 @@ factory_bv.h:18:  Weird number of spaces at line-start.  Are you using a 2-space
 factory_bv.h:28:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_bv.h:29:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_bv.h:31:  Tab found; better to use spaces  [whitespace/tab] [1]
+factory_bv.h:35:  private: should be indented +1 space inside class factoryBraitenberg  [whitespace/indent] [3]
 factory_entity.h:13:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_entity.h:18:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_entity.h:26:  Should have a space between // and comment  [whitespace/comments] [4]
 factory_entity.h:28:  Tab found; better to use spaces  [whitespace/tab] [1]
-factory_entity.h:30:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-factory_entity.h:30:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-factory_entity.h:30:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
-factory_entity.h:30:  Should have a space between // and comment  [whitespace/comments] [4]
+factory_entity.h:30:  Is this a non-const reference? If so, make const or use a pointer: json_object& config  [runtime/references] [2]
 factory_entity.h:31:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
 factory_food.h:13:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_food.h:18:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_food.h:28:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_food.h:29:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_food.h:31:  Tab found; better to use spaces  [whitespace/tab] [1]
+factory_food.h:32:  private: should be indented +1 space inside class factoryFood  [whitespace/indent] [3]
+factory_food.h:33:  Missing spaces around =  [whitespace/operators] [4]
 factory_light.h:13:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_light.h:18:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
 factory_light.h:28:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_light.h:29:  Tab found; better to use spaces  [whitespace/tab] [1]
 factory_light.h:31:  Tab found; better to use spaces  [whitespace/tab] [1]
+factory_light.h:33:  private: should be indented +1 space inside class factoryLight  [whitespace/indent] [3]
 graphics_arena_viewer.h:171:  "virtual" is redundant since function is already declared as "override"  [readability/inheritance] [4]
 Done processing arena.cc
 Done processing braitenberg_vehicle.cc
@@ -184,7 +228,7 @@ Done processing params.h
 Done processing pose.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 80
+Total errors found: 124
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_01_Full_Feedback/repo-chant077/project/src'
@@ -199,34 +243,13 @@ make: *** [check-style] Error 2
 
 + Pass: Check that file "build/bin/unittest" exists.
 
-+ Fail: Check that a GoogleTest test passes.
-    fails the test: InstBraitenbergVehicle.ColorMatchesBehavior.
-<pre>
-[ RUN      ] InstBraitenbergVehicle.ColorMatchesBehavior
-inst_braitenberg_vehicle.cc:48: Failure
-Expected equality of these values:
-  bv->get_color()
-    Which is: 12-byte object <7A-00 00-00 00-00 00-00 19-00 00-00>
-  csci3081::RgbColor(csci3081::kBlue)
-    Which is: 12-byte object <00-00 00-00 00-00 00-00 FF-00 00-00>
-The robot's color should be Blue when there is only a food behavior.
-inst_braitenberg_vehicle.cc:57: Failure
-Expected equality of these values:
-  bv->get_color()
-    Which is: 12-byte object <7A-00 00-00 00-00 00-00 19-00 00-00>
-  csci3081::RgbColor(csci3081::kGold)
-    Which is: 12-byte object <FF-00 00-00 CC-00 00-00 33-00 00-00>
-The robot's color should be Gold when there is only a light behavior.</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstBraitenbergVehicle.ColorMatchesBehavior.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    fails the test: InstBraitenbergVehicle.RobotMovesInEmptyScene.
-<pre>
-[ RUN      ] InstBraitenbergVehicle.RobotMovesInEmptyScene
-inst_braitenberg_vehicle.cc:70: Failure
-Expected: ((bv->get_pose()-prevPose).Length()) > (0.005f), actual: 0 vs 0.005
-The robot should move with Love even if there are not lights or food.</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: InstBraitenbergVehicle.RobotMovesInEmptyScene.
 
 
 
