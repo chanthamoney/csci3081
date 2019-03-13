@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 13, 11:36:46 AM.
+Run on March 13, 14:17:01 PM.
 
 + Pass: Checkout devel branch.
 
@@ -62,7 +62,7 @@ Run on March 13, 11:36:46 AM.
 Sufficient commits (found=50,required=25)
 
 + Pass: Run git ls-remote to check for # of branches in repo
-Sufficient branches (found=10,required=4)
+Sufficient branches (found=11,required=4)
 
 + Pass: Run git ls-remote gather all branches in repo
 
@@ -72,11 +72,13 @@ e327972b0d29dd2d607b476cc329853748e11322	refs/heads/devel
 
 1ef71ec3f2adafb831dcf9c686b013de6e3b03d4	refs/heads/feature/02-add_color_sensor_for_robot
 
+1dac2f2294ed86205bfda61ad954ea112819b02c	refs/heads/feature/03-implement_factory_pattern
+
 d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-661255fa1e1059c6f1cc81880905121218808740	refs/heads/master
+6e49b210ada572089eb89b4b9bdd210be45594ed	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
