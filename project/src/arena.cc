@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+#include <string>
 
 #include "src/arena.h"
 #include "src/light.h"
