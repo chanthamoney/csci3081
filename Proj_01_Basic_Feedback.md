@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 06:28:53 AM.
+Run on March 14, 13:25:17 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -41,7 +41,7 @@ Sufficient commits (found=59,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-e2144b98028ab4e25f1fd9a7f63fd746e05d6df3	refs/heads/devel
+08376f431538c464a7cfba3c7b9d9d1faf70d1e6	refs/heads/devel
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -53,13 +53,13 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-fe2183a54dab1212662cd462e7e9bc8688fcfb59	refs/heads/master
+a21cdbdd924938ec0b96f5b3918f0ba790997a4a	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
 c3c21c56c0ce281df73641979d47865c588200d7	refs/heads/refactor/02-update_robot_collision_behavior
 
-f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
+5dbd4b7e2958af471c74eadbc1b145293468b78d	refs/heads/style
 
 4df659524279791a45b7c7529058b54b00b66a59	refs/heads/tests
 
@@ -72,7 +72,7 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 
 + Pass: Run ghi for total number of open issues in Github repo (Found: 2)
 
-[OPEN issue #8] :  Implement factory pattern into arena [enhancement]
+[OPEN issue #9] :  Unittest C++ type exception error [bug]
 
 [OPEN issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [stlye]
 
@@ -80,7 +80,9 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 
 
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 6)
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 7)
+
+[CLOSED issue #8] :  Implement factory pattern into arena [enhancement]
 
 [CLOSED issue #6] :  Implement the functionality for color of robot sensors [enhancement]
 
