@@ -45,7 +45,7 @@ BraitenbergVehicle::BraitenbergVehicle() :
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
   if (collision_time_ != 0) {
     if (collision_time_ == 20) {
-      set_heading(static_cast<int>((get_pose().theta - 45)) % 360);
+      set_heading(static_cast<int>((get_pose().theta - 135)) % 360);
       collision_time_ = 0;
     } else {
         collision_time_++;
