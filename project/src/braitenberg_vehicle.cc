@@ -43,12 +43,11 @@ BraitenbergVehicle::BraitenbergVehicle() :
 }
 
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
-  if(collision_time_ != 0){
-    if(collision_time_ == 20){
+  if (collision_time_ != 0) {
+    if (collision_time_ == 20) {
       set_heading(static_cast<int>((get_pose().theta - 45)) % 360);
       collision_time_ = 0;
-    }
-    else{
+    } else {
         collision_time_++;
     }
   }
@@ -59,7 +58,8 @@ void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
   UpdateLightSensors();
 }
 
-void BraitenbergVehicle::HandleCollision(__unused EntityType ent_type, __unused ArenaEntity * object) {
+void BraitenbergVehicle::HandleCollision(__unused EntityType ent_type,
+   __unused ArenaEntity * object) {
   collision_time_++;
   set_heading(static_cast<int>((get_pose().theta + 180)) % 360);
 }
@@ -161,19 +161,16 @@ void BraitenbergVehicle::Update() {
   } else {
     wheel_velocity_ = WheelVelocity(0, 0);
   }
-    //set color of robot
-  if( (light_wheel_velocity.left == 0 && light_wheel_velocity.right == 0)
-    && (food_wheel_velocity.left > 0 && food_wheel_velocity.right >0) ) {
+    // set color of robot
+  if ( (light_wheel_velocity.left == 0 && light_wheel_velocity.right == 0)
+    && (food_wheel_velocity.left > 0 && food_wheel_velocity.right >0)) {
       set_color({0, 0, 255});
-    }
-  else if( (light_wheel_velocity.left > 0 && light_wheel_velocity.right > 0)
+    } else if ((light_wheel_velocity.left > 0 && light_wheel_velocity.right > 0)
     && (food_wheel_velocity.left == 0 && food_wheel_velocity.right == 0)) {
       set_color({255, 204, 51});
-    }
-  else{
+    } else {
     set_color({122, 0, 25});
   }
-
 }
 
 std::string BraitenbergVehicle::get_name() const {
@@ -219,9 +216,9 @@ void BraitenbergVehicle::UpdateLightSensors() {
   }
 }
 
-void BraitenbergVehicle::LoadFromObject(json_object& entity_config) {
-  ArenaEntity::LoadFromObject(entity_config);
-
+void BraitenbergVehicle::LoadFromObject(json_object* config) {
+  ArenaEntity::LoadFromObject(config);
+    json_object& entity_config = *config;
   if (entity_config.find("light_behavior") != entity_config.end()) {
       light_behavior_ = get_behavior_type(
         entity_config["light_behavior"].get<std::string>());

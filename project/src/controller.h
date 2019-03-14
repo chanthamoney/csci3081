@@ -79,4 +79,4 @@ class Controller {
 
 NAMESPACE_END(csci3081);
 
-#endif /* SRC_CONTROLLER_H_ */
+#endif  // SRC_CONTROLLER_H_
