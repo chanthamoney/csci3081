@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 13:49:38 PM.
+Run on March 14, 13:51:05 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -37,11 +37,11 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=85,required=25)
+Sufficient commits (found=91,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-d5f250bbf8b36c64564878d81031fdd8161e9183	refs/heads/devel
+4afe80c71bbe169ba04e554a617f86a459e781ab	refs/heads/devel
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -53,7 +53,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-a82bba3e158f673fd6d57490a9c16950b552e9a5	refs/heads/master
+2648ac015e7897a353ae357e62de68b4a228b1bc	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -111,56 +111,7 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 
 #### Style Tests
 
-+ Fail: Ensuring code follows style guide.
-
-<pre>cd src; make check-style
-make[1]: Entering directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/project/src'
-==== Checking style is correct ====
-/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
-arena.cc:52:  Add #include <string> for string  [build/include_what_you_use] [4]
-Done processing arena.cc
-Done processing braitenberg_vehicle.cc
-Done processing controller.cc
-Done processing factory_bv.cc
-Done processing factory_food.cc
-Done processing factory_light.cc
-Done processing food.cc
-Done processing graphics_arena_viewer.cc
-Done processing light.cc
-Done processing main.cc
-Done processing motion_behavior.cc
-Done processing motion_behavior_differential.cc
-Done processing rgb_color.cc
-Done processing arena_entity.h
-Done processing arena.h
-Done processing arena_immobile_entity.h
-Done processing arena_mobile_entity.h
-Done processing arena_viewer.h
-Done processing behavior_enum.h
-Done processing braitenberg_vehicle.h
-Done processing common.h
-Done processing controller.h
-Done processing entity_type.h
-Done processing factory_bv.h
-Done processing factory_entity.h
-Done processing factory_food.h
-Done processing factory_light.h
-Done processing food.h
-Done processing graphics_arena_viewer.h
-Done processing light.h
-Done processing motion_behavior_differential.h
-Done processing motion_behavior.h
-Done processing params.h
-Done processing pose.h
-Done processing rgb_color.h
-Done processing wheel_velocity.h
-Total errors found: 1
-Makefile:162: recipe for target 'check-style' failed
-make[1]: *** [check-style] Error 1
-make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/project/src'
-Makefile:8: recipe for target 'check-style' failed
-make: *** [check-style] Error 2
-</pre>
++ Pass: Ensuring code follows style guide.
 
 
 
