@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 08, 16:36:46 PM.
+Run on March 14, 06:25:00 AM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -34,17 +34,74 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 + Pass: Change into directory "project".
 
 
+#### Git Usage
+
++ Pass: Check git commit history
+Sufficient commits (found=50,required=25)
+
++ Pass: Run git ls-remote gather all branches in repo
+
+e327972b0d29dd2d607b476cc329853748e11322	refs/heads/devel
+
+8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
+
+1ef71ec3f2adafb831dcf9c686b013de6e3b03d4	refs/heads/feature/02-add_color_sensor_for_robot
+
+5bef7862878037d7e4d998528a8ea5937f488e8c	refs/heads/feature/03-implement_factory_pattern
+
+d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
+
+3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
+
+6b6220676136c4d55df3ee9ccdb35a977e747d2d	refs/heads/master
+
+1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
+
+c3c21c56c0ce281df73641979d47865c588200d7	refs/heads/refactor/02-update_robot_collision_behavior
+
+f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
+
+4df659524279791a45b7c7529058b54b00b66a59	refs/heads/tests
+
+
+
+
+#### Git Issue Usage
+
++ Pass: Configuring GHI
+
++ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
+
+[OPEN issue #8] :  Implement factory pattern into arena [enhancement]
+
+[OPEN issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [stlye]
+
+
+
+
+
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 6)
+
+[CLOSED issue #6] :  Implement the functionality for color of robot sensors [enhancement]
+
+[CLOSED issue #5] :  Refactor robot collision behavior [refactor]
+
+[CLOSED issue #4] :  Implement Robot Behaviors for Aggression, love, and cower [enhancement] 1
+
+[CLOSED issue #3] :  Adding json object to unittest for factories  [refactor]
+
+[CLOSED issue #2] :  AdjustEntityOverlap Function Error [bug]
+
+[CLOSED issue #1] :  Compilation Error For Simulator [bug]
+
+
+
+
+
+
 #### Documentation Tests
 
-+ Fail: Check that file "src/mainpage.h" exists.
-
-     "src/mainpage.h" not found.
-
 + Pass: Check that file "docs/uml_design.pdf" exists.
-
-+ Fail: Check that file "docs/design.pdf" exists.
-
-     "docs/design.pdf" not found.
 
 
 Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
