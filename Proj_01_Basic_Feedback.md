@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 06:25:00 AM.
+Run on March 14, 06:28:53 AM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -37,11 +37,11 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=50,required=25)
+Sufficient commits (found=59,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-e327972b0d29dd2d607b476cc329853748e11322	refs/heads/devel
+e2144b98028ab4e25f1fd9a7f63fd746e05d6df3	refs/heads/devel
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -53,7 +53,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-6b6220676136c4d55df3ee9ccdb35a977e747d2d	refs/heads/master
+fe2183a54dab1212662cd462e7e9bc8688fcfb59	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -115,10 +115,10 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 make[1]: Entering directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/project/src'
 ==== Checking style is correct ====
 /class/grades/Spring-2019/csci3081/student-repos/Proj_01_Basic_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
-arena.cc:246:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-arena.cc:246:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
-arena.cc:246:  Should have a space between // and comment  [whitespace/comments] [4]
-arena.cc:49:  Add #include <string> for string  [build/include_what_you_use] [4]
+arena.cc:247:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+arena.cc:247:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
+arena.cc:247:  Should have a space between // and comment  [whitespace/comments] [4]
+arena.cc:52:  Add #include <string> for string  [build/include_what_you_use] [4]
 braitenberg_vehicle.cc:46:  Missing space before ( in if(  [whitespace/parens] [5]
 braitenberg_vehicle.cc:46:  Missing space before {  [whitespace/braces] [5]
 braitenberg_vehicle.cc:47:  Missing space before ( in if(  [whitespace/parens] [5]
