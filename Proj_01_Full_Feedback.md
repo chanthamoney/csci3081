@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 08:10:38 AM.
+Run on March 14, 10:45:47 AM.
 
 + Pass: Checkout devel branch.
 
@@ -59,7 +59,7 @@ Sufficient commits (found=59,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-e2144b98028ab4e25f1fd9a7f63fd746e05d6df3	refs/heads/devel
+08376f431538c464a7cfba3c7b9d9d1faf70d1e6	refs/heads/devel
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -71,7 +71,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-756e37799ef179323f07dd3d42102ab57f9eb937	refs/heads/master
+c8d7e311147282743ef23a8cb206ac4f8651eec0	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -88,9 +88,7 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
-
-[OPEN issue #8] :  Implement factory pattern into arena [enhancement]
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
 
 [OPEN issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [stlye]
 
@@ -98,7 +96,9 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 
 
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 6)
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 7)
+
+[CLOSED issue #8] :  Implement factory pattern into arena [enhancement]
 
 [CLOSED issue #6] :  Implement the functionality for color of robot sensors [enhancement]
 
