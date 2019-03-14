@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 05:33:57 AM.
+Run on March 14, 08:10:38 AM.
 
 + Pass: Checkout devel branch.
 
@@ -55,23 +55,23 @@ Run on March 14, 05:33:57 AM.
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=50,required=25)
+Sufficient commits (found=59,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-e327972b0d29dd2d607b476cc329853748e11322	refs/heads/devel
+e2144b98028ab4e25f1fd9a7f63fd746e05d6df3	refs/heads/devel
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
 1ef71ec3f2adafb831dcf9c686b013de6e3b03d4	refs/heads/feature/02-add_color_sensor_for_robot
 
-1dac2f2294ed86205bfda61ad954ea112819b02c	refs/heads/feature/03-implement_factory_pattern
+5bef7862878037d7e4d998528a8ea5937f488e8c	refs/heads/feature/03-implement_factory_pattern
 
 d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-e22782e9e58ca574291cfc28965e6ffebdd7c07e	refs/heads/master
+756e37799ef179323f07dd3d42102ab57f9eb937	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -125,10 +125,10 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 make[1]: Entering directory '/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_01_Full_Feedback/repo-chant077/project/src'
 ==== Checking style is correct ====
 /classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_01_Full_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
-arena.cc:246:  At least two spaces is best between code and comments  [whitespace/comments] [2]
-arena.cc:246:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
-arena.cc:246:  Should have a space between // and comment  [whitespace/comments] [4]
-arena.cc:49:  Add #include <string> for string  [build/include_what_you_use] [4]
+arena.cc:247:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+arena.cc:247:  Missing username in TODO; it should look like "// TODO(my_username): Stuff."  [readability/todo] [2]
+arena.cc:247:  Should have a space between // and comment  [whitespace/comments] [4]
+arena.cc:52:  Add #include <string> for string  [build/include_what_you_use] [4]
 braitenberg_vehicle.cc:46:  Missing space before ( in if(  [whitespace/parens] [5]
 braitenberg_vehicle.cc:46:  Missing space before {  [whitespace/braces] [5]
 braitenberg_vehicle.cc:47:  Missing space before ( in if(  [whitespace/parens] [5]
