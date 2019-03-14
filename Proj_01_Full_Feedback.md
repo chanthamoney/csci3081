@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 10:45:47 AM.
+Run on March 14, 13:19:01 PM.
 
 + Pass: Checkout devel branch.
 
@@ -71,7 +71,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-c8d7e311147282743ef23a8cb206ac4f8651eec0	refs/heads/master
+47542ae9345ee3ad0494f60aa01861d9e671d09e	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -88,7 +88,9 @@ f13e9913bac7aee4768d83207922dd44df443949	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
+
+[OPEN issue #9] :  Unittest C++ type exception error [bug]
 
 [OPEN issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [stlye]
 
