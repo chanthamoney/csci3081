@@ -34,7 +34,7 @@ factoryBraitenberg::factoryBraitenberg() {}
  * Member Functions
  ******************************************************************************/
 
-BraitenbergVehicle* factoryBraitenberg::Create(__unused json_object* config) {
+BraitenbergVehicle* factoryBraitenberg::Create(json_object* config) {
   BraitenbergVehicle * braitenbergVehicle = new BraitenbergVehicle;
   braitenbergVehicle->LoadFromObject(config);
   return braitenbergVehicle;

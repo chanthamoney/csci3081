@@ -26,7 +26,7 @@ NAMESPACE_BEGIN(csci3081);
 class factoryEntity {
  public:
   virtual ~factoryEntity() {}
-  virtual ArenaEntity* Create(__unused json_object* config) = 0;
+  virtual ArenaEntity* Create(json_object* config) = 0;
 };
 
 NAMESPACE_END(csci3081);

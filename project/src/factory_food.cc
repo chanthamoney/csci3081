@@ -33,7 +33,7 @@ factoryFood::factoryFood() {}
  * Member Functions
  ******************************************************************************/
 
-Food* factoryFood::Create(__unused json_object* config) {
+Food* factoryFood::Create(json_object* config) {
   Food * food = new Food;
   food->LoadFromObject(config);
   return food;

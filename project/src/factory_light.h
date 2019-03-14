@@ -27,7 +27,7 @@ NAMESPACE_BEGIN(csci3081);
 class factoryLight : public factoryEntity {
  public:
   factoryLight();
-  Light * Create(__unused json_object* config) override;
+  Light * Create(json_object* config) override;
 
  private:
   int light_count_ = 0;

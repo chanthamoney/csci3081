@@ -26,6 +26,8 @@ class FactoryLightTest : public ::testing::Test {
    //   delete myconfig;
    //   myconfig = NULL;
    // }
+   std::string err = parse_json(myconfig, json);
+
    json_object config = myconfig->get<json_object>();
 
 };

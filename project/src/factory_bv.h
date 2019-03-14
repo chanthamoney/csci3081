@@ -28,7 +28,7 @@ class factoryBraitenberg : public factoryEntity {
  public:
   factoryBraitenberg();
 
-  BraitenbergVehicle* Create(__unused json_object* config) override;
+  BraitenbergVehicle* Create(json_object* config) override;
 
   factoryBraitenberg(const factoryBraitenberg & rhs) = delete;
   factoryBraitenberg operator=(const factoryBraitenberg & rhs) = delete;

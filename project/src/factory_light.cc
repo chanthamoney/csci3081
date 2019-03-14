@@ -30,7 +30,7 @@ factoryLight::factoryLight() {}
  * Member Functions
  ******************************************************************************/
 
-Light* factoryLight::Create(__unused json_object* config) {
+Light* factoryLight::Create(json_object* config) {
   Light * light = new Light;
   light->LoadFromObject(config);
   return light;
