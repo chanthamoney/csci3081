@@ -14,6 +14,9 @@
 #include "src/arena.h"
 #include "src/light.h"
 #include "src/braitenberg_vehicle.h"
+#include "src/factory_food.h"
+#include "src/factory_light.h"
+#include "src/factory_bv.h"
 
 
 /*******************************************************************************
@@ -50,16 +53,19 @@ Arena::Arena(json_object& arena_object): x_dim_(X_DIM),
     EntityType etype = static_cast<EntityType>(type);
 
     ArenaEntity* entity = NULL;
+    factoryBraitenberg bv_factory;
+    factoryLight light_factory;
+    factoryFood food_factory;
 
     switch (etype) {
       case (kLight):
-        entity = new Light();
+        entity = light_factory.Create(entity_config);
         break;
       case (kFood):
-        entity = new Food();
+        entity = food_factory.Create(entity_config);
         break;
       case (kBraitenberg):
-        entity = new BraitenbergVehicle();
+        entity = bv_factory.Create(entity_config);
         break;
       default:
         std::cout << "FATAL: Bad entity type on creation" << std::endl;
@@ -67,11 +73,6 @@ Arena::Arena(json_object& arena_object): x_dim_(X_DIM),
     }
 
     if (entity) {
-      entity->LoadFromObject(entity_config);
-      if (etype == kBraitenberg) {
-        BraitenbergVehicle* bv = static_cast<BraitenbergVehicle*>(entity);
-        bv->UpdateLightSensors();
-      }
       AddEntity(entity);
     }
   }
