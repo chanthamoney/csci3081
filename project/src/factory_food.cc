@@ -7,17 +7,17 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
- #include <iostream>
- #include <string>
- #include <vector>
- #include <sstream>
- #include "src/common.h"
- #include "src/factory_food.h"
- #include "src/entity_type.h"
- #include "src/params.h"
- #include "src/pose.h"
- #include "src/rgb_color.h"
- #include "src/behavior_enum.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include "src/common.h"
+#include "src/factory_food.h"
+#include "src/entity_type.h"
+#include "src/params.h"
+#include "src/pose.h"
+#include "src/rgb_color.h"
+#include "src/behavior_enum.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -27,17 +27,17 @@ NAMESPACE_BEGIN(csci3081);
  * Constructors/Destructor
  ******************************************************************************/
 
-factoryFood::factoryFood(){}; //TODO: Constructor What should I do..
+factoryFood::factoryFood() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 
- Food* factoryFood::Create(__unused json_object& config){ //create entity here
-   Food * food = new Food;
-   food->LoadFromObject(config);
-   return food;
- };
+Food* factoryFood::Create(__unused json_object* config) {
+  Food * food = new Food;
+  food->LoadFromObject(config);
+  return food;
+}
 
 
 NAMESPACE_END(csci3081);

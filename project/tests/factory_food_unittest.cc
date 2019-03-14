@@ -20,7 +20,7 @@ class FactoryFoodTest : public ::testing::Test {
 
    std::string json = "{\"type\": \"Food\", \"x\":200, \"y\":200, \"r\":20, \"theta\": 0.0 }";
    json_value* myconfig = new json_value();
-   std::string err = parse_json(*myconfig, json);
+   // std::string err = parse_json(*myconfig, json);
    // if (!err.empty()) {
    //   std::cerr << "Parse error: " << err << std::endl;
    //   delete myconfig;
@@ -34,7 +34,7 @@ class FactoryFoodTest : public ::testing::Test {
  ******************************************************************************/
 
 TEST_F(FactoryFoodTest, Constructor){
-  auto food = food_factory.Create(config);
+  auto food = food_factory.Create(&config);
   // Testing position of bv
   csci3081::Pose foodPose = food->get_pose();
   int foodx = foodPose.x;

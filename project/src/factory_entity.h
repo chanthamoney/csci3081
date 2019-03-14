@@ -10,25 +10,23 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
- #include <iostream>
- #include <string>
- #include <vector>
- #include <sstream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
 
- #include "src/common.h"
- #include "src/arena_entity.h"
-
+#include "src/common.h"
+#include "src/arena_entity.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NAMESPACE_BEGIN(csci3081);
-    //THIS IS INTERFACE
-class factoryEntity{
-	public:
-    virtual ~factoryEntity() {}
-    virtual ArenaEntity* Create(__unused json_object& config) = 0;
 
+class factoryEntity {
+ public:
+  virtual ~factoryEntity() {}
+  virtual ArenaEntity* Create(__unused json_object* config) = 0;
 };
 
 NAMESPACE_END(csci3081);

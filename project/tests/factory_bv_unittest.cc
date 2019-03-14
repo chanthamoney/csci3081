@@ -20,7 +20,7 @@ class FactoryBvTest : public ::testing::Test {
 
    std::string json = "{\"type\": \"Braitenberg\", \"x\":270, \"y\":270, \"r\":15, \"theta\": 215, \"light_behavior\": \"None\", \"food_behavior\": \"Explore\" }";
    json_value* myconfig = new json_value();
-   std::string err = parse_json(*myconfig, json);
+   // std::string err = parse_json(*myconfig, json);
    // if (! err.empty()) {
    //   std::cerr << "Parse error: " << err << std::endl;
    //   delete myconfig;
@@ -34,7 +34,7 @@ class FactoryBvTest : public ::testing::Test {
  ******************************************************************************/
 
 TEST_F(FactoryBvTest, Constructor){
-  auto bv = bv_factory.Create(config);
+  auto bv = bv_factory.Create(&config);
   // Testing position of bv
   csci3081::Pose bvpose = bv->get_pose();
   int bvx = bvpose.x;

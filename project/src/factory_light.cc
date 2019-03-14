@@ -7,14 +7,13 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
- #include <iostream>
- #include <string>
- #include <vector>
- #include <sstream>
- #include "src/common.h"
- #include "src/factory_light.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
 
-
+#include "src/common.h"
+#include "src/factory_light.h"
 
 /*******************************************************************************
  * Namespaces
@@ -25,17 +24,16 @@ NAMESPACE_BEGIN(csci3081);
  * Constructors/Destructor
  ******************************************************************************/
 
-factoryLight::factoryLight(){}; //TODO: Constructor What should I do..
+factoryLight::factoryLight() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
 
- Light* factoryLight::Create(__unused json_object& config){ //create entity here
-   Light * light = new Light;
-   light->LoadFromObject(config);
-   return light;
- };
-
+Light* factoryLight::Create(__unused json_object* config) {
+  Light * light = new Light;
+  light->LoadFromObject(config);
+  return light;
+}
 
 NAMESPACE_END(csci3081);

@@ -10,14 +10,14 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
- #include <iostream>
- #include <string>
- #include <vector>
- #include <sstream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
 
- #include "src/common.h"
- #include "src/food.h"
- #include "src/factory_entity.h"
+#include "src/common.h"
+#include "src/food.h"
+#include "src/factory_entity.h"
 
 /*******************************************************************************
  * Namespaces
@@ -25,12 +25,12 @@
 NAMESPACE_BEGIN(csci3081);
 
 class factoryFood : public factoryEntity {
-	public:
-		factoryFood();
+ public:
+  factoryFood();
 
-		Food * Create(__unused json_object& config) override;
-  private:
-    int food_count_= 0;
+  Food * Create(__unused json_object* config) override;
+ private:
+  int food_count_ = 0;
 };
 
 NAMESPACE_END(csci3081);
