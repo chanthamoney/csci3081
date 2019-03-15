@@ -56,7 +56,6 @@ class factoryBraitenberg : public factoryEntity {
   *  @brief Deleting the copy assignment.
   */
   factoryBraitenberg operator=(const factoryBraitenberg & rhs) = delete;
-
 };
 
 NAMESPACE_END(csci3081);
