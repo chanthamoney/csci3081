@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 14, 13:51:05 PM.
+Run on March 14, 19:08:12 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -37,7 +37,7 @@ Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=91,required=25)
+Commits found=91
 
 + Pass: Run git ls-remote gather all branches in repo
 
@@ -53,7 +53,9 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
-2648ac015e7897a353ae357e62de68b4a228b1bc	refs/heads/master
+2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
+
+549ec96137d515b3f5b611265fd5a2d479769c7a	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -70,19 +72,19 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
 
 [OPEN issue #9] :  Unittest C++ type exception error [bug]
 
-[OPEN issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [stlye]
 
 
 
 
-
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 7)
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 8)
 
 [CLOSED issue #8] :  Implement factory pattern into arena [enhancement]
+
+[CLOSED issue #7] :  Fix factory and braitenberg vehicle to be google style compliant [style]
 
 [CLOSED issue #6] :  Implement the functionality for color of robot sensors [enhancement]
 
