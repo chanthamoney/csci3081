@@ -48,9 +48,6 @@ class factoryLight : public factoryEntity {
   *  @return A pointer to the Light object that was created.
   */
   Light * Create(json_object* config) override;
-
- private:
-  int light_count_ = 0;
 };
 
 NAMESPACE_END(csci3081);

@@ -48,8 +48,6 @@ class factoryFood : public factoryEntity {
   *  @return A pointer to the Food object that was created.
   */
   Food * Create(json_object* config) override;
- private:
-  int food_count_ = 0;
 };
 
 NAMESPACE_END(csci3081);

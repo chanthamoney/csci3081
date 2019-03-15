@@ -57,8 +57,6 @@ class factoryBraitenberg : public factoryEntity {
   */
   factoryBraitenberg operator=(const factoryBraitenberg & rhs) = delete;
 
- private:
-  int vehicle_count_ = 0;
 };
 
 NAMESPACE_END(csci3081);
