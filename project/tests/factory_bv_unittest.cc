@@ -2,13 +2,8 @@
  * Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
-#include "src/arena.h"
-#include "src/entity_type.h"
-#include "src/params.h"
 #include "src/factory_bv.h"
-#include "src/arena_mobile_entity.h"
-#include "src/braitenberg_vehicle.h"
-#include "src/arena_entity.h"
+#include "src/behavior_enum.h"
 
  /******************************************************
 * TEST FEATURE SetUp
@@ -19,13 +14,14 @@ class FactoryBvTest : public ::testing::Test {
    csci3081::factoryBraitenberg bv_factory;
 
    std::string json = "{\"type\": \"Braitenberg\", \"x\":270, \"y\":270, \"r\":15, \"theta\": 215, \"light_behavior\": \"None\", \"food_behavior\": \"Explore\" }";
-   json_value* myconfig = new json_value();
+   json_value * myconfig = new json_value();
    // std::string err = parse_json(*myconfig, json);
    // if (! err.empty()) {
    //   std::cerr << "Parse error: " << err << std::endl;
    //   delete myconfig;
    //   myconfig = NULL;
    // }
+   std::string err = parse_json(myconfig, json);
    json_object config = myconfig->get<json_object>();
 };
 

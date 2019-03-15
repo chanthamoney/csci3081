@@ -218,7 +218,7 @@ void BraitenbergVehicle::UpdateLightSensors() {
 
 void BraitenbergVehicle::LoadFromObject(json_object* config) {
   ArenaEntity::LoadFromObject(config);
-    json_object& entity_config = *config;
+    json_object entity_config = *config;
   if (entity_config.find("light_behavior") != entity_config.end()) {
       light_behavior_ = get_behavior_type(
         entity_config["light_behavior"].get<std::string>());
