@@ -2,13 +2,8 @@
  * Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
-#include "src/arena.h"
-#include "src/entity_type.h"
-#include "src/params.h"
 #include "src/factory_light.h"
-#include "src/arena_mobile_entity.h"
-#include "src/light.h"
-#include "src/arena_entity.h"
+#include "src/behavior_enum.h"
 
  /******************************************************
 * TEST FEATURE SetUp
@@ -16,19 +11,20 @@
 class FactoryLightTest : public ::testing::Test {
 
  protected:
-   csci3081::factoryLight light_factory;
+  virtual void SetUp() {
+    light_factory = new  csci3081::factoryLight();
+    std::string json = "{\"type\": \"Light\", \"x\":150, \"y\":300, \"r\":25 }";
+    json_value * myconfig = new json_value();
+    std::string err = parse_json(myconfig, json);
+    config = myconfig->get<json_object>();
+    delete myconfig;
+  }
+ virtual void TearDown(){
+   delete light_factory;
+ }
 
-   std::string json = "{\"type\": \"Light\", \"x\":150, \"y\":300, \"r\":25 }";
-   json_value* myconfig = new json_value();
-   // std::string err = parse_json(*myconfig, json);
-   // if (! err.empty()) {
-   //   std::cerr << "Parse error: " << err << std::endl;
-   //   delete myconfig;
-   //   myconfig = NULL;
-   // }
-   std::string err = parse_json(myconfig, json);
-
-   json_object config = myconfig->get<json_object>();
+ csci3081::factoryLight * light_factory;
+json_object config;
 
 };
 
@@ -36,38 +32,38 @@ class FactoryLightTest : public ::testing::Test {
  * Test Cases
  ******************************************************************************/
 
-TEST_F(FactoryLightTest, Constructor){
-  auto light = light_factory.Create(&config);
-  // Testing position of light
-  csci3081::Pose lightPose = light->get_pose();
-  int lightx = lightPose.x;
-  int lighty = lightPose.y;
-  double lightTheta = lightPose.theta;
-  //TODO: provide real values later
-  EXPECT_EQ(lightx, 1);
-  EXPECT_EQ(lighty, 1);
-  EXPECT_NEAR(lightTheta, 0, 10);
-
-  //Testing radius of light
-  double lightRadius = light->get_radius();
-  EXPECT_NEAR(lightRadius, 0, 10);
-
-  //Testing speed of light
-  double lightSpeed = light->get_speed();
-  EXPECT_NEAR(lightSpeed, 0, 10);
-
-  //testing mobile
+TEST_F(FactoryLightTest, Constructor) {
+  csci3081::Light * light  = light_factory->Create(&config);
   bool lightMobile = light->is_moving();
   EXPECT_EQ(lightMobile, true);
+  EXPECT_EQ(light->get_type(), csci3081::kLight);
+  delete light;
+}
 
-  //testing color
+TEST_F(FactoryLightTest, JsonPostion) {
+  csci3081::Light * light  = light_factory->Create(&config);
+  csci3081::Pose lightpose = light->get_pose();
+  int lightx = lightpose.x;
+  int lighty = lightpose.y;
+  EXPECT_EQ(lightx, 150);
+  EXPECT_EQ(lighty, 300);
+  delete light;
+}
+
+TEST_F(FactoryLightTest, JsonRadius) {
+  csci3081::Light * light  = light_factory->Create(&config);
+  double lightRadius = light->get_radius();
+  EXPECT_EQ(lightRadius, 25);
+  delete light;
+}
+
+TEST_F(FactoryLightTest, JsonColor) {
+  csci3081::Light * light  = light_factory->Create(&config);
   int lightRColor = light->get_color().r;
   int lightBColor = light->get_color().b;
   int lightGColor = light->get_color().g;
-  EXPECT_EQ(lightRColor, 0);
-  EXPECT_EQ(lightBColor, 0);
-  EXPECT_EQ(lightGColor, 0);
-
-  //Test type
-  EXPECT_EQ(light->get_type(), csci3081::kLight);
+  EXPECT_EQ(lightRColor, 255);
+  EXPECT_EQ(lightBColor, 255);
+  EXPECT_EQ(lightGColor, 255);
+  delete light;
 }
