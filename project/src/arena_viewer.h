@@ -1,15 +1,27 @@
 /**
- * @file controller.h
+ * @file arena_viewer.h
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
 #ifndef SRC_ARENA_VIEWER_H_
 #define SRC_ARENA_VIEWER_H_
-
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include "src/arena.h"
 
+/*******************************************************************************
+ * Namespaces
+ ******************************************************************************/
 NAMESPACE_BEGIN(csci3081);
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @brief Arena_viewer class that allows user to view the and set the Arena.
+ *
+ */
 
 class ArenaViewer {
  public:
