@@ -29,7 +29,8 @@ NAMESPACE_BEGIN(csci3081);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-/* @brief Entity class to represent a Braitenberg Vehicle
+/**
+ * @brief Entity class to represent a BraitenbergVehicle.
  *
  * A braitenberg vehicle is a simple machine that is used to show how simple
  * concepts (in this case wiring) can give way to complex looking behavior. In
@@ -48,8 +49,13 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * Deleting the copy assignment and copy constructor. required now with
    *  inclusion of references to sensors and motion_handler/behavior
    */
+  /**
+  *  @brief Deleting the copy constructor.
+  */
   BraitenbergVehicle(const BraitenbergVehicle & rhs) = delete;
-
+  /**
+  *  @brief Deleting the copy assignment.
+  */
   BraitenbergVehicle operator=(const BraitenbergVehicle & rhs) = delete;
 
   /**
@@ -59,37 +65,107 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @param dt The # of timesteps that have elapsed since the last update.
    */
   void TimestepUpdate(unsigned int dt) override;
-
+  /**
+   * @brief Update the BraitenbergVehicle's wheel velocity based on the
+   * behaviors set by light_behavior_ and food_behavior_
+   *
+   */
   void Update() override;
 
   /**
    * @brief Change the movement state of the BraitenbergVehicle.
+   * When a collision occurs, the BraitenbergVehicle will turn 180 degrees,
+   * move 20 timesteps, and then turn the heading 45 degrees (turn left).
+   *
+   * @param[in] ent_type The type of ArenaEntity the BraitenbergVehicle collided with
+   * @param[in] object ArenaEntity object that the BraitenbergVehicle collided with
+   *
    */
   void HandleCollision(EntityType ent_type,
                        ArenaEntity * object = NULL) override;
 
+ /**
+  * @brief Senses or Identify, the entity that are in the range of the BraitenbergVehicle's
+  * sensor. Then this will update the closest_entity (either food or light).
+  *
+  * @param[in] entity The AreanEntity that is sense by the BraitenbergVehicle.
+  */
   void SenseEntity(const ArenaEntity& entity);
-
+  /**
+   * @brief Get the name of the BraitenbergVehicle.
+   *
+   * @return Returns a string
+   */
   std::string get_name() const override;
-
+  /**
+   * @brief Get the immutable light sensors.
+   *
+   * @returns Returns a const vector<pose>
+   */
   std::vector<Pose> get_light_sensors_const() const;
-
+  /**
+   * @brief Get the light sensors.
+   *
+   * @returns Returns a const vector<pose>
+   */
   std::vector<Pose> get_light_sensors();
-
+  /**
+   * @brief Update the position and direction of the light sensor
+   * To match the direction that the BraitenbergVehicle is facing.
+   *
+   */
   void UpdateLightSensors();
-
+  /**
+   * @brief Takes in json_object and gets the configuration from the object.
+   * The configuration from the object consist of the Type of entity (BraitenbergVehicle),
+   * light_behavior, food_behavior, radius, x, y, and theta position.
+   *
+   * @param[in] entity_config The json_object pointer to the configuration that for the BraitenbergVehicle
+   */
   void LoadFromObject(json_object* entity_config) override;
-
+  /**
+   * @brief Get the light_behavior.
+   *
+   * @return Returns the type behavior of Light
+   */
   Behavior get_light_behavior() { return light_behavior_; }
-
+  /**
+   * @brief Set the behavior for light.
+   *
+   * @param[in] behavior The new light_behavior.
+   */
   void set_light_behavior(Behavior behavior) { light_behavior_ = behavior; }
-
+  /**
+   * @brief Get the food_behavior.
+   *
+   * @return Return the type behavior of Food
+   */
   Behavior get_food_behavior() { return food_behavior_; }
-
+  /**
+   * @brief Set the behavior for food.
+   *
+   * @param[in] behavior The new food_behavior.
+   */
   void set_food_behavior(Behavior behavior) { food_behavior_ = behavior; }
-
+  /**
+   * @brief Get the sensor reading from the left sensor.
+   * This returns the velocity speed from the left sensor of the BraitenbergVehicle
+   * respect to an entity.
+   *
+   * @param[in] entity The entity in the Arean that the left sensor is inspecting.
+   *
+   * @result Returns a double type of the velocity
+   */
   double get_sensor_reading_left(const ArenaEntity* entity);
-
+  /**
+   * @brief Get the sensor reading from the right sensor.
+   * This returns the velocity speed from the left sensor of the BraitenbergVehicle
+   * respect to an entity.
+   *
+   * @param[in] entity The entity in the Arean that the right sensor is inspecting.
+   *
+   * @result Returns a double type of the velocity
+   */
   double get_sensor_reading_right(const ArenaEntity* entity);
 
   static int count;
