@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 15, 19:25:12 PM.
+Run on March 15, 21:34:32 PM.
 
 + Pass: Checkout devel branch.
 
@@ -55,13 +55,13 @@ Run on March 15, 19:25:12 PM.
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=139,required=25)
+Sufficient commits (found=152,required=25)
 
 + Pass: Run git ls-remote gather all branches in repo
 
-82f10d0159a18ab5be211d9d6e90372e58df5436	refs/heads/devel
+5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/devel
 
-c708c903d3e24901756e5a0e2f25993f1e6daee4	refs/heads/docs
+8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -75,7 +75,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-ec415c8cdb2356c3372cde6e6c4b48c79fbc0644	refs/heads/master
+33d859372a1799f7055fe3841d76fd02d46792b7	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -92,7 +92,13 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Fail: Run ghi for total number of open issues in Github repo (Found: 0)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
+
+[OPEN issue #12] :  Implement strategy pattern for Braitenberg vehicle [refactor]
+
+
+
+
 
 + Pass: Run ghi for total number of closed issues in Github repo (Found: 11)
 
