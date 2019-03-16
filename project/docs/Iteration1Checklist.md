@@ -41,20 +41,20 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 | Functionality | Good | Okay | Help | Time |
 | ------------- | ---- |----- | ---- | ---- |
 | **__Priority Level 2__** |
-| _Aggression_ Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. |  |  |  |  |
-| _Aggression_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. |  |  |  |  |
-| _Love_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. |  |  |  |  |
-| _Love_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. |  |  |  |  |
-| _Coward_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. |  |  |  |  |
-| _Coward_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. | | | | |
-|_Explore_  Behavior still operational for Braitenberg Vehicle behavior toward Lights. | | | | |
-| _Explore_  Behavior still operational for Braitenberg Vehicle behavior toward Food. |  |  |  | |
-| Braitenberg Vehicle _new collision avoidance behavior_ (turn 180, advance 20 time steps, turn 180 + or - 45 degrees and continue) implemented and operational. |  |  |  |  |
-| _Lights_ are colored white. |  |  |  |  |
-| _Food_ is colored green. |  |  |  |  |
-| _Vehicle_ is colored Maroon if both sensors are affecting vehicle behavior, or neither sensor is affecting vehicle behavior. |  |  |  |  |
-| _Vehicle_ is colored Gold if only the Light sensor is affecting vehicle behavior.  |  |  |  |  |
-| _Vehicle is colored Blue if only the Food sensor is affecting vehicle behavior. |  |  |  |  |
+| _Aggression_ Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. | X |  |  |  |
+| _Aggression_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. | X |  |  |  |
+| _Love_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. | X |  |  |  |
+| _Love_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. | X |  |  |  |
+| _Coward_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Lights. | X |  |  |  |
+| _Coward_  Behavior implemented and operational for Braitenberg Vehicle behavior toward Food. | X| | | |
+|_Explore_  Behavior still operational for Braitenberg Vehicle behavior toward Lights. |X | | | |
+| _Explore_  Behavior still operational for Braitenberg Vehicle behavior toward Food. | X |  |  | |
+| Braitenberg Vehicle _new collision avoidance behavior_ (turn 180, advance 20 time steps, turn 180 + or - 45 degrees and continue) implemented and operational. | X |  |  |  |
+| _Lights_ are colored white. | X |  |  |  |
+| _Food_ is colored green. | X |  |  |  |
+| _Vehicle_ is colored Maroon if both sensors are affecting vehicle behavior, or neither sensor is affecting vehicle behavior. | X |  |  |  |
+| _Vehicle_ is colored Gold if only the Light sensor is affecting vehicle behavior.  | X |  |  |  |
+| _Vehicle is colored Blue if only the Food sensor is affecting vehicle behavior. | X |  |  |  |
 
 
 
@@ -65,65 +65,65 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 | Functionality | Good | Okay | Help | Time |
 | -------- | -------- | -------- | -------- | --------- |
 | **__Priority Level 3__** |
-| Factories instantiate entities using JSON |  |  |  |   |
-| All BraitenbergVehicle entities in Arena created with a factory |  |  |  |  |
-| All Light entities in Arena created with a factory |  |  |  |  |
-| All Food entities in Arena created with a factory |  |  |  |  |
-| _Scenario 1_  visually inspected - Vehicle does not sense food (default) or light (default). |  |  |  |  |
-| _Scenario 2_  visually inspected - Vehicle aggressive toward food, default toward light. |  |  |  |  |
-| _Scenario 3_  visually inspected - Vehicle explore toward food, default toward light. |  |  |  |  |
-| _Scenario 4_  visually inspected - Vehicle love toward food, default toward light. |  |  |  |  |
-| _Scenario 5_  visually inspected - Vehicle coward toward food, default toward light. |  |  |  |  |
-| _Scenario 6_  visually inspected - Vehicle aggressive toward light, default toward food. |  |  |  |  |
-| _Scenario 7_  visually inspected - Vehicle explore toward light, default toward food. |  |  |  |  |
-| _Scenario 8_  visually inspected - Vehicle love toward light, default toward food. |  |  |  |  |
-| _Scenario 9_  visually inspected - Vehicle coward toward light, default toward food. |  |  |  |  | |
+| Factories instantiate entities using JSON | X |  |  |   |
+| All BraitenbergVehicle entities in Arena created with a factory | X |  |  |  |
+| All Light entities in Arena created with a factory | X |  |  |  |
+| All Food entities in Arena created with a factory | X |  |  |  |
+| _Scenario 1_  visually inspected - Vehicle does not sense food (default) or light (default). | X |  |  |  |
+| _Scenario 2_  visually inspected - Vehicle aggressive toward food, default toward light. | X |  |  |  |
+| _Scenario 3_  visually inspected - Vehicle explore toward food, default toward light. | X |  |  |  |
+| _Scenario 4_  visually inspected - Vehicle love toward food, default toward light. | X |  |  |  |
+| _Scenario 5_  visually inspected - Vehicle coward toward food, default toward light. | X |  |  |  |
+| _Scenario 6_  visually inspected - Vehicle aggressive toward light, default toward food. | X |  |  |  |
+| _Scenario 7_  visually inspected - Vehicle explore toward light, default toward food. | X |  |  |  |
+| _Scenario 8_  visually inspected - Vehicle love toward light, default toward food. | X |  |  |  |
+| _Scenario 9_  visually inspected - Vehicle coward toward light, default toward food. | X |  |  |  | |
 
 
 ### Documentation
 
 #### Design Document
 
-- [ ] The final version of your design document for iteration 1 exists in _docs_ (named **__iteration1\_design.pdf__**).
-- [ ] The final version of your design document discusses the tradeoffs of different implementations of the Factory Pattern and discusses which version you implemented, which might be some variation/hybrid of the factory pattern you discussed in the document.
+- [ X] The final version of your design document for iteration 1 exists in _docs_ (named **__iteration1\_design.pdf__**).
+- [ X] The final version of your design document discusses the tradeoffs of different implementations of the Factory Pattern and discusses which version you implemented, which might be some variation/hybrid of the factory pattern you discussed in the document.
 
 #### UML
 
-- [ ] Final version of UML in a pdf file in the project/docs directory (named **__iteration1_UML.pdf__**).
-- [ ] The Factory classes in the UML reflect what was implemented.
-- [ ] The UML contains the BraitenbergVehicle, Light, and Food class.
-- [ ] The UML contains the Arena class.
-- [ ] The UML contains the _design_ of the Strategy Pattern.
+- [ X] Final version of UML in a pdf file in the project/docs directory (named **__iteration1_UML.pdf__**).
+- [ X] The Factory classes in the UML reflect what was implemented.
+- [X ] The UML contains the BraitenbergVehicle, Light, and Food class.
+- [ X] The UML contains the Arena class.
+- [ X] The UML contains the _design_ of the Strategy Pattern.
 
 #### Doxygen
 
-- [ ] All classes have a _brief_ description that appears in the doxygen web page class list.
-- [ ] The Arena class is fully documented with respect to methods and member variables. In other words, in the html generated pages of doxygen, the user can click on a class method and see more information about its purpose and parameters.
-- [ ] The BraitenbergVehicle class is fully documented with respect to methods and member variables.
-- [ ] The factory classes are fully documented with respect to methods and member variables.
+- [X ] All classes have a _brief_ description that appears in the doxygen web page class list.
+- [ X] The Arena class is fully documented with respect to methods and member variables. In other words, in the html generated pages of doxygen, the user can click on a class method and see more information about its purpose and parameters.
+- [X ] The BraitenbergVehicle class is fully documented with respect to methods and member variables.
+- [ X] The factory classes are fully documented with respect to methods and member variables.
 
 
 ### Linter and Git
 
-- [ ] All *.h and *.c files pass cpplint.
-- [ ] The code complies with naming conventions for Classes, ClassMethods, and class\_members\_.
-- [ ] There exists a history of git commit messages to show effort.
-- [ ] There exists a history of issues and branches to show effort.
-- [ ] Github issues include current unresolved bugs.
-- [ ] Github issues include unresolved feature enhancements and refactoring that is due for this iteration.
+- [X ] All *.h and *.c files pass cpplint.
+- [ X] The code complies with naming conventions for Classes, ClassMethods, and class\_members\_.
+- [ X] There exists a history of git commit messages to show effort.
+- [ X] There exists a history of issues and branches to show effort.
+- [ X] Github issues include current unresolved bugs.
+- [ X] Github issues include unresolved feature enhancements and refactoring that is due for this iteration.
 
 
 
 ### Testing
 
-- [ ] Unit tests are in the /project/tests folder.
-- [ ] Unit tests for different classes are in separate files.
+- [X ] Unit tests are in the /project/tests folder.
+- [X ] Unit tests for different classes are in separate files.
 
-- [ ] Unit tests exist to test the creation of a BraitenbergVehicle.
-- [ ] Unit tests exist to test the creation of a Light.
-- [ ] Unit tests exist to test the creation of a Food.
-- [ ] Unit tests for the factories use JSON.
-- [ ] Unit tests for the factories test initialization of the entity.
+- [X ] Unit tests exist to test the creation of a BraitenbergVehicle.
+- [ X] Unit tests exist to test the creation of a Light.
+- [ X] Unit tests exist to test the creation of a Food.
+- [ X] Unit tests for the factories use JSON.
+- [ X] Unit tests for the factories test initialization of the entity.
 
 
 
