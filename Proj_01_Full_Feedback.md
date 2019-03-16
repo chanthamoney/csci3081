@@ -1,6 +1,6 @@
 ### Feedback for Proj 01
 
-Run on March 15, 21:34:32 PM.
+Run on March 15, 22:16:20 PM.
 
 + Pass: Checkout devel branch.
 
@@ -55,7 +55,7 @@ Run on March 15, 21:34:32 PM.
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=152,required=25)
+Commits found=152
 
 + Pass: Run git ls-remote gather all branches in repo
 
@@ -75,7 +75,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-33d859372a1799f7055fe3841d76fd02d46792b7	refs/heads/master
+49d85321b09a832f13724fa7bd12d777e6f59fa6	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
