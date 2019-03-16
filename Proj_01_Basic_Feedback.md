@@ -1,6 +1,12 @@
 ### Feedback for Proj 01
 
-Run on March 15, 19:25:12 PM.
+Run on March 15, 20:07:32 PM.
+
+
+***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
+
+
+Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 
 + Pass: Checkout devel branch.
 
@@ -28,40 +34,16 @@ Run on March 15, 19:25:12 PM.
 + Pass: Change into directory "project".
 
 
-#### Compile Tests
-
-+ Pass: Clean project.
-
-
-
-+ Pass: Check that make compiles.
-
-
-
-+ Pass: Check that file "build/bin/arenaviewer" exists.
-
-
-#### Documentation Tests
-
-+ Pass: Check that file "docs/uml_design.pdf" exists.
-
-+ Pass: Documentation builds.
-
-
-
-+ Pass: Check that file "docs/html/index.html" exists.
-
-
 #### Git Usage
 
 + Pass: Check git commit history
-Sufficient commits (found=139,required=25)
+Commits found=139
 
 + Pass: Run git ls-remote gather all branches in repo
 
 82f10d0159a18ab5be211d9d6e90372e58df5436	refs/heads/devel
 
-c708c903d3e24901756e5a0e2f25993f1e6daee4	refs/heads/docs
+25f626e943d2a8f38a09580d8844aa176c86ec73	refs/heads/docs
 
 8e3a5bfb231c7d4afb305f7c2339cd6e3ea10c88	refs/heads/feature/01-add_robot_behaviors
 
@@ -75,7 +57,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-ec415c8cdb2356c3372cde6e6c4b48c79fbc0644	refs/heads/master
+35a186ff910b79de2fad54c0c2d02e9b8d1330f6	refs/heads/master
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -92,7 +74,13 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Fail: Run ghi for total number of open issues in Github repo (Found: 0)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 0)
+
+[OPEN issue #] : 
+
+
+
+
 
 + Pass: Run ghi for total number of closed issues in Github repo (Found: 11)
 
@@ -123,6 +111,14 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 
 
+#### Documentation Tests
+
++ Pass: Check that file "docs/uml_design.pdf" exists.
+
+
+Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
+
+
 #### Style Tests
 
 + Pass: Ensuring code follows style guide.
@@ -130,12 +126,14 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 
 
+#### Compile Tests
+
+
+Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
+
+
 #### Unit Tests
 
-+ Pass: Check that file "build/bin/unittest" exists.
 
-+ Pass: Check that a GoogleTest test passes.
-    passes the test: InstBraitenbergVehicle.RobotMovesInEmptyScene.
-
-
+Link to full feedback: [Proj_01_Full_Feedback.md](Proj_01_Full_Feedback.md)
 
