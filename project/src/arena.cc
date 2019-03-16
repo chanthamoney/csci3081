@@ -10,9 +10,15 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+#include <string>
 
 #include "src/arena.h"
 #include "src/light.h"
+#include "src/braitenberg_vehicle.h"
+#include "src/factory_food.h"
+#include "src/factory_light.h"
+#include "src/factory_bv.h"
+
 
 /*******************************************************************************
  * Namespaces
@@ -33,7 +39,7 @@ Arena::Arena(): x_dim_(X_DIM),
     AddEntity(new BraitenbergVehicle());
 }
 
-Arena::Arena(json_object& arena_object): x_dim_(X_DIM),
+Arena::Arena(json_object arena_object): x_dim_(X_DIM),
       y_dim_(Y_DIM),
       entities_(),
       mobile_entities_(),
@@ -48,16 +54,19 @@ Arena::Arena(json_object& arena_object): x_dim_(X_DIM),
     EntityType etype = static_cast<EntityType>(type);
 
     ArenaEntity* entity = NULL;
+    factoryBraitenberg bv_factory;
+    factoryLight light_factory;
+    factoryFood food_factory;
 
     switch (etype) {
       case (kLight):
-        entity = new Light();
+        entity = light_factory.Create(&entity_config);
         break;
       case (kFood):
-        entity = new Food();
+        entity = food_factory.Create(&entity_config);
         break;
       case (kBraitenberg):
-        entity = new BraitenbergVehicle();
+        entity = bv_factory.Create(&entity_config);
         break;
       default:
         std::cout << "FATAL: Bad entity type on creation" << std::endl;
@@ -65,11 +74,6 @@ Arena::Arena(json_object& arena_object): x_dim_(X_DIM),
     }
 
     if (entity) {
-      entity->LoadFromObject(entity_config);
-      if (etype == kBraitenberg) {
-        BraitenbergVehicle* bv = static_cast<BraitenbergVehicle*>(entity);
-        bv->UpdateLightSensors();
-      }
       AddEntity(entity);
     }
   }
@@ -241,7 +245,7 @@ void Arena::AdjustEntityOverlap(ArenaMobileEntity * const mobile_e,
     double distance_between = sqrt(delta_x*delta_x + delta_y*delta_y);
     double distance_to_move =
       mobile_e->get_radius() + other_e->get_radius() - distance_between;
-    double angle = atan(delta_y/delta_x);
+    double angle = atan2(delta_y, delta_x);
     mobile_e->set_position(
       mobile_e->get_pose().x+cos(angle)*distance_to_move,
       mobile_e->get_pose().y+sin(angle)*distance_to_move);

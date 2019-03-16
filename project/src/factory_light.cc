@@ -1,35 +1,39 @@
 /**
- * @file arena_viewer.h
+ * @file factory_light.cc
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
-#ifndef SRC_ARENA_VIEWER_H_
-#define SRC_ARENA_VIEWER_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "src/arena.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+#include "src/common.h"
+#include "src/factory_light.h"
 
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NAMESPACE_BEGIN(csci3081);
-/*******************************************************************************
- * Class Definitions
- ******************************************************************************/
-/**
- * @brief Arena_viewer class that allows user to view the and set the Arena.
- *
- */
 
-class ArenaViewer {
- public:
-  virtual ~ArenaViewer() {}
-  virtual bool RunViewer() = 0;
-  virtual void SetArena(Arena* arena) = 0;
-};
+/*******************************************************************************
+ * Constructors/Destructor
+ ******************************************************************************/
+
+factoryLight::factoryLight() {}
+
+/*******************************************************************************
+ * Member Functions
+ ******************************************************************************/
+
+Light* factoryLight::Create(json_object* config) {
+  Light * light = new Light;
+  light->LoadFromObject(config);
+  return light;
+}
 
 NAMESPACE_END(csci3081);
-
-#endif  // SRC_ARENA_VIEWER_H_

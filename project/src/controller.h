@@ -45,7 +45,7 @@ class Controller {
    * @brief Controller's constructor that will create Arena and Viewer.
    */
   Controller(int argc, char **argv);
-
+  Controller(const Controller &control);
   virtual ~Controller();
 
   virtual ArenaViewer* CreateViewer(int width, int height);
@@ -68,7 +68,7 @@ class Controller {
 
 
   Controller &operator=(const Controller &other) = delete;
-
+  // Controller (const Controller &control) = delete;
  private:
   double last_dt{0};
   Arena* arena_{nullptr};
@@ -79,4 +79,4 @@ class Controller {
 
 NAMESPACE_END(csci3081);
 
-#endif /* SRC_CONTROLLER_H_ */
+#endif  // SRC_CONTROLLER_H_

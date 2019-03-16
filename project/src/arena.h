@@ -49,10 +49,15 @@ class Arena {
    *
    * Initialize all private variables and entities.
    */
-  explicit Arena();
-
-
-  explicit Arena(json_object& arena_object);
+  Arena();
+  /**
+   * @brief Arena's constructor given a JSON Object
+   *
+   * @param[in] arena_object The json_object to set up Arena
+   *
+   * Initialize all private variables and entities.
+   */
+  explicit Arena(json_object arena_object);
 
   /**
    * @brief Arena's destructor. `delete` all entities created.
@@ -70,7 +75,11 @@ class Arena {
    * Arena::UpdateEntitiesTimestep() once.
    */
   void AdvanceTime(double dt);
-
+  /**
+   * @brief Add an AreanEntity object to the Arena's list of objects
+   *
+   * @param[in] entity The AreanEntity that the will be added to the arena
+   */
   void AddEntity(ArenaEntity* entity);
 
   /**
@@ -141,10 +150,23 @@ class Arena {
    */
   void UpdateEntitiesTimestep();
 
-
+  /**
+   * @brief Get all the entities in the Arena
+   *
+   * @return entities The list of all entities in the Arena as a <vector>
+   */
   std::vector<class ArenaEntity *> get_entities() const { return entities_; }
-
+  /**
+   * @brief Get the x_dim of the arena.
+   *
+   * @return x Dimension of arena
+   */
   double get_x_dim() { return x_dim_; }
+  /**
+   * @brief Get the y_dim of the arena.
+   *
+   * @return y Dimension of arena
+   */
   double get_y_dim() { return y_dim_; }
 
  private:
