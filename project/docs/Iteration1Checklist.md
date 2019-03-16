@@ -11,16 +11,16 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 
 
-- [ ]  cloned **fresh** from github onto a cselabs machine to test compilation, style compliance, and execution
-- [ ] Submission is on the **master** branch in the project folder of your repo
-- [ ] _/project_ folder exists
-- [ ] _/build_ is not in the repo
-- [ ] _/html_  and _/latex_ is not in _docs_
-- [ ] **__`make` from within _project_ completes without error.__**
-- [ ] `./../build/bin/arenaviewer` executes without assert or a seg fault
-- [ ] `./../build/bin/unittest` executes without a seg fault
-- [ ] **_"make check-style" reports no errors when run in the master branch._**
-- [ ] `doxygen docs/Doxyfile` compiles
+- [ X]  cloned **fresh** from github onto a cselabs machine to test compilation, style compliance, and execution
+- [ X] Submission is on the **master** branch in the project folder of your repo
+- [ X] _/project_ folder exists
+- [ X] _/build_ is not in the repo
+- [ X] _/html_  and _/latex_ is not in _docs_
+- [ X] **__`make` from within _project_ completes without error.__**
+- [ X] `./../build/bin/arenaviewer` executes without assert or a seg fault
+- [ X] `./../build/bin/unittest` executes without a seg fault
+- [ X] **_"make check-style" reports no errors when run in the master branch._**
+- [ X] `doxygen docs/Doxyfile` compiles
 
 
 
@@ -133,8 +133,8 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 When everything above is as you want it or the deadline is upon you, it is time to submit!
 
-- [ ] I pushed this file and any changes resulting from this checklist.
-- [ ] Everything is in the **__master__** branch.
+- [ X] I pushed this file and any changes resulting from this checklist.
+- [ X] Everything is in the **__master__** branch.
 
 _One more thing_ -- check that what you think you pushed was really pushed to github. If you can see it, we can see it. If you can't, we can't.
 
