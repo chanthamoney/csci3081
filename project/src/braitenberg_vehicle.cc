@@ -100,7 +100,6 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
 void BraitenbergVehicle::Update() {
   WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
 
-  int numBehaviors = 2;
   double light_left_sensor_reading = get_sensor_reading_left(closest_light_entity_);
   double light_right_sensor_reading = get_sensor_reading_right(closest_light_entity_);
 
@@ -168,22 +167,30 @@ void BraitenbergVehicle::Update() {
   //     break;
   // }
 
-  if (numBehaviors) {
-    wheel_velocity_ = WheelVelocity(
-      (light_wheel_velocity.left + food_wheel_velocity.left)/numBehaviors,
-      (light_wheel_velocity.right + food_wheel_velocity.right)/numBehaviors,
-      defaultSpeed_);
-  } else {
-    wheel_velocity_ = WheelVelocity(0, 0);
-  }
+  // if (numBehaviors) {
+  //   wheel_velocity_ = WheelVelocity(
+  //     (light_wheel_velocity.left + food_wheel_velocity.left)/numBehaviors,
+  //     (light_wheel_velocity.right + food_wheel_velocity.right)/numBehaviors,
+  //     defaultSpeed_);
+  // } else {
+  //   wheel_velocity_ = WheelVelocity(0, 0);
+  // }
     // set color of robot
   if ( (light_wheel_velocity.left == 0 && light_wheel_velocity.right == 0)
-    && (food_wheel_velocity.left > 0 && food_wheel_velocity.right >0)) {
+    && (food_wheel_velocity.left > 0 && food_wheel_velocity.right > 0)) {
+      wheel_velocity_ = WheelVelocity(
+        food_wheel_velocity.left, food_wheel_velocity.right, defaultSpeed_);
       set_color({0, 0, 255});
     } else if ((light_wheel_velocity.left > 0 && light_wheel_velocity.right > 0)
     && (food_wheel_velocity.left == 0 && food_wheel_velocity.right == 0)) {
+      wheel_velocity_ = WheelVelocity(
+        light_wheel_velocity.left, light_wheel_velocity.right, defaultSpeed_);
       set_color({255, 204, 51});
     } else {
+      wheel_velocity_ = WheelVelocity(
+        (light_wheel_velocity.left + food_wheel_velocity.left)/2,
+        (light_wheel_velocity.right + food_wheel_velocity.right)/2,
+        defaultSpeed_);
     set_color({122, 0, 25});
   }
 }
