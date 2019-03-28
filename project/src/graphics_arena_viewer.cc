@@ -14,6 +14,13 @@
 #include "src/graphics_arena_viewer.h"
 #include "src/rgb_color.h"
 #include "src/braitenberg_vehicle.h"
+#include "src/behaviors.h"
+#include "src/behavior_enum.h"
+#include "src/aggressive.h"
+#include "src/coward.h"
+#include "src/love.h"
+#include "src/explore.h"
+#include "src/none.h"
 
 /*******************************************************************************
  * Namespaces
@@ -96,6 +103,22 @@ void GraphicsArenaViewer::UpdateSimulation(double dt) {
   if (!paused_) {
     controller_->AdvanceTime(dt);
   }
+}
+
+int GraphicsArenaViewer::getIndexOfBehavior(const std::string& type) {
+  if (type == "Aggressive") {
+    return 1;
+  }
+  if (type == "Love") {
+    return 4;
+  }
+  if (type == "Coward") {
+    return 2;
+  }
+  if (type == "Explore") {
+    return 3;
+  }
+  return 0;
 }
 
 /*******************************************************************************
@@ -300,10 +323,10 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
   }
 
   if (defaultEntity->get_type() == kBraitenberg) {
-    lightBehaviorSelect->setSelectedIndex(
-      static_cast<BraitenbergVehicle*>(defaultEntity)->get_light_behavior());
-    foodBehaviorSelect->setSelectedIndex(
-      static_cast<BraitenbergVehicle*>(defaultEntity)->get_food_behavior());
+    lightBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+      static_cast<BraitenbergVehicle*>(defaultEntity)->get_light_behavior()->getBehaviorType()));
+    foodBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+      static_cast<BraitenbergVehicle*>(defaultEntity)->get_food_behavior()->getBehaviorType()));
   }
 
   entitySelect->setCallback(
@@ -323,10 +346,10 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
       }
 
       if (entity->get_type() == kBraitenberg) {
-        lightBehaviorSelect->setSelectedIndex(
-          static_cast<BraitenbergVehicle*>(entity)->get_light_behavior());
-        foodBehaviorSelect->setSelectedIndex(
-          static_cast<BraitenbergVehicle*>(entity)->get_food_behavior());
+        lightBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+          static_cast<BraitenbergVehicle*>(entity)->get_light_behavior()->getBehaviorType()));
+        foodBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+          static_cast<BraitenbergVehicle*>(entity)->get_food_behavior()->getBehaviorType()));
       }
 
       screen()->performLayout();
@@ -336,9 +359,27 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
     [this, entitySelect](int index) {
       ArenaEntity* entity =
       this->arena_->get_entities()[entitySelect->selectedIndex()];
+      Behaviors * behavior;
+      switch (index) {
+        case 0:
+          behavior = new None();
+          break;
+        case 1:
+          behavior = new Aggressive();
+          break;
+        case 2:
+          behavior = new Coward();
+          break;
+        case 3:
+          behavior = new Explore();
+          break;
+        default:
+          behavior = new Love();
+          break;
+      }
       if (entity->get_type() == kBraitenberg) {
-        static_cast<BraitenbergVehicle*>(entity)->set_light_behavior(
-          static_cast<Behavior>(index));
+
+        static_cast<BraitenbergVehicle*>(entity)->set_light_behavior(behavior);
       }
     });
 
@@ -346,9 +387,26 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
     [this, entitySelect](int index) {
       ArenaEntity* entity =
       this->arena_->get_entities()[entitySelect->selectedIndex()];
+      Behaviors * behavior;
+      switch (index) {
+        case 0:
+          behavior = new None();
+          break;
+        case 1:
+          behavior = new Aggressive();
+          break;
+        case 2:
+          behavior = new Coward();
+          break;
+        case 3:
+          behavior = new Explore();
+          break;
+        default:
+          behavior = new Love();
+          break;
+      }
       if (entity->get_type() == kBraitenberg) {
-        static_cast<BraitenbergVehicle*>(entity)->set_food_behavior(
-          static_cast<Behavior>(index));
+        static_cast<BraitenbergVehicle*>(entity)->set_food_behavior(behavior);
       }
     });
 

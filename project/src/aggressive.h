@@ -1,40 +1,44 @@
 /**
- * @file behavior_enum.h
+ * @file aggressive.h
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
-#ifndef SRC_BEHAVIOR_ENUM_H_
-#define SRC_BEHAVIOR_ENUM_H_
+#ifndef SRC_AGGRESSIVE_H_
+#define SRC_AGGRESSIVE_H_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
 
-#include "src/common.h"
-
+#include "wheel_velocity.h"
+#include "behaviors.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NAMESPACE_BEGIN(csci3081);
-
 /*******************************************************************************
- * Enumeration
+ * Class Definitions
  ******************************************************************************/
-/**
- * @brief Enumeration representing the 4 possible behaviors
- *
- */
 
-enum Behavior {
-  kNone = 0,
-  kAggressive,
-  kCoward,
-  kExplore,
-  kLove
+class Aggressive : public Behaviors {
+ public:
+  Aggressive() {}
+  ~Aggressive() {};
+
+  void getWheelVelocity (double left_sensor_reading, double right_sensor_reading, double speed, WheelVelocity *wheel_velocity) override {
+    *wheel_velocity = WheelVelocity(right_sensor_reading, left_sensor_reading, speed);
+  }
+
+  std::string getBehaviorType() override {
+    return "Aggressive";
+  }
 };
 
 NAMESPACE_END(csci3081);
 
-#endif  // SRC_BEHAVIOR_ENUM_H_
+#endif  // SRC_AGGRESSIVE_H_

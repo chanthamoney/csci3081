@@ -3,7 +3,6 @@
  ******************************************************************************/
 #include <gtest/gtest.h>
 #include "src/factory_bv.h"
-#include "src/behavior_enum.h"
 
  /******************************************************
 * TEST FEATURE SetUp
@@ -72,12 +71,12 @@ TEST_F(FactoryBvTest, JsonColor) {
 
 TEST_F(FactoryBvTest, JsonFoodBehavior) {
   csci3081::BraitenbergVehicle * bv  = bv_factory->Create(&config);
-  EXPECT_EQ(bv->get_food_behavior(), csci3081::kExplore);
+  EXPECT_EQ((bv->get_food_behavior())->getBehaviorType(), "Explore");
   delete bv;
 }
 
 TEST_F(FactoryBvTest, JsonLightBehavior) {
   csci3081::BraitenbergVehicle * bv  = bv_factory->Create(&config);
-  EXPECT_EQ(bv->get_light_behavior(), csci3081::kNone);
+  EXPECT_EQ((bv->get_light_behavior())->getBehaviorType(), "None");
   delete bv;
 }

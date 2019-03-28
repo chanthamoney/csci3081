@@ -10,6 +10,11 @@
 #include <ctime>
 #include "src/braitenberg_vehicle.h"
 #include "src/params.h"
+#include "src/aggressive.h"
+#include "src/coward.h"
+#include "src/love.h"
+#include "src/explore.h"
+#include "src/none.h"
 
 class SensorLightLove;
 
@@ -25,8 +30,8 @@ int BraitenbergVehicle::count = 0;
  ******************************************************************************/
 
 BraitenbergVehicle::BraitenbergVehicle() :
-  light_sensors_(), wheel_velocity_(), light_behavior_(kNone),
-  food_behavior_(kNone), closest_light_entity_(NULL),
+  light_sensors_(), wheel_velocity_(), light_behavior_(new None()),
+  food_behavior_(new None()), closest_light_entity_(NULL),
   closest_food_entity_(NULL), defaultSpeed_(5.0) {
   set_type(kBraitenberg);
   motion_behavior_ = new MotionBehaviorDifferential(this);
@@ -96,62 +101,72 @@ void BraitenbergVehicle::Update() {
   WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
 
   int numBehaviors = 2;
+  double light_left_sensor_reading = get_sensor_reading_left(closest_light_entity_);
+  double light_right_sensor_reading = get_sensor_reading_right(closest_light_entity_);
 
-  switch (light_behavior_) {
-    case kExplore:
-      light_wheel_velocity = WheelVelocity(
-        1.0/get_sensor_reading_right(closest_light_entity_),
-         1.0/get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
-      break;
-    case kLove:
-      light_wheel_velocity = WheelVelocity(
-        1.0/get_sensor_reading_left(closest_light_entity_),
-        1.0/get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
-      break;
-    case kCoward:
-      light_wheel_velocity = WheelVelocity(
-        get_sensor_reading_left(closest_light_entity_),
-        get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
-      break;
-    case kAggressive:
-      light_wheel_velocity = WheelVelocity(
-        get_sensor_reading_right(closest_light_entity_),
-        get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
-      break;
-    case kNone:
-    default:
-      numBehaviors--;
-      break;
-  }
+  light_behavior_->getWheelVelocity(light_left_sensor_reading, light_right_sensor_reading, defaultSpeed_, &light_wheel_velocity);
+
+    //
+    // switch (light_behavior_) {
+    //   case kExplore:
+    //     light_wheel_velocity = WheelVelocity(
+    //       1.0/get_sensor_reading_right(closest_light_entity_),
+    //        1.0/get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
+    //     break;
+    //   case kLove:
+    //     light_wheel_velocity = WheelVelocity(
+    //       1.0/get_sensor_reading_left(closest_light_entity_),
+    //       1.0/get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
+    //     break;
+    //   case kCoward:
+    //     light_wheel_velocity = WheelVelocity(
+    //       get_sensor_reading_left(closest_light_entity_),
+    //       get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
+    //     break;
+    //   case kAggressive:
+    //     light_wheel_velocity = WheelVelocity(
+    //       get_sensor_reading_right(closest_light_entity_),
+    //       get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
+    //     break;
+    //   case kNone:
+    //   default:
+    //     numBehaviors--;
+    //     break;
+    // }
+    //
+
 
   WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
+  double food_left_sensor_reading = get_sensor_reading_left(closest_food_entity_);
+  double food_right_sensor_reading = get_sensor_reading_right(closest_food_entity_);
+  food_behavior_->getWheelVelocity(food_left_sensor_reading, food_right_sensor_reading, defaultSpeed_, &food_wheel_velocity);
 
-  switch (food_behavior_) {
-    case kExplore:
-      food_wheel_velocity = WheelVelocity(
-        1.0/get_sensor_reading_right(closest_food_entity_),
-        1.0/get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
-      break;
-    case kLove:
-      food_wheel_velocity = WheelVelocity(
-        1.0/get_sensor_reading_left(closest_food_entity_),
-        1.0/get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
-      break;
-    case kCoward:
-      food_wheel_velocity = WheelVelocity(
-        get_sensor_reading_left(closest_food_entity_),
-        get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
-      break;
-    case kAggressive:
-      food_wheel_velocity = WheelVelocity(
-        get_sensor_reading_right(closest_food_entity_),
-        get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
-      break;
-    case kNone:
-    default:
-      numBehaviors--;
-      break;
-  }
+  // switch (food_behavior_) {
+  //   case kExplore:
+  //     food_wheel_velocity = WheelVelocity(
+  //       1.0/get_sensor_reading_right(closest_food_entity_),
+  //       1.0/get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
+  //     break;
+  //   case kLove:
+  //     food_wheel_velocity = WheelVelocity(
+  //       1.0/get_sensor_reading_left(closest_food_entity_),
+  //       1.0/get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
+  //     break;
+  //   case kCoward:
+  //     food_wheel_velocity = WheelVelocity(
+  //       get_sensor_reading_left(closest_food_entity_),
+  //       get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
+  //     break;
+  //   case kAggressive:
+  //     food_wheel_velocity = WheelVelocity(
+  //       get_sensor_reading_right(closest_food_entity_),
+  //       get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
+  //     break;
+  //   case kNone:
+  //   default:
+  //     numBehaviors--;
+  //     break;
+  // }
 
   if (numBehaviors) {
     wheel_velocity_ = WheelVelocity(
@@ -220,12 +235,40 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
   ArenaEntity::LoadFromObject(config);
     json_object entity_config = *config;
   if (entity_config.find("light_behavior") != entity_config.end()) {
-      light_behavior_ = get_behavior_type(
-        entity_config["light_behavior"].get<std::string>());
+    std::string type = entity_config["light_behavior"].get<std::string>();
+    if (type == "Aggressive") {
+      light_behavior_ = new Aggressive();
+    }
+    else if (type == "Love") {
+      light_behavior_ = new Love();
+    }
+    else if (type == "Coward") {
+      light_behavior_ = new Coward();
+    }
+    else if (type == "Explore") {
+      light_behavior_ = new Explore();
+    }
+    else {
+      light_behavior_ = new None();
+    }
   }
   if (entity_config.find("food_behavior") != entity_config.end()) {
-      food_behavior_ = get_behavior_type(
-        entity_config["food_behavior"].get<std::string>());
+    std::string type = entity_config["food_behavior"].get<std::string>();
+    if (type == "Aggressive") {
+      food_behavior_ = new Aggressive();
+    }
+    else if (type == "Love") {
+      food_behavior_ = new Love();
+    }
+    else if (type == "Coward") {
+      food_behavior_ = new Coward();
+    }
+    else if (type == "Explore") {
+      food_behavior_ = new Explore();
+    }
+    else {
+      food_behavior_ = new None();
+    }
   }
 
   UpdateLightSensors();
