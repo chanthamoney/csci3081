@@ -18,8 +18,7 @@
 #include "src/arena_mobile_entity.h"
 #include "src/motion_behavior_differential.h"
 #include "src/wheel_velocity.h"
-#include "src/behavior_enum.h"
-
+#include "src/behaviors.h"
 
 /*******************************************************************************
  * Namespaces
@@ -128,25 +127,25 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    *
    * @return Returns the type behavior of Light
    */
-  Behavior get_light_behavior() { return light_behavior_; }
+  Behaviors * get_light_behavior() { return light_behavior_; }
   /**
    * @brief Set the behavior for light.
    *
    * @param[in] behavior The new light_behavior.
    */
-  void set_light_behavior(Behavior behavior) { light_behavior_ = behavior; }
+  void set_light_behavior(Behaviors * behavior) { light_behavior_ = behavior; }
   /**
    * @brief Get the food_behavior.
    *
    * @return Return the type behavior of Food
    */
-  Behavior get_food_behavior() { return food_behavior_; }
+  Behaviors * get_food_behavior() { return food_behavior_; }
   /**
    * @brief Set the behavior for food.
    *
    * @param[in] behavior The new food_behavior.
    */
-  void set_food_behavior(Behavior behavior) { food_behavior_ = behavior; }
+  void set_food_behavior(Behaviors * behavior) { food_behavior_ = behavior; }
   /**
    * @brief Get the sensor reading from the left sensor.
    * This returns the velocity speed from the left sensor of the BraitenbergVehicle
@@ -174,8 +173,8 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   std::vector<Pose> light_sensors_;
   MotionBehaviorDifferential * motion_behavior_{nullptr};
   WheelVelocity wheel_velocity_;
-  Behavior light_behavior_;
-  Behavior food_behavior_;
+  Behaviors *light_behavior_;
+  Behaviors *food_behavior_;
   const ArenaEntity* closest_light_entity_;
   const ArenaEntity* closest_food_entity_;
   double defaultSpeed_;

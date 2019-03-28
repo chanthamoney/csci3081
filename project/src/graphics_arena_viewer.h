@@ -81,6 +81,14 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
   void UpdateSimulation(double dt) override;
 
   /**
+   * @brief Provides the corresponding index of a behavior type.
+   *
+   * @param type The name of the behavior
+   * @return the index position of a behavior type
+   */
+  int getIndexOfBehavior(const std::string& type);
+
+  /**
    * @brief Handle the user pressing the pause button on the GUI.
    *
    * This will freeze the graphics--no update, until the pause button is
