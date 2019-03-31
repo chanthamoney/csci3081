@@ -123,6 +123,19 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   void LoadFromObject(json_object* entity_config) override;
   /**
+   * @brief Get the bv_behavior.
+   *
+   * @return Returns the type behavior of bv
+   */
+  Behaviors * get_bv_behavior() { return bv_behavior_; }
+  /**
+   * @brief Set the behavior for bv.
+   *
+   * @param[in] behavior The new bv_behavior.
+   */
+  void set_bv_behavior(Behaviors * behavior) { bv_behavior_ = behavior; }
+
+  /**
    * @brief Get the light_behavior.
    *
    * @return Returns the type behavior of Light
@@ -173,8 +186,10 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   std::vector<Pose> light_sensors_;
   MotionBehaviorDifferential * motion_behavior_{nullptr};
   WheelVelocity wheel_velocity_;
+  Behaviors *bv_behavior_;
   Behaviors *light_behavior_;
   Behaviors *food_behavior_;
+  const ArenaEntity* closest_bv_entity_;
   const ArenaEntity* closest_light_entity_;
   const ArenaEntity* closest_food_entity_;
   double defaultSpeed_;

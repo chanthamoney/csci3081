@@ -318,6 +318,28 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
   space->setVisible(false);
   sliderPanel->setVisible(false);
 
+  robotWidgets.push_back(new nanogui::Label(
+    panel, "Braitenberg Behavior", "sans-bold"));
+  robotPanel = new nanogui::Widget(panel);
+  robotWidgets.push_back(robotPanel);
+  robotPanel->setLayout(new nanogui::BoxLayout(
+    nanogui::Orientation::Vertical, nanogui::Alignment::Minimum, 0, 0));
+  nanogui::ComboBox* bvBehaviorSelect = new nanogui::ComboBox(
+    robotPanel, behaviorNames);
+  bvBehaviorSelect->setFixedWidth(COMBO_BOX_WIDTH -10);
+  space = new nanogui::Widget(robotPanel);
+  sliderPanel = new nanogui::Widget(robotPanel);
+  space->setFixedHeight(10);
+  sliderPanel->setLayout(
+    new nanogui::BoxLayout(
+      nanogui::Orientation::Horizontal, nanogui::Alignment::Middle, 0, 0));
+  lbl = new nanogui::Label(sliderPanel, "Intensity", "sans-bold");
+  lbl->setFixedWidth(50);
+  slider = new nanogui::Slider(sliderPanel);
+  slider->setFixedWidth(90);
+  space->setVisible(false);
+  sliderPanel->setVisible(false);
+
   for (unsigned int f = 0; f < robotWidgets.size(); f++) {
     robotWidgets[f]->setVisible(defaultEntity->get_type() == kBraitenberg);
   }
@@ -327,11 +349,13 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
       static_cast<BraitenbergVehicle*>(defaultEntity)->get_light_behavior()->getBehaviorType()));
     foodBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
       static_cast<BraitenbergVehicle*>(defaultEntity)->get_food_behavior()->getBehaviorType()));
+    bvBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+      static_cast<BraitenbergVehicle*>(defaultEntity)->get_bv_behavior()->getBehaviorType()));
   }
 
   entitySelect->setCallback(
     [this, isMobile, robotWidgets, lightBehaviorSelect,
-    foodBehaviorSelect](int index) {
+    foodBehaviorSelect, bvBehaviorSelect](int index) {
       ArenaEntity* entity = this->arena_->get_entities()[index];
       if (entity->is_mobile()) {
         ArenaMobileEntity* mobileEntity =
@@ -350,7 +374,9 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
           static_cast<BraitenbergVehicle*>(entity)->get_light_behavior()->getBehaviorType()));
         foodBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
           static_cast<BraitenbergVehicle*>(entity)->get_food_behavior()->getBehaviorType()));
-      }
+        bvBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
+          static_cast<BraitenbergVehicle*>(entity)->get_bv_behavior()->getBehaviorType()));
+        }
 
       screen()->performLayout();
     });
@@ -409,6 +435,33 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
         static_cast<BraitenbergVehicle*>(entity)->set_food_behavior(behavior);
       }
     });
+
+    bvBehaviorSelect->setCallback(
+      [this, entitySelect](int index) {
+        ArenaEntity* entity =
+        this->arena_->get_entities()[entitySelect->selectedIndex()];
+        Behaviors * behavior;
+        switch (index) {
+          case 0:
+            behavior = new None();
+            break;
+          case 1:
+            behavior = new Aggressive();
+            break;
+          case 2:
+            behavior = new Coward();
+            break;
+          case 3:
+            behavior = new Explore();
+            break;
+          default:
+            behavior = new Love();
+            break;
+        }
+        if (entity->get_type() == kBraitenberg) {
+          static_cast<BraitenbergVehicle*>(entity)->set_bv_behavior(behavior);
+        }
+      });
 
   isMobile->setCallback(
     [this, entitySelect](bool moving) {
