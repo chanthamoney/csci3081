@@ -65,6 +65,19 @@ struct WheelVelocity {
    */
   WheelVelocity &operator=(const WheelVelocity &other) = default;
 
+  /**
+   * @brief Comparison operator for wheel velocities. Two wheel velocities
+   * are equal if left and right components are equal.
+   *
+   * @param other The Pose object to copy from.
+   *
+   * @return The left-hand-side Pose object that is now identical (in value)
+   * to `other`.
+   */
+  friend bool operator==(const WheelVelocity &lhs, const WheelVelocity &rhs) {
+    return lhs.left == rhs.left && lhs.right == rhs.right;
+  }
+
   double left;
   double right;
 };
