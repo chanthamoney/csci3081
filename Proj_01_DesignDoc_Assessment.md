@@ -2,7 +2,7 @@
 
 #### Total score: _0_ / _0_
 
-Run on March 28, 23:56:37 PM.
+Run on April 01, 22:31:51 PM.
 
 
 #### Release Branch
@@ -38,12 +38,20 @@ Run on March 28, 23:56:37 PM.
 
 + Pass: Check that file "docs/iteration1_UML.pdf" exists.
 
+
+#### Doxygen
+
++ Pass: Documentation builds.
+
+
+
++ Pass: Check that file "docs/html/index.html" exists.
+
++ Pass: Check that file "docs/html/index.html" exists.
+
 + Pass: Graded on Canvas.
 
 
-
-
-#### Doxygen
 
 #### Total score: _0_ / _0_
 
