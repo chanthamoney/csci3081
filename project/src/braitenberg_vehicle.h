@@ -196,6 +196,8 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
 
+  void Die();
+
   static int count;
 
  private:

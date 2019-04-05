@@ -173,18 +173,26 @@ void GraphicsArenaViewer::DrawEntity(NVGcontext *ctx,
   // draw food with a radius of 5 less than actual radius. BraitenbergVehicles
   // will 'eat' when withing 5 radius of the food
   if (entity->get_type() == kFood) rad -= 5;
+  int dead_or_alive_opacity = 255;
+  if (entity->isDead()) {
+    dead_or_alive_opacity = 190;
+  }
   nvgCircle(ctx, xOffset_ + x, y, rad);
   nvgFillColor(ctx,
                nvgRGBA(entity->get_color().r, entity->get_color().g,
-                       entity->get_color().b, 255));
+                       entity->get_color().b, dead_or_alive_opacity));
   nvgFill(ctx);
-  nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
+  nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, dead_or_alive_opacity));
   nvgStroke(ctx);
   nvgSave(ctx);
   // draw the sensors if the entity is a BraitenbergVehicle
   // the nvg calls are porobably not perfect, but we haven't been taught them
   /************************* DRAWING SENSORS *********************************/
   if (entity->get_type() == kBraitenberg) {
+    int sensor_a_color = 255;
+    if (entity->isDead()) {
+      sensor_a_color = 90;
+    }
     auto bv = static_cast<const BraitenbergVehicle * const>(entity);
     std::vector<Pose> sensors = bv->get_light_sensors_const();
     Pose left_sens_pose = sensors[0];
@@ -198,7 +206,7 @@ void GraphicsArenaViewer::DrawEntity(NVGcontext *ctx,
             xOffset_ + static_cast<float>(left_sens_pose.x),
             static_cast<float>(left_sens_pose.y),
             static_cast<float>(SENSOR_LIGHT_RAD));
-    nvgFillColor(ctx, nvgRGBA(255, 0, 0, 255));
+    nvgFillColor(ctx, nvgRGBA(255, 0, 0, sensor_a_color));
     nvgFill(ctx);
     nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
     nvgStroke(ctx);
@@ -212,7 +220,7 @@ void GraphicsArenaViewer::DrawEntity(NVGcontext *ctx,
             xOffset_ + static_cast<float>(right_sens_pose.x),
             static_cast<float>(right_sens_pose.y),
             static_cast<float>(SENSOR_LIGHT_RAD));
-    nvgFillColor(ctx, nvgRGBA(255, 0, 0, 255));
+    nvgFillColor(ctx, nvgRGBA(255, 0, 0, sensor_a_color));
     nvgFill(ctx);
     nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
     nvgStroke(ctx);

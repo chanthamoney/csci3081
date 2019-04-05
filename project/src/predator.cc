@@ -9,6 +9,7 @@
 #include <iostream>
 #include <ctime>
 #include "src/predator.h"
+#include "src/braitenberg_vehicle.h"
 #include "src/params.h"
 #include "src/aggressive.h"
 #include "src/coward.h"
@@ -80,7 +81,9 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
       closest_entity_ = &closest_pred_entity_;
     }
   } else if (entity.get_type() == kBraitenberg) {
-    closest_entity_ = &closest_bv_entity_;
+    if (!entity.isDead()) {
+      closest_entity_ = &closest_bv_entity_;
+    }
   }
 
   if (!closest_entity_) {
