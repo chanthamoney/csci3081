@@ -19,6 +19,7 @@
 #include "src/motion_behavior_differential.h"
 #include "src/wheel_velocity.h"
 #include "src/behaviors.h"
+#include "src/observer.h"
 
 /*******************************************************************************
  * Namespaces
@@ -39,6 +40,21 @@ NAMESPACE_BEGIN(csci3081);
 
 class BraitenbergVehicle : public ArenaMobileEntity {
  public:
+
+   void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
+     observer_ = o;
+   };
+
+   void UnregisterObserver() {
+     observer_ = nullptr;
+   };
+
+   void Notify(std::vector<WheelVelocity*>* arg) {
+     if (observer_ != nullptr) {
+       observer_->Notify(arg);
+     }
+   }
+
   /**
    * @brief Default constructor.
    */
@@ -194,6 +210,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   const ArenaEntity* closest_food_entity_;
   double defaultSpeed_;
   int collision_time_ = 0;
+  Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
 };
 
 NAMESPACE_END(csci3081);

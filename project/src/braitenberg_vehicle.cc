@@ -115,77 +115,14 @@ void BraitenbergVehicle::Update() {
 
   light_behavior_->getWheelVelocity(light_left_sensor_reading, light_right_sensor_reading, defaultSpeed_, &light_wheel_velocity);
 
-    //
-    // switch (light_behavior_) {
-    //   case kExplore:
-    //     light_wheel_velocity = WheelVelocity(
-    //       1.0/get_sensor_reading_right(closest_light_entity_),
-    //        1.0/get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
-    //     break;
-    //   case kLove:
-    //     light_wheel_velocity = WheelVelocity(
-    //       1.0/get_sensor_reading_left(closest_light_entity_),
-    //       1.0/get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
-    //     break;
-    //   case kCoward:
-    //     light_wheel_velocity = WheelVelocity(
-    //       get_sensor_reading_left(closest_light_entity_),
-    //       get_sensor_reading_right(closest_light_entity_), defaultSpeed_);
-    //     break;
-    //   case kAggressive:
-    //     light_wheel_velocity = WheelVelocity(
-    //       get_sensor_reading_right(closest_light_entity_),
-    //       get_sensor_reading_left(closest_light_entity_), defaultSpeed_);
-    //     break;
-    //   case kNone:
-    //   default:
-    //     numBehaviors--;
-    //     break;
-    // }
-    //
-
-
   WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
   double food_left_sensor_reading = get_sensor_reading_left(closest_food_entity_);
   double food_right_sensor_reading = get_sensor_reading_right(closest_food_entity_);
   food_behavior_->getWheelVelocity(food_left_sensor_reading, food_right_sensor_reading, defaultSpeed_, &food_wheel_velocity);
 
-  // switch (food_behavior_) {
-  //   case kExplore:
-  //     food_wheel_velocity = WheelVelocity(
-  //       1.0/get_sensor_reading_right(closest_food_entity_),
-  //       1.0/get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
-  //     break;
-  //   case kLove:
-  //     food_wheel_velocity = WheelVelocity(
-  //       1.0/get_sensor_reading_left(closest_food_entity_),
-  //       1.0/get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
-  //     break;
-  //   case kCoward:
-  //     food_wheel_velocity = WheelVelocity(
-  //       get_sensor_reading_left(closest_food_entity_),
-  //       get_sensor_reading_right(closest_food_entity_), defaultSpeed_);
-  //     break;
-  //   case kAggressive:
-  //     food_wheel_velocity = WheelVelocity(
-  //       get_sensor_reading_right(closest_food_entity_),
-  //       get_sensor_reading_left(closest_food_entity_), defaultSpeed_);
-  //     break;
-  //   case kNone:
-  //   default:
-  //     numBehaviors--;
-  //     break;
-  // }
+  std::vector<WheelVelocity*> wvs {&light_wheel_velocity, &food_wheel_velocity, &bv_wheel_velocity};
 
-  // if (numBehaviors) {
-  //   wheel_velocity_ = WheelVelocity(
-  //     (light_wheel_velocity.left + food_wheel_velocity.left)/numBehaviors,
-  //     (light_wheel_velocity.right + food_wheel_velocity.right)/numBehaviors,
-  //     defaultSpeed_);
-  // } else {
-  //   wheel_velocity_ = WheelVelocity(0, 0);
-  // }
-    // set color of robot
+  Notify(&wvs);
 
   // FOOD, LIGHT, BV
   // NNN, NNS, NSN, NSS, SNN, SNS, SSS
@@ -243,15 +180,6 @@ void BraitenbergVehicle::Update() {
       wheel_velocity_ = WheelVelocity(0, 0, defaultSpeed_);
     }
   }
-  // if ( (light_wheel_velocity.left == 0 && light_wheel_velocity.right == 0)
-  //   && (food_wheel_velocity.left > 0 && food_wheel_velocity.right > 0)) {
-  //
-  //   } else if ((light_wheel_velocity.left > 0 && light_wheel_velocity.right > 0)
-  //   && (food_wheel_velocity.left == 0 && food_wheel_velocity.right == 0)) {
-  //
-  //   } else {
-  //
-  // }
 }
 
 std::string BraitenbergVehicle::get_name() const {
