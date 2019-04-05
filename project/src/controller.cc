@@ -17,6 +17,7 @@
 #include "src/graphics_arena_viewer.h"
 #include "src/light.h"
 #include "src/food.h"
+#include "src/predator.h"
 #include "src/braitenberg_vehicle.h"
 
 /*******************************************************************************
@@ -87,6 +88,7 @@ void Controller::Reset() {
   Light::count = 0;
   Food::count = 0;
   BraitenbergVehicle::count = 0;
+  Predator::count = 0;
 
   if (arena_) {
     delete (arena_);

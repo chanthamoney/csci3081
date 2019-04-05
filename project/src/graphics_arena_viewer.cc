@@ -21,6 +21,7 @@
 #include "src/love.h"
 #include "src/explore.h"
 #include "src/none.h"
+#include "src/predator.h"
 
 /*******************************************************************************
  * Namespaces
@@ -142,7 +143,7 @@ void GraphicsArenaViewer::OnResetButtonPressed() {
 
 void GraphicsArenaViewer::SetArena(Arena *arena) {
   arena_ = arena;
-  selected_entity = this->arena_->get_entities()[0];
+  selected_entity = arena_->get_entities()[0];
   if (selected_entity->get_type() == kBraitenberg) {
     static_cast<BraitenbergVehicle*>(selected_entity)->RegisterObserver(this);
   }
@@ -186,6 +187,40 @@ void GraphicsArenaViewer::DrawEntity(NVGcontext *ctx,
   if (entity->get_type() == kBraitenberg) {
     auto bv = static_cast<const BraitenbergVehicle * const>(entity);
     std::vector<Pose> sensors = bv->get_light_sensors_const();
+    Pose left_sens_pose = sensors[0];
+    Pose right_sens_pose = sensors[1];
+    // left sensor drawing save the ctx twice, once for the circle and
+    // once for the text
+    nvgSave(ctx);
+    nvgSave(ctx);
+    nvgBeginPath(ctx);
+    nvgCircle(ctx,
+            xOffset_ + static_cast<float>(left_sens_pose.x),
+            static_cast<float>(left_sens_pose.y),
+            static_cast<float>(SENSOR_LIGHT_RAD));
+    nvgFillColor(ctx, nvgRGBA(255, 0, 0, 255));
+    nvgFill(ctx);
+    nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
+    nvgStroke(ctx);
+    nvgRestore(ctx);
+    nvgFillColor(ctx, nvgRGBA(0, 0, 0, 255));
+    nvgRestore(ctx);
+    nvgSave(ctx);
+    nvgBeginPath(ctx);
+    // right sensor drawing
+    nvgCircle(ctx,
+            xOffset_ + static_cast<float>(right_sens_pose.x),
+            static_cast<float>(right_sens_pose.y),
+            static_cast<float>(SENSOR_LIGHT_RAD));
+    nvgFillColor(ctx, nvgRGBA(255, 0, 0, 255));
+    nvgFill(ctx);
+    nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, 255));
+    nvgStroke(ctx);
+    nvgRestore(ctx);
+    nvgFillColor(ctx, nvgRGBA(0, 0, 0, 255));
+  } else if (entity->get_type() == kPredator) {
+    auto pred = static_cast<const Predator * const>(entity);
+    std::vector<Pose> sensors = pred->get_light_sensors_const();
     Pose left_sens_pose = sensors[0];
     Pose right_sens_pose = sensors[1];
     // left sensor drawing save the ctx twice, once for the circle and
