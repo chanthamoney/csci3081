@@ -15,6 +15,9 @@
 #include "src/arena.h"
 #include "src/controller.h"
 #include "src/common.h"
+#include "src/wheel_velocity.h"
+#include "src/observer.h"
+
 
 /*******************************************************************************
  * Namespaces
@@ -52,7 +55,7 @@ class Controller;
  *  Fill in the `Draw*()` methods to draw graphics on the screen using
  *  either the `nanovg` library or raw `OpenGL`.
  */
-class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
+class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer, public Observer<std::vector<WheelVelocity*>> {
  public:
   /**
    * @brief Constructor.
@@ -69,6 +72,8 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    * `delete` the contained Arena.
    */
   ~GraphicsArenaViewer() override { delete arena_; }
+
+  void Notify(__unused const std::vector<WheelVelocity*>* arg) override;
 
   /** Used to setup the 2D GUI. */
   void InitNanoGUI() override;
@@ -228,6 +233,10 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    */
   GraphicsArenaViewer(const GraphicsArenaViewer &other) = delete;
 
+  void my_velocity_containers_light_(const WheelVelocity* wv);
+  void my_velocity_containers_food_(const WheelVelocity* wv);
+  void my_velocity_containers_bv_(const WheelVelocity* wv);
+
  private:
   void DrawArena(NVGcontext *ctx);
 
@@ -257,6 +266,13 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
   bool nanogui_intialized_;
   nanogui::FormHelper* gui;
   nanogui::ref<nanogui::Window> window;
+  nanogui::TextBox* light_value_left_{nullptr};
+  nanogui::TextBox* light_value_right_{nullptr};
+  nanogui::TextBox* food_value_left_{nullptr};
+  nanogui::TextBox* food_value_right_{nullptr};
+  nanogui::TextBox* bv_value_left_{nullptr};
+  nanogui::TextBox* bv_value_right_{nullptr};
+  ArenaEntity* selected_entity{nullptr};
 };
 
 NAMESPACE_END(csci3081);

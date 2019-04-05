@@ -142,6 +142,10 @@ void GraphicsArenaViewer::OnResetButtonPressed() {
 
 void GraphicsArenaViewer::SetArena(Arena *arena) {
   arena_ = arena;
+  selected_entity = this->arena_->get_entities()[0];
+  if (selected_entity->get_type() == kBraitenberg) {
+    static_cast<BraitenbergVehicle*>(selected_entity)->RegisterObserver(this);
+  }
   if (nanogui_intialized_) {
     InitNanoGUI();
   }
@@ -327,6 +331,45 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
   nanogui::ComboBox* bvBehaviorSelect = new nanogui::ComboBox(
     robotPanel, behaviorNames);
   bvBehaviorSelect->setFixedWidth(COMBO_BOX_WIDTH -10);
+
+  // ************************************************ //
+  // ******* Create the Wheel Velocity Grid  ******** //
+  robotWidgets.push_back(new nanogui::Label(
+    panel, "Wheel Velocities", "sans-bold"));
+  nanogui::Widget* grid = new nanogui::Widget(panel);
+  // A grid with 3 columns
+  grid->setLayout(
+    new nanogui::GridLayout(nanogui::Orientation::Horizontal, 3, nanogui::Alignment::Middle, /*int margin = */0, /*int spacing = */0)
+  );
+  robotWidgets.push_back(grid);
+
+  // Columns Headers Row
+  // Notice that it is assigning these items to grid locations row by row
+  new nanogui::Label(grid, "", "sans-bold");
+  new nanogui::Label(grid, "Left", "sans-bold");
+  new nanogui::Label(grid, "Right", "sans-bold");
+
+  // Next Row for wheel velocities from light behavior
+  new nanogui::Label(grid, "Light", "sans-bold");
+  light_value_left_ = new nanogui::TextBox(grid, "0.0");
+  light_value_left_->setFixedWidth(75);
+  light_value_right_ = new nanogui::TextBox(grid, "0.0");
+  light_value_right_->setFixedWidth(75);
+
+  // Next Row for wheel velocities from food behavior
+  new nanogui::Label(grid, "Food", "sans-bold");
+  food_value_left_ = new nanogui::TextBox(grid, "0.0");
+  food_value_left_->setFixedWidth(75);
+  food_value_right_ = new nanogui::TextBox(grid, "0.0");
+  food_value_right_->setFixedWidth(75);
+
+  // Next Row for wheel velocities from bv behavior
+  new nanogui::Label(grid, "BV", "sans-bold");
+  bv_value_left_ = new nanogui::TextBox(grid, "0.0");
+  bv_value_left_->setFixedWidth(75);
+  bv_value_right_ = new nanogui::TextBox(grid, "0.0");
+  bv_value_right_->setFixedWidth(75);
+
   space = new nanogui::Widget(robotPanel);
   sliderPanel = new nanogui::Widget(robotPanel);
   space->setFixedHeight(10);
@@ -356,7 +399,11 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
   entitySelect->setCallback(
     [this, isMobile, robotWidgets, lightBehaviorSelect,
     foodBehaviorSelect, bvBehaviorSelect](int index) {
+      if (selected_entity->get_type() == kBraitenberg) {
+        static_cast<BraitenbergVehicle*>(selected_entity)->UnregisterObserver();
+      }
       ArenaEntity* entity = this->arena_->get_entities()[index];
+      selected_entity = entity;
       if (entity->is_mobile()) {
         ArenaMobileEntity* mobileEntity =
         static_cast<ArenaMobileEntity*>(entity);
@@ -370,6 +417,7 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
       }
 
       if (entity->get_type() == kBraitenberg) {
+        static_cast<BraitenbergVehicle*>(entity)->RegisterObserver(this);
         lightBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
           static_cast<BraitenbergVehicle*>(entity)->get_light_behavior()->getBehaviorType()));
         foodBehaviorSelect->setSelectedIndex(getIndexOfBehavior(
@@ -470,6 +518,27 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
       ArenaMobileEntity* mobileEntity = static_cast<ArenaMobileEntity*>(entity);
       mobileEntity->set_is_moving(moving);
     });
+}
+
+void GraphicsArenaViewer::my_velocity_containers_light_(const WheelVelocity* wv) {
+  light_value_left_->setValue(std::to_string(wv->left).substr(0,4));
+  light_value_right_->setValue(std::to_string(wv->right).substr(0,4));
+}
+
+void GraphicsArenaViewer::my_velocity_containers_food_(const WheelVelocity* wv) {
+  food_value_left_->setValue(std::to_string(wv->left).substr(0,4));
+  food_value_right_->setValue(std::to_string(wv->right).substr(0,4));
+}
+
+void GraphicsArenaViewer::my_velocity_containers_bv_(const WheelVelocity* wv) {
+  bv_value_left_->setValue(std::to_string(wv->left).substr(0,4));
+  bv_value_right_->setValue(std::to_string(wv->right).substr(0,4));
+}
+
+void GraphicsArenaViewer::Notify(__unused const std::vector<WheelVelocity*>* arg) {
+  my_velocity_containers_light_((*arg)[0]);
+  my_velocity_containers_food_((*arg)[1]);
+  my_velocity_containers_bv_((*arg)[2]);
 }
 
 bool GraphicsArenaViewer::RunViewer() {
