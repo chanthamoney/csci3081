@@ -48,6 +48,9 @@ BraitenbergVehicle::BraitenbergVehicle() :
 }
 
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
+  if (isDead()) {
+    return;
+  }
   if (collision_time_ != 0) {
     if (collision_time_ == 20) {
       set_heading(static_cast<int>((get_pose().theta - 135)) % 360);
@@ -76,7 +79,7 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
   } else if (entity.get_type() == kFood) {
     closest_entity_ = &closest_food_entity_;
   } else if (entity.get_type() == kBraitenberg) {
-    if(entity.get_id() != this->get_id()){
+    if(entity.get_id() != this->get_id() && !entity.isDead()){
       closest_entity_ = &closest_bv_entity_;
     }
   }
@@ -171,7 +174,9 @@ void BraitenbergVehicle::Update() {
         defaultSpeed_);
     }
   } else {
-    set_color({122, 0, 25});
+    if (!dead_) {
+      set_color({122, 0, 25});
+    }
 
     if (bv_behavior_set) {
       wheel_velocity_ = WheelVelocity(bv_wheel_velocity.left,
@@ -286,5 +291,15 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
 
   UpdateLightSensors();
 }
+
+
+void BraitenbergVehicle::Die() {
+  dead_ = true;
+  set_color({220, 220, 220});
+  bv_behavior_ = new None();
+  food_behavior_ = new None();
+  light_behavior_ = new None();
+}
+
 
 NAMESPACE_END(csci3081);

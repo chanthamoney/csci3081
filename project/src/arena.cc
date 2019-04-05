@@ -145,6 +145,10 @@ void Arena::UpdateEntitiesTimestep() {
    * Adjust the position accordingly so it doesn't overlap.
    */
   for (auto &ent1 : mobile_entities_) {
+    if (ent1->get_type() == kBraitenberg && static_cast<BraitenbergVehicle*>(ent1)->isDead()) {
+          continue;
+    }
+
     EntityType wall = GetCollisionWall(ent1);
     if (kUndefined != wall) {
       AdjustWallOverlap(ent1, wall);
@@ -155,6 +159,10 @@ void Arena::UpdateEntitiesTimestep() {
     */
     for (auto &ent2 : entities_) {
       if (ent2 == ent1) { continue; }
+      if (ent2->get_type() == kBraitenberg && static_cast<BraitenbergVehicle*>(ent2)->isDead()) {
+            continue;
+      }
+
       if (IsColliding(ent1, ent2)) {
         // if a braitenberg vehicle collides with food, call consume on bv
         // this is pretty ugly, I should move it into HandleCollision
@@ -164,6 +172,15 @@ void Arena::UpdateEntitiesTimestep() {
         } else if (ent1->get_type() == kFood &&
                    ent2->get_type() == kBraitenberg) {
           // static_cast<BraitenbergVehicle*>(ent2)->ConsumeFood();
+        }
+
+        // if a predator collides with bv, call kill on bv
+        if (ent1->get_type() == kBraitenberg &&
+            ent2->get_type() == kPredator) {
+          static_cast<BraitenbergVehicle*>(ent1)->Die();
+        } else if (ent1->get_type() == kPredator &&
+                   ent2->get_type() == kBraitenberg) {
+          static_cast<BraitenbergVehicle*>(ent2)->Die();
         }
 
         // nothing collides with food, but bv's call consume() if they do
@@ -182,12 +199,6 @@ void Arena::UpdateEntitiesTimestep() {
         if ((ent2->get_type() == kPredator && ent1->get_type() == kLight) ||
             (ent2->get_type() == kLight && ent1->get_type() == kPredator)) {
           continue;
-        }
-
-        // lights and predator vehicles do not collide
-        if ((ent2->get_type() == kPredator && ent1->get_type() == kBraitenberg) ||
-            (ent2->get_type() == kBraitenberg && ent1->get_type() == kPredator)) {
-          // KILL
         }
 
         AdjustEntityOverlap(ent1, ent2);

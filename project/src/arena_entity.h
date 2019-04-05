@@ -134,6 +134,11 @@ class ArenaEntity {
   bool is_mobile(void) { return is_mobile_; }
 
   /**
+   * @brief Getter method for if an entity is dead or not.
+   */
+  bool isDead(void) const { return dead_; }
+
+  /**
    * @brief Setter method for indicating if entity can move or not.
    */
   void set_mobility(bool value) { is_mobile_ = value; }
@@ -149,6 +154,9 @@ class ArenaEntity {
       set_radius(entity_config["r"].get<double>());
     }
   }
+
+ protected:
+  bool dead_{false};
 
  private:
   double radius_{DEFAULT_RADIUS};
