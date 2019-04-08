@@ -4,8 +4,8 @@
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
-#ifndef SRC_PREDATOR_VEHICLE_H_
-#define SRC_PREDATOR_VEHICLE_H_
+#ifndef SRC_PREDATOR_H_
+#define SRC_PREDATOR_H_
 
 /*******************************************************************************
  * Includes
@@ -39,7 +39,6 @@ NAMESPACE_BEGIN(csci3081);
 
 class Predator : public ArenaMobileEntity {
  public:
-
   /**
    * @brief Default constructor.
    */
@@ -200,4 +199,4 @@ class Predator : public ArenaMobileEntity {
 
 NAMESPACE_END(csci3081);
 
-#endif  // SRC_PREDATOR_VEHICLE_H_
+#endif  // SRC_PREDATOR_H_

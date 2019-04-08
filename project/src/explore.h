@@ -15,8 +15,8 @@
 #include <vector>
 #include <sstream>
 
-#include "wheel_velocity.h"
-#include "behaviors.h"
+#include "src/wheel_velocity.h"
+#include "src/behaviors.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -30,8 +30,10 @@ class Explore : public Behaviors {
   Explore() {}
   ~Explore() {}
 
-  void getWheelVelocity (double left_sensor_reading, double right_sensor_reading, double speed,WheelVelocity *wheel_velocity) override { //TODO: make it name set :(
-    *wheel_velocity = WheelVelocity(1.0/right_sensor_reading, 1.0/left_sensor_reading, speed);
+  void getWheelVelocity(double left_sensor_reading, double right_sensor_reading,
+    double speed, WheelVelocity *wheel_velocity) override {
+    *wheel_velocity = WheelVelocity(1.0/right_sensor_reading,
+      1.0/left_sensor_reading, speed);
   }
 
   std::string getBehaviorType() override {
