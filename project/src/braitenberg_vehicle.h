@@ -51,7 +51,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
 
    void Notify(std::vector<WheelVelocity*>* arg) {
      if (observer_ != nullptr) {
-       observer_->Notify(arg);
+       observer_->UpdateState(arg);
      }
    }
 

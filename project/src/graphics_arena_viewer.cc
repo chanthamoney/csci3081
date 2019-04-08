@@ -578,7 +578,7 @@ void GraphicsArenaViewer::my_velocity_containers_bv_(const WheelVelocity* wv) {
   bv_value_right_->setValue(std::to_string(wv->right).substr(0,4));
 }
 
-void GraphicsArenaViewer::Notify(__unused const std::vector<WheelVelocity*>* arg) {
+void GraphicsArenaViewer::UpdateState(__unused const std::vector<WheelVelocity*>* arg) {
   my_velocity_containers_light_((*arg)[0]);
   my_velocity_containers_food_((*arg)[1]);
   my_velocity_containers_bv_((*arg)[2]);

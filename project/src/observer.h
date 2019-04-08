@@ -18,7 +18,7 @@ template <class T>
 class Observer {
 public:
   virtual ~Observer() = default;
-  virtual void Notify(const T* arg) = 0;
+  virtual void UpdateState(const T* arg) = 0;
 
 };
 

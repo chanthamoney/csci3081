@@ -73,7 +73,7 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer, publ
    */
   ~GraphicsArenaViewer() override { delete arena_; }
 
-  void Notify(__unused const std::vector<WheelVelocity*>* arg) override;
+  void UpdateState(__unused const std::vector<WheelVelocity*>* arg) override;
 
   /** Used to setup the 2D GUI. */
   void InitNanoGUI() override;
