@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 08, 10:04:48 AM.
+Run on April 08, 13:24:25 PM.
 
 + Pass: Checkout devel branch.
 
@@ -57,7 +57,9 @@ Commits found=152
 
 + Pass: Run git ls-remote gather all branches in repo
 
-ba4da59cf0912c24defd8208581f93189acc4182	refs/heads/devel
+83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
+
+46cba3de3cf4e970eca7d1fc9d22fc297c7272be	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -81,7 +83,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-8d3f09e2402d729240956e99523b14aef7100146	refs/heads/master
+0200f27906a7377ad16590289241c2b188d560b1	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -106,7 +108,13 @@ edfbb5fb594e1ca9316aa6e89a26ab41c187d400	refs/heads/style
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 0)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
+
+[OPEN issue #18] :  Observer.h function is also called notify - change to updateState [chore]
+
+
+
+
 
 + Pass: Run ghi for total number of closed issues in Github repo (Found: 17)
 
