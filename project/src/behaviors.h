@@ -15,8 +15,8 @@
 #include <vector>
 #include <sstream>
 
-#include "wheel_velocity.h"
-#include "behavior_enum.h"
+#include "src/wheel_velocity.h"
+#include "src/behavior_enum.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -27,10 +27,11 @@ NAMESPACE_BEGIN(csci3081);
 
 class Behaviors {
  public:
-
   virtual ~Behaviors() {}
-  virtual void getWheelVelocity (double left_sensor_reading, double right_sensor_reading, double speed, WheelVelocity *wheel_velocity) = 0;
-  virtual std::string getBehaviorType () = 0;
+  virtual void getWheelVelocity(double left_sensor_reading,
+    double right_sensor_reading, double speed,
+    WheelVelocity *wheel_velocity) = 0;
+  virtual std::string getBehaviorType() = 0;
 };
 
 NAMESPACE_END(csci3081);

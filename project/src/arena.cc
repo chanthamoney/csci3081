@@ -145,7 +145,8 @@ void Arena::UpdateEntitiesTimestep() {
    * Adjust the position accordingly so it doesn't overlap.
    */
   for (auto &ent1 : mobile_entities_) {
-    if (ent1->get_type() == kBraitenberg && static_cast<BraitenbergVehicle*>(ent1)->isDead()) {
+    if (ent1->get_type() == kBraitenberg &&
+     static_cast<BraitenbergVehicle*>(ent1)->isDead()) {
           continue;
     }
 
@@ -159,7 +160,8 @@ void Arena::UpdateEntitiesTimestep() {
     */
     for (auto &ent2 : entities_) {
       if (ent2 == ent1) { continue; }
-      if (ent2->get_type() == kBraitenberg && static_cast<BraitenbergVehicle*>(ent2)->isDead()) {
+      if (ent2->get_type() == kBraitenberg &&
+       static_cast<BraitenbergVehicle*>(ent2)->isDead()) {
             continue;
       }
 

@@ -30,8 +30,10 @@ int BraitenbergVehicle::count = 0;
  ******************************************************************************/
 
 BraitenbergVehicle::BraitenbergVehicle() :
-  light_sensors_(), wheel_velocity_(), bv_behavior_(new None()), light_behavior_(new None()),
-  food_behavior_(new None()), closest_bv_entity_(NULL), closest_light_entity_(NULL),
+  light_sensors_(), wheel_velocity_(), bv_behavior_(new None()),
+  light_behavior_(new None()),
+  food_behavior_(new None()), closest_bv_entity_(NULL),
+  closest_light_entity_(NULL),
   closest_food_entity_(NULL), defaultSpeed_(5.0) {
   set_type(kBraitenberg);
   motion_behavior_ = new MotionBehaviorDifferential(this);
@@ -79,7 +81,7 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
   } else if (entity.get_type() == kFood) {
     closest_entity_ = &closest_food_entity_;
   } else if (entity.get_type() == kBraitenberg) {
-    if(entity.get_id() != this->get_id() && !entity.isDead()){
+    if (entity.get_id() != this->get_id() && !entity.isDead()) {
       closest_entity_ = &closest_bv_entity_;
     }
   }
@@ -108,23 +110,37 @@ void BraitenbergVehicle::Update() {
   WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
   double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
   double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
-  bv_behavior_->getWheelVelocity(bv_left_sensor_reading, bv_right_sensor_reading, defaultSpeed_, &bv_wheel_velocity);
+  bv_behavior_->getWheelVelocity(bv_left_sensor_reading,
+                                 bv_right_sensor_reading,
+                                 defaultSpeed_,
+                                 &bv_wheel_velocity);
 
 
   WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
 
-  double light_left_sensor_reading = get_sensor_reading_left(closest_light_entity_);
-  double light_right_sensor_reading = get_sensor_reading_right(closest_light_entity_);
+  double light_left_sensor_reading =
+   get_sensor_reading_left(closest_light_entity_);
+  double light_right_sensor_reading =
+   get_sensor_reading_right(closest_light_entity_);
 
-  light_behavior_->getWheelVelocity(light_left_sensor_reading, light_right_sensor_reading, defaultSpeed_, &light_wheel_velocity);
+  light_behavior_->getWheelVelocity(light_left_sensor_reading,
+                                    light_right_sensor_reading,
+                                    defaultSpeed_,
+                                    &light_wheel_velocity);
 
   WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
-  double food_left_sensor_reading = get_sensor_reading_left(closest_food_entity_);
-  double food_right_sensor_reading = get_sensor_reading_right(closest_food_entity_);
-  food_behavior_->getWheelVelocity(food_left_sensor_reading, food_right_sensor_reading, defaultSpeed_, &food_wheel_velocity);
+  double food_left_sensor_reading =
+    get_sensor_reading_left(closest_food_entity_);
+  double food_right_sensor_reading =
+    get_sensor_reading_right(closest_food_entity_);
+  food_behavior_->getWheelVelocity(food_left_sensor_reading,
+                                   food_right_sensor_reading,
+                                   defaultSpeed_,
+                                   &food_wheel_velocity);
 
-  std::vector<WheelVelocity*> wvs {&light_wheel_velocity, &food_wheel_velocity, &bv_wheel_velocity};
-
+  std::vector<WheelVelocity*> wvs {&light_wheel_velocity,
+                                   &food_wheel_velocity,
+                                   &bv_wheel_velocity};
   Notify(&wvs);
 
   // FOOD, LIGHT, BV
@@ -164,8 +180,10 @@ void BraitenbergVehicle::Update() {
 
     if (bv_behavior_set) {
       wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + food_wheel_velocity.left + bv_wheel_velocity.left )/3,
-        (light_wheel_velocity.right + food_wheel_velocity.right + bv_wheel_velocity.right)/3,
+        (light_wheel_velocity.left + food_wheel_velocity.left +
+           bv_wheel_velocity.left)/3,
+        (light_wheel_velocity.right + food_wheel_velocity.right +
+           bv_wheel_velocity.right)/3,
         defaultSpeed_);
     } else {
       wheel_velocity_ = WheelVelocity(
@@ -237,17 +255,13 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
     std::string type = entity_config["light_behavior"].get<std::string>();
     if (type == "Aggressive") {
       light_behavior_ = new Aggressive();
-    }
-    else if (type == "Love") {
+    } else if (type == "Love") {
       light_behavior_ = new Love();
-    }
-    else if (type == "Coward") {
+    } else if (type == "Coward") {
       light_behavior_ = new Coward();
-    }
-    else if (type == "Explore") {
+    } else if (type == "Explore") {
       light_behavior_ = new Explore();
-    }
-    else {
+    } else {
       light_behavior_ = new None();
     }
   }
@@ -255,17 +269,13 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
     std::string type = entity_config["food_behavior"].get<std::string>();
     if (type == "Aggressive") {
       food_behavior_ = new Aggressive();
-    }
-    else if (type == "Love") {
+    } else if (type == "Love") {
       food_behavior_ = new Love();
-    }
-    else if (type == "Coward") {
+    } else if (type == "Coward") {
       food_behavior_ = new Coward();
-    }
-    else if (type == "Explore") {
+    } else if (type == "Explore") {
       food_behavior_ = new Explore();
-    }
-    else {
+    } else {
       food_behavior_ = new None();
     }
   }
@@ -274,17 +284,13 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
     std::string type = entity_config["bv_behavior"].get<std::string>();
     if (type == "Aggressive") {
       bv_behavior_ = new Aggressive();
-    }
-    else if (type == "Love") {
+    } else if (type == "Love") {
       bv_behavior_ = new Love();
-    }
-    else if (type == "Coward") {
+    } else if (type == "Coward") {
       bv_behavior_ = new Coward();
-    }
-    else if (type == "Explore") {
+    } else if (type == "Explore") {
       bv_behavior_ = new Explore();
-    }
-    else {
+    } else {
       bv_behavior_ = new None();
     }
   }

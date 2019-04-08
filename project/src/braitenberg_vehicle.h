@@ -40,20 +40,19 @@ NAMESPACE_BEGIN(csci3081);
 
 class BraitenbergVehicle : public ArenaMobileEntity {
  public:
+  void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
+      observer_ = o;
+  }
 
-   void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
-     observer_ = o;
-   };
+  void UnregisterObserver() {
+      observer_ = nullptr;
+  }
 
-   void UnregisterObserver() {
-     observer_ = nullptr;
-   };
-
-   void Notify(std::vector<WheelVelocity*>* arg) {
-     if (observer_ != nullptr) {
-       observer_->UpdateState(arg);
-     }
-   }
+  void Notify(std::vector<WheelVelocity*>* arg) {
+      if (observer_ != nullptr) {
+          observer_->UpdateState(arg);
+        }
+  }
 
   /**
    * @brief Default constructor.

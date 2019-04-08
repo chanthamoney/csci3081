@@ -15,8 +15,8 @@
 #include <vector>
 #include <sstream>
 
-#include "wheel_velocity.h"
-#include "behaviors.h"
+#include "src/wheel_velocity.h"
+#include "src/behaviors.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -30,8 +30,10 @@ class Coward : public Behaviors {
   Coward() {}
   ~Coward() {}
 
-  void getWheelVelocity (double left_sensor_reading, double right_sensor_reading, double speed, WheelVelocity *wheel_velocity) override {
-    *wheel_velocity = WheelVelocity(left_sensor_reading, right_sensor_reading, speed);
+  void getWheelVelocity(double left_sensor_reading, double right_sensor_reading,
+    double speed, WheelVelocity *wheel_velocity) override {
+    *wheel_velocity = WheelVelocity(left_sensor_reading, right_sensor_reading,
+      speed);
   }
 
   std::string getBehaviorType() override {
