@@ -567,24 +567,25 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
       mobileEntity->set_is_moving(moving);
     });
 }
-
+// Velocity container for light
 void GraphicsArenaViewer::my_velocity_containers_light_(
   const WheelVelocity* wv) {
   light_value_left_->setValue(std::to_string(wv->left).substr(0, 4));
   light_value_right_->setValue(std::to_string(wv->right).substr(0, 4));
 }
-
+// Velocity container for food
 void GraphicsArenaViewer::my_velocity_containers_food_(
   const WheelVelocity* wv) {
   food_value_left_->setValue(std::to_string(wv->left).substr(0, 4));
   food_value_right_->setValue(std::to_string(wv->right).substr(0, 4));
 }
-
+// Velocity container for bv
 void GraphicsArenaViewer::my_velocity_containers_bv_(const WheelVelocity* wv) {
   bv_value_left_->setValue(std::to_string(wv->left).substr(0, 4));
   bv_value_right_->setValue(std::to_string(wv->right).substr(0, 4));
 }
 
+// Updating the 3 columns for the velocity
 void GraphicsArenaViewer::UpdateState(
   __unused const std::vector<WheelVelocity*>* arg) {
   my_velocity_containers_light_((*arg)[0]);
