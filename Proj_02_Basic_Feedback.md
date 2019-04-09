@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 08, 15:05:53 PM.
+Run on April 09, 17:43:16 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-083d603b24639fda4de94b873a8fb0c9dd814327	refs/heads/devel
+3f9d656e72a645dcf689a77960f8df7434623ab8	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -67,7 +67,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-e09b656aefeff535ff1f55b5486a782959a088cf	refs/heads/master
+153007dfc3908c43c352cfe0ab124ef11ef6e642	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -81,6 +81,8 @@ c3c21c56c0ce281df73641979d47865c588200d7	refs/heads/refactor/02-update_robot_col
 
 a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
+083d603b24639fda4de94b873a8fb0c9dd814327	refs/heads/release/iteration2-prelim2
+
 890f75ee6cead2f7c2bda56ce72f6f7c9fdb79ed	refs/heads/style
 
 2ee97dd6c97277542a11b301d96438d652b2b997	refs/heads/tests
@@ -92,15 +94,21 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
 
-[OPEN issue #18] :  Observer.h function is also called notify - change to updateState [chore]
+[OPEN issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
+
+[OPEN issue #20] :  Make bv starve if no food after 600 iterations [enhancement]
 
 
 
 
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 17)
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 19)
+
+[CLOSED issue #19] :  Make google style compliant for iteration 2 prelim 2 [chore]
+
+[CLOSED issue #18] :  Observer.h function is also called notify - change to updateState [chore]
 
 [CLOSED issue #17] :  Predator kills bv and bv becomes ghost [enhancement]
 
