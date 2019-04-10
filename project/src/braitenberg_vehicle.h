@@ -197,6 +197,8 @@ class BraitenbergVehicle : public ArenaMobileEntity {
 
   void Die();
 
+  void ConsumeFood();
+
   static int count;
 
  private:
@@ -211,6 +213,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   const ArenaEntity* closest_food_entity_;
   double defaultSpeed_;
   int collision_time_ = 0;
+  int starving_time_ = 0;
   Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
 };
 

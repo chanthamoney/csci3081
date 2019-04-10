@@ -50,6 +50,7 @@ BraitenbergVehicle::BraitenbergVehicle() :
 }
 
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
+  starving_time_++;
   if (isDead()) {
     return;
   }
@@ -61,7 +62,9 @@ void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
         collision_time_++;
     }
   }
-
+  if (starving_time_ == 600){
+    Die();
+  }
   if (is_moving()) {
     motion_behavior_->UpdatePose(dt, wheel_velocity_);
   }
@@ -298,13 +301,16 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
   UpdateLightSensors();
 }
 
-
 void BraitenbergVehicle::Die() {
   dead_ = true;
   set_color({220, 220, 220});
   bv_behavior_ = new None();
   food_behavior_ = new None();
   light_behavior_ = new None();
+}
+
+void BraitenbergVehicle::ConsumeFood() {
+  starving_time_ = 0;
 }
 
 

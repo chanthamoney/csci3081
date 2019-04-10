@@ -170,10 +170,10 @@ void Arena::UpdateEntitiesTimestep() {
         // this is pretty ugly, I should move it into HandleCollision
         if (ent1->get_type() == kBraitenberg &&
             ent2->get_type() == kFood) {
-          // static_cast<BraitenbergVehicle*>(ent1)->ConsumeFood();
+          static_cast<BraitenbergVehicle*>(ent1)->ConsumeFood();
         } else if (ent1->get_type() == kFood &&
                    ent2->get_type() == kBraitenberg) {
-          // static_cast<BraitenbergVehicle*>(ent2)->ConsumeFood();
+          static_cast<BraitenbergVehicle*>(ent2)->ConsumeFood();
         }
 
         // if a predator collides with bv, call kill on bv
