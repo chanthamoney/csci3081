@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 10, 14:04:05 PM.
+Run on April 10, 14:04:36 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-3f9d656e72a645dcf689a77960f8df7434623ab8	refs/heads/devel
+6116f260d3b9bca9cd206dcfd9a3ee8df55bcad5	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -69,7 +69,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-f0415f41c91c63c5b42c168d02a9a8f0b3f96860	refs/heads/master
+3c90de537f9e5fb1b7d2d69ccf563217ef7e927b	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -159,7 +159,68 @@ Link to full feedback: [Proj_02_Full_Feedback.md](Proj_02_Full_Feedback.md)
 
 #### Style Tests
 
-+ Pass: Ensuring code follows style guide.
++ Fail: Ensuring code follows style guide.
+
+<pre>cd src; make check-style
+make[1]: Entering directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/project/src'
+==== Checking style is correct ====
+/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
+braitenberg_vehicle.cc:65:  Missing space before {  [whitespace/braces] [5]
+Done processing arena.cc
+Done processing braitenberg_vehicle.cc
+Done processing controller.cc
+Done processing factory_bv.cc
+Done processing factory_food.cc
+Done processing factory_light.cc
+Done processing factory_predator.cc
+Done processing food.cc
+Done processing graphics_arena_viewer.cc
+Done processing light.cc
+Done processing main.cc
+Done processing motion_behavior.cc
+Done processing motion_behavior_differential.cc
+Done processing predator.cc
+Done processing rgb_color.cc
+Done processing aggressive.h
+Done processing arena_entity.h
+Done processing arena.h
+Done processing arena_immobile_entity.h
+Done processing arena_mobile_entity.h
+Done processing arena_viewer.h
+Done processing behavior_enum.h
+Done processing behaviors.h
+Done processing braitenberg_vehicle.h
+Done processing common.h
+Done processing controller.h
+Done processing coward.h
+Done processing entity_type.h
+Done processing explore.h
+Done processing factory_bv.h
+Done processing factory_entity.h
+Done processing factory_food.h
+Done processing factory_light.h
+Done processing factory_predator.h
+Done processing food.h
+Done processing graphics_arena_viewer.h
+Done processing light.h
+Done processing love.h
+Done processing mainpage.h
+Done processing motion_behavior_differential.h
+Done processing motion_behavior.h
+Done processing none.h
+Done processing observer.h
+Done processing params.h
+Done processing pose.h
+Done processing predator.h
+Done processing rgb_color.h
+Done processing wheel_velocity.h
+Total errors found: 1
+Makefile:162: recipe for target 'check-style' failed
+make[1]: *** [check-style] Error 1
+make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/project/src'
+Makefile:8: recipe for target 'check-style' failed
+make: *** [check-style] Error 2
+</pre>
 
 
 
