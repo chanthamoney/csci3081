@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 11, 18:09:25 PM.
+Run on April 11, 18:10:56 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-6116f260d3b9bca9cd206dcfd9a3ee8df55bcad5	refs/heads/devel
+1ccabbf69d935eca4f01ed1227677ab0067819d6	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -71,7 +71,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-f74000bbc557214e32f351112bc54cba81dda202	refs/heads/master
+cf4eab45344e3e46e5b94c8d68ad47e991a3d65c	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -167,7 +167,11 @@ Link to full feedback: [Proj_02_Full_Feedback.md](Proj_02_Full_Feedback.md)
 make[1]: Entering directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/project/src'
 ==== Checking style is correct ====
 /class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
+arena.cc:55:  Add #include <utility> for make_pair  [build/include_what_you_use] [4]
 braitenberg_vehicle.cc:65:  Missing space before {  [whitespace/braces] [5]
+braitenberg_vehicle.cc:125:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+food.h:79:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
+rgb_color.h:68:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 Done processing arena.cc
 Done processing braitenberg_vehicle.cc
 Done processing controller.cc
@@ -216,7 +220,7 @@ Done processing pose.h
 Done processing predator.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 1
+Total errors found: 5
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/project/src'
