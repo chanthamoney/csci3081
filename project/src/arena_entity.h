@@ -138,6 +138,17 @@ class ArenaEntity {
    */
   bool isDead(void) const { return dead_; }
 
+  int get_x_bound(void) const { return x_bound_; }
+  int get_y_bound(void) const { return y_bound_; }
+
+  void move_to_random_position(void) {
+    int x, y;
+    x = random_num(get_radius(), get_x_bound() - get_radius());
+    y = random_num(get_radius(), get_y_bound() - get_radius());
+    set_position(x, y);
+  }
+
+
   /**
    * @brief Setter method for indicating if entity can move or not.
    */
@@ -153,6 +164,8 @@ class ArenaEntity {
     if (entity_config.find("r") != entity_config.end()) {
       set_radius(entity_config["r"].get<double>());
     }
+    x_bound_ = entity_config["x_bound"].get<double>();
+    y_bound_ = entity_config["y_bound"].get<double>();
   }
 
  protected:
@@ -165,6 +178,8 @@ class ArenaEntity {
   EntityType type_{kEntity};
   int id_{-1};
   bool is_mobile_{false};
+  double x_bound_{-1};
+  double y_bound_{-1};
 };
 
 NAMESPACE_END(csci3081);

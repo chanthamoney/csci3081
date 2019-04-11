@@ -195,6 +195,10 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
 
+  void set_hungry_time(int ht) {
+    hungry_time_ = ht;
+  }
+
   void Die();
 
   void ConsumeFood();
@@ -214,6 +218,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   double defaultSpeed_;
   int collision_time_ = 0;
   int starving_time_ = 0;
+  int hungry_time_ = 300;
   Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
 };
 

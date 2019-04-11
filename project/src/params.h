@@ -46,7 +46,7 @@
 #define B_MIN_RAD 8
 #define B_MAX_RAD 14
 #define BRAITENBERG_COLLISION_DELTA 1
-#define BRAITENBERG_COLOR {122, 0, 25}
+#define BRAITENBERG_COLOR {122, 0, 25, 255}
 #define DEF_FOOD_BEHAV kLove
 #define DEF_LIGHT_BEHAV kCoward
 #define BRAITENBERG_SPEED_CONST .0025
@@ -56,7 +56,7 @@
 #define BRAITENBERG_RATIO .5
 
 // predator
-#define PREDATOR_COLOR {101, 67, 33}
+#define PREDATOR_COLOR {101, 67, 33, 255}
 
 // light_sensor
 #define SENSOR_LIGHT_RAD 4

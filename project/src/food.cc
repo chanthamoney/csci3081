@@ -37,5 +37,19 @@ Food::Food() : ArenaImmobileEntity() {
 void Food::Reset() {
   set_pose(FOOD_INIT_POS);
 } /* Reset */
+void Food::Consume() {
+  if (food_level_ <= 1) {
+    move_to_random_position();
+    food_level_ = 50;
+    RgbColor color = get_color();
+    color.a = 255;
+    set_color(color);
+  } else {
+    food_level_--;
+    RgbColor color = get_color();
+    color.a = 255 * (static_cast<double>(food_level_) / 50.0);
+    set_color(color);
+  }
+}
 
 NAMESPACE_END(csci3081);

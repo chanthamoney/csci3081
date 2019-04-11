@@ -21,7 +21,6 @@
 #include "src/factory_predator.h"
 #include "src/predator.h"
 
-
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -52,6 +51,8 @@ Arena::Arena(json_object arena_object): x_dim_(X_DIM),
   json_array& entities = arena_object["entities"].get<json_array>();
   for (unsigned int f = 0; f < entities.size(); f++) {
     json_object& entity_config = entities[f].get<json_object>();
+    entity_config.insert(std::make_pair("x_bound", picojson::value(x_dim_)));
+    entity_config.insert(std::make_pair("y_bound", picojson::value(y_dim_)));
     unsigned int type = get_entity_type(
       entity_config["type"].get<std::string>());
     EntityType etype = static_cast<EntityType>(type);
@@ -171,9 +172,7 @@ void Arena::UpdateEntitiesTimestep() {
         if (ent1->get_type() == kBraitenberg &&
             ent2->get_type() == kFood) {
           static_cast<BraitenbergVehicle*>(ent1)->ConsumeFood();
-        } else if (ent1->get_type() == kFood &&
-                   ent2->get_type() == kBraitenberg) {
-          static_cast<BraitenbergVehicle*>(ent2)->ConsumeFood();
+          static_cast<Food*>(ent2)->Consume();
         }
 
         // if a predator collides with bv, call kill on bv
@@ -186,7 +185,7 @@ void Arena::UpdateEntitiesTimestep() {
         }
 
         // nothing collides with food, but bv's call consume() if they do
-        if ((ent2->get_type() == kFood) || (ent1->get_type() == kFood)) {
+        if ((ent2->get_type() == kFood)) {
           continue;
         }
 

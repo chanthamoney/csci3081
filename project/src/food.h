@@ -59,6 +59,12 @@ class Food : public ArenaImmobileEntity {
     Update();
   }
 
+  int get_food_level() {
+    return static_cast<int>((static_cast<float>(food_level_) / 50.0)*100);
+  }
+
+  void Consume();
+
   /**
    * @brief Get the name of the Food for visualization purposes, and to
    * aid in debugging.
@@ -70,6 +76,7 @@ class Food : public ArenaImmobileEntity {
   static int count;
 
  private:
+   int food_level_ = 50;
 };
 
 NAMESPACE_END(csci3081);

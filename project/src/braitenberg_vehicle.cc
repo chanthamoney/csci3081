@@ -110,10 +110,42 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
 }
 
 void BraitenbergVehicle::Update() {
+  if (dead_) {
+    return;
+  }
+
+  Behaviors* dynamic_food_behavior;
+  Behaviors* dynamic_bv_behavior;
+  Behaviors* dynamic_light_behavior;
+
+  // Set dynamic behaviors based on internal measures
+  if (starving_time_ >= hungry_time_) {
+    bool food_close = true;
+    if (closest_food_entity_ != nullptr) {
+      double distance = (get_pose() - closest_food_entity_->get_pose()).Length();
+      food_close = distance < 100;
+
+    } else {
+      food_close = false;
+    }
+
+    if (food_close) {
+      dynamic_food_behavior = new Aggressive();
+    } else {
+      dynamic_food_behavior = new Explore();
+    }
+    dynamic_bv_behavior = new None();
+    dynamic_light_behavior = new None();
+  } else {
+    dynamic_food_behavior = food_behavior_;
+    dynamic_bv_behavior = bv_behavior_;
+    dynamic_light_behavior = light_behavior_;
+  }
+
   WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
   double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
   double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
-  bv_behavior_->getWheelVelocity(bv_left_sensor_reading,
+  dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,
                                  bv_right_sensor_reading,
                                  defaultSpeed_,
                                  &bv_wheel_velocity);
@@ -126,7 +158,7 @@ void BraitenbergVehicle::Update() {
   double light_right_sensor_reading =
    get_sensor_reading_right(closest_light_entity_);
 
-  light_behavior_->getWheelVelocity(light_left_sensor_reading,
+  dynamic_light_behavior->getWheelVelocity(light_left_sensor_reading,
                                     light_right_sensor_reading,
                                     defaultSpeed_,
                                     &light_wheel_velocity);
@@ -136,7 +168,8 @@ void BraitenbergVehicle::Update() {
     get_sensor_reading_left(closest_food_entity_);
   double food_right_sensor_reading =
     get_sensor_reading_right(closest_food_entity_);
-  food_behavior_->getWheelVelocity(food_left_sensor_reading,
+
+  dynamic_food_behavior->getWheelVelocity(food_left_sensor_reading,
                                    food_right_sensor_reading,
                                    defaultSpeed_,
                                    &food_wheel_velocity);
@@ -149,9 +182,9 @@ void BraitenbergVehicle::Update() {
   // FOOD, LIGHT, BV
   // NNN, NNS, NSN, NSS, SNN, SNS, SSS
   bool light_behavior_set, food_behavior_set, bv_behavior_set;
-  light_behavior_set = light_behavior_->getBehaviorType() != "None";
-  food_behavior_set = food_behavior_->getBehaviorType() != "None";
-  bv_behavior_set = bv_behavior_->getBehaviorType() != "None";
+  light_behavior_set = dynamic_light_behavior->getBehaviorType() != "None";
+  food_behavior_set = dynamic_food_behavior->getBehaviorType() != "None";
+  bv_behavior_set = dynamic_bv_behavior->getBehaviorType() != "None";
   if (!light_behavior_set && food_behavior_set) {
     set_color({0, 0, 255});
 
@@ -195,9 +228,7 @@ void BraitenbergVehicle::Update() {
         defaultSpeed_);
     }
   } else {
-    if (!dead_) {
-      set_color({122, 0, 25});
-    }
+    set_color({122, 0, 25});
 
     if (bv_behavior_set) {
       wheel_velocity_ = WheelVelocity(bv_wheel_velocity.left,
@@ -303,7 +334,7 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
 
 void BraitenbergVehicle::Die() {
   dead_ = true;
-  set_color({220, 220, 220});
+  set_color({220, 220, 220, 190});
   bv_behavior_ = new None();
   food_behavior_ = new None();
   light_behavior_ = new None();
