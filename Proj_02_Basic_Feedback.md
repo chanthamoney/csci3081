@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 10, 14:04:36 PM.
+Run on April 11, 18:09:25 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -63,13 +63,15 @@ Commits found=152
 
 b5991806668ccd065049dff06667f5f97acf9a16	refs/heads/feature/08-bv_starves
 
+4b87dba6bbc5a0708c397d5734a26d4d7cff4332	refs/heads/feature/09-dynamic_wheel_velocity_starving
+
 d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-3c90de537f9e5fb1b7d2d69ccf563217ef7e927b	refs/heads/master
+f74000bbc557214e32f351112bc54cba81dda202	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -96,17 +98,17 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
 
 [OPEN issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
 
-[OPEN issue #20] :  Make bv starve if no food after 600 iterations [enhancement]
 
 
 
 
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 20)
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 19)
+[CLOSED issue #20] :  Make bv starve if no food after 600 iterations [enhancement]
 
 [CLOSED issue #19] :  Make google style compliant for iteration 2 prelim 2 [chore]
 
