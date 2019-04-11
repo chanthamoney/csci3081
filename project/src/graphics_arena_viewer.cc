@@ -36,7 +36,7 @@ GraphicsArenaViewer::GraphicsArenaViewer(
     Controller * controller) :
     GraphicsApp(
         width + GUI_MENU_WIDTH + GUI_MENU_GAP * 2,
-        height,
+        height + 150,
         "Robot Simulation"),
     controller_(controller),
     arena_(nullptr),
@@ -173,16 +173,13 @@ void GraphicsArenaViewer::DrawEntity(NVGcontext *ctx,
   // draw food with a radius of 5 less than actual radius. BraitenbergVehicles
   // will 'eat' when withing 5 radius of the food
   if (entity->get_type() == kFood) rad -= 5;
-  int dead_or_alive_opacity = 255;
-  if (entity->isDead()) {
-    dead_or_alive_opacity = 190;
-  }
+
   nvgCircle(ctx, xOffset_ + x, y, rad);
   nvgFillColor(ctx,
                nvgRGBA(entity->get_color().r, entity->get_color().g,
-                       entity->get_color().b, dead_or_alive_opacity));
+                       entity->get_color().b, entity->get_color().a));
   nvgFill(ctx);
-  nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, dead_or_alive_opacity));
+  nvgStrokeColor(ctx, nvgRGBA(0, 0, 0, entity->get_color().a));
   nvgStroke(ctx);
   nvgSave(ctx);
   // draw the sensors if the entity is a BraitenbergVehicle
@@ -374,6 +371,36 @@ void GraphicsArenaViewer::AddEntityPanel(nanogui::Widget * panel) {
   nanogui::ComboBox* bvBehaviorSelect = new nanogui::ComboBox(
     robotPanel, behaviorNames);
   bvBehaviorSelect->setFixedWidth(COMBO_BOX_WIDTH -10);
+
+  nanogui::Widget *spaceHT = new nanogui::Widget(robotPanel);
+  nanogui::Widget * sliderPanelHT = new nanogui::Widget(robotPanel);
+  spaceHT->setFixedHeight(10);
+  sliderPanelHT->setLayout(
+    new nanogui::BoxLayout(
+      nanogui::Orientation::Horizontal, nanogui::Alignment::Middle, 0, 0));
+  nanogui::Widget *lblHT = new nanogui::Label(
+    sliderPanelHT, "Hungry Time", "sans-bold");
+  lblHT->setFixedWidth(50);
+  nanogui::Slider *sliderHT = new nanogui::Slider(sliderPanelHT);
+  sliderHT->setValue(0.5);
+  sliderHT->setFixedWidth(90);
+  spaceHT->setVisible(true);
+  sliderPanelHT->setVisible(true);
+
+  nanogui::TextBox *textBoxHT = new nanogui::TextBox(robotPanel);
+  textBoxHT->setValue("300");
+  sliderHT->setCallback([textBoxHT](float value) {
+    textBoxHT->setValue(std::to_string(static_cast<int>(value * 600)));
+  });
+
+  sliderHT->setFinalCallback([&](float value) {
+    for (auto &entity : arena_->get_entities()) {
+      if (entity->get_type() == kBraitenberg) {
+        int ht = value * 600;
+        static_cast<BraitenbergVehicle*>(entity)->set_hungry_time(ht);
+      }
+    }
+  });
 
   // ************************************************ //
   // ******* Create the Wheel Velocity Grid  ******** //

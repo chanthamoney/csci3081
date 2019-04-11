@@ -45,6 +45,7 @@ struct RgbColor {
   int r{0};
   int g{0};
   int b{0};
+  int a{255};
 
   /**
    * @brief Default constructor.
@@ -60,16 +61,21 @@ struct RgbColor {
    * @param g_in The G component of the rgb_color.
    * @param b_in The B component of the rgb_color.
    */
-  RgbColor(int r_in, int g_in, int b_in) : r(r_in), g(g_in), b(b_in) {}
+  RgbColor(int r_in, int g_in, int b_in) : r(r_in), g(g_in), b(b_in) {
+    a = 255;
+  }
 
-  explicit RgbColor(RgbColorEnum value) : r(0), g(0), b(0) {
+  RgbColor(int r_in, int g_in, int b_in, int a_in) : r(r_in), g(g_in), b(b_in), a(a_in) {
+  }
+
+  explicit RgbColor(RgbColorEnum value) : r(0), g(0), b(0), a(255) {
     Set(value);
   }
 
   void Set(RgbColorEnum value);
 
   bool operator==(const RgbColor& color) const {
-    return r == color.r && g == color.g && b == color.b;
+    return r == color.r && g == color.g && b == color.b && a == color.a;
   }
 };
 
