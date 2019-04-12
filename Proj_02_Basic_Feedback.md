@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 11, 18:10:56 PM.
+Run on April 12, 14:19:46 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-1ccabbf69d935eca4f01ed1227677ab0067819d6	refs/heads/devel
+5bd51e27344e9cbba5ebe1f3b71691e0c60b70cb	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -71,7 +71,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-cf4eab45344e3e46e5b94c8d68ad47e991a3d65c	refs/heads/master
+f602406050201b80de37b38f9bfacb1f36e968bf	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -98,15 +98,11 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 0)
 
-[OPEN issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 21)
 
-
-
-
-
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 20)
+[CLOSED issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
 
 [CLOSED issue #20] :  Make bv starve if no food after 600 iterations [enhancement]
 
