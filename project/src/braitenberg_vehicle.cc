@@ -314,8 +314,8 @@ void BraitenbergVehicle::LoadFromObject(json_object* config) {
     }
   }
 
-  if (entity_config.find("bv_behavior") != entity_config.end()) {
-    std::string type = entity_config["bv_behavior"].get<std::string>();
+  if (entity_config.find("robot_behavior") != entity_config.end()) {
+    std::string type = entity_config["robot_behavior"].get<std::string>();
     if (type == "Aggressive") {
       bv_behavior_ = new Aggressive();
     } else if (type == "Love") {
