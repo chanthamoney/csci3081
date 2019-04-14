@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 14, 11:13:39 AM.
+Run on April 14, 14:46:20 PM.
 
 + Pass: Checkout devel branch.
 
@@ -59,7 +59,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-5bd51e27344e9cbba5ebe1f3b71691e0c60b70cb	refs/heads/devel
+4ae787c84658cd0d73e331227ff9202170d37512	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -87,7 +87,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-a1d4cefd83354fc037e89219df93b5ac2cf57f2d	refs/heads/master
+812690b47bbf78927af6dc191cac460b53e54d8d	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -103,7 +103,7 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 083d603b24639fda4de94b873a8fb0c9dd814327	refs/heads/release/iteration2-prelim2
 
-890f75ee6cead2f7c2bda56ce72f6f7c9fdb79ed	refs/heads/style
+156e94272dba4f90bc1485e97fb76dd3141e9d76	refs/heads/style
 
 2ee97dd6c97277542a11b301d96438d652b2b997	refs/heads/tests
 
@@ -174,10 +174,6 @@ make[1]: Entering directory '/classes/grades/Spring-2019/csci3081/dtorban/csci30
 ==== Checking style is correct ====
 /classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_02_Full_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
 arena.cc:55:  Add #include <utility> for make_pair  [build/include_what_you_use] [4]
-braitenberg_vehicle.cc:65:  Missing space before {  [whitespace/braces] [5]
-braitenberg_vehicle.cc:125:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-food.h:79:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-rgb_color.h:68:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 Done processing arena.cc
 Done processing braitenberg_vehicle.cc
 Done processing controller.cc
@@ -226,7 +222,7 @@ Done processing pose.h
 Done processing predator.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 5
+Total errors found: 1
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_02_Full_Feedback/repo-chant077/project/src'
