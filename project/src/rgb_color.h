@@ -65,7 +65,8 @@ struct RgbColor {
     a = 255;
   }
 
-  RgbColor(int r_in, int g_in, int b_in, int a_in) : r(r_in), g(g_in), b(b_in), a(a_in) {
+  RgbColor(int r_in, int g_in, int b_in, int a_in) : r(r_in), g(g_in), b(b_in),
+  a(a_in) {
   }
 
   explicit RgbColor(RgbColorEnum value) : r(0), g(0), b(0), a(255) {

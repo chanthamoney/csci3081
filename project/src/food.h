@@ -76,7 +76,7 @@ class Food : public ArenaImmobileEntity {
   static int count;
 
  private:
-   int food_level_ = 50;
+  int food_level_ = 50;
 };
 
 NAMESPACE_END(csci3081);
