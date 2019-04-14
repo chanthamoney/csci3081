@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 14, 12:24:14 PM.
+Run on April 14, 12:24:51 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-5bd51e27344e9cbba5ebe1f3b71691e0c60b70cb	refs/heads/devel
+4ae787c84658cd0d73e331227ff9202170d37512	refs/heads/devel
 
 8ec39bc354dc57223870828b619ba1809445d1af	refs/heads/docs
 
@@ -71,7 +71,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-8fe3de2925a6bd39c743e0c693a3a75b41dba6e7	refs/heads/master
+5e61c6d5a0eab320b9b99886af74550d9a63b143	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -164,10 +164,6 @@ make[1]: Entering directory '/class/grades/Spring-2019/csci3081/student-repos/Pr
 ==== Checking style is correct ====
 /class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
 arena.cc:55:  Add #include <utility> for make_pair  [build/include_what_you_use] [4]
-braitenberg_vehicle.cc:65:  Missing space before {  [whitespace/braces] [5]
-braitenberg_vehicle.cc:125:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
-food.h:79:  Weird number of spaces at line-start.  Are you using a 2-space indent?  [whitespace/indent] [3]
-rgb_color.h:68:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 Done processing arena.cc
 Done processing braitenberg_vehicle.cc
 Done processing controller.cc
@@ -216,7 +212,7 @@ Done processing pose.h
 Done processing predator.h
 Done processing rgb_color.h
 Done processing wheel_velocity.h
-Total errors found: 5
+Total errors found: 1
 Makefile:162: recipe for target 'check-style' failed
 make[1]: *** [check-style] Error 1
 make[1]: Leaving directory '/class/grades/Spring-2019/csci3081/student-repos/Proj_02_Basic_Feedback/repo-chant077/project/src'
