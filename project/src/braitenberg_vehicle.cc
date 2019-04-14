@@ -62,7 +62,7 @@ void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
         collision_time_++;
     }
   }
-  if (starving_time_ == 600){
+  if (starving_time_ == 600) {
     Die();
   }
   if (is_moving()) {
@@ -122,7 +122,7 @@ void BraitenbergVehicle::Update() {
   if (starving_time_ >= hungry_time_) {
     bool food_close = true;
     if (closest_food_entity_ != nullptr) {
-      double distance = (get_pose() - closest_food_entity_->get_pose()).Length();
+      double distance = (get_pose()-closest_food_entity_->get_pose()).Length();
       food_close = distance < 100;
 
     } else {
