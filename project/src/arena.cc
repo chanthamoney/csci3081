@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <utility>
 
 #include "src/arena.h"
 #include "src/light.h"
@@ -20,7 +21,6 @@
 #include "src/factory_bv.h"
 #include "src/factory_predator.h"
 #include "src/predator.h"
-#include "src/lib/picojson.h"
 
 /*******************************************************************************
  * Namespaces
