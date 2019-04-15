@@ -185,6 +185,7 @@ void BraitenbergVehicle::Update() {
   light_behavior_set = dynamic_light_behavior->getBehaviorType() != "None";
   food_behavior_set = dynamic_food_behavior->getBehaviorType() != "None";
   bv_behavior_set = dynamic_bv_behavior->getBehaviorType() != "None";
+  // if the BV has the food sensor on but not the light sensor
   if (!light_behavior_set && food_behavior_set) {
     set_color({0, 0, 255});
 
@@ -197,7 +198,7 @@ void BraitenbergVehicle::Update() {
       wheel_velocity_ = WheelVelocity(
         food_wheel_velocity.left, food_wheel_velocity.right, defaultSpeed_);
     }
-
+    // if the BV has the light sensor on but not the food sensor
   } else if (light_behavior_set && !food_behavior_set) {
     set_color({255, 204, 51});
 
@@ -210,7 +211,7 @@ void BraitenbergVehicle::Update() {
       wheel_velocity_ = WheelVelocity(
         light_wheel_velocity.left, light_wheel_velocity.right, defaultSpeed_);
     }
-
+    // if the BV has the light sensor and food sensor on
   } else if (light_behavior_set && food_behavior_set) {
     set_color({122, 0, 25});
 
@@ -227,6 +228,7 @@ void BraitenbergVehicle::Update() {
         (light_wheel_velocity.right + food_wheel_velocity.right)/2,
         defaultSpeed_);
     }
+    // if the BV has no sensors on or just the robot behavior sensor
   } else {
     set_color({122, 0, 25});
 

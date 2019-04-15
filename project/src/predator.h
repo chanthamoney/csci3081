@@ -31,10 +31,9 @@ NAMESPACE_BEGIN(csci3081);
 /**
  * @brief Entity class to represent a Predator.
  *
- * A predator vehicle is a simple machine that is used to show how simple
- * concepts (in this case wiring) can give way to complex looking behavior. In
- * this simulation, Predator contain sensors, which can be hooked
- * up in four different ways, and thus they can exhibit four different behaviors
+ * A predator vehicle is similar to a BraitenbergVehicle, however, it has fixed
+ * behaviors. It is aggressive towards BraitenbergVehicle, coward towards light,
+ * and it has none behavior towards Food
  */
 
 class Predator : public ArenaMobileEntity {
@@ -85,7 +84,8 @@ class Predator : public ArenaMobileEntity {
 
  /**
   * @brief Senses or Identify, the entity that are in the range of the Predator's
-  * sensor. Then this will update the closest_entity (either food or light).
+  * sensor. Then this will update the closest_entity (either briatenberg vehicle
+  * or light).
   *
   * @param[in] entity The AreanEntity that is sense by the Predator.
   */
@@ -117,7 +117,7 @@ class Predator : public ArenaMobileEntity {
   /**
    * @brief Takes in json_object and gets the configuration from the object.
    * The configuration from the object consist of the Type of entity (Predator),
-   * light_behavior, food_behavior, radius, x, y, and theta position.
+   * radius, x, y, and theta position.
    *
    * @param[in] entity_config The json_object pointer to the configuration that for the Predator
    */
@@ -183,17 +183,53 @@ class Predator : public ArenaMobileEntity {
   static int count;
 
  private:
+   /**
+    * @brief A vector for the pose of the light sensor on the braitenberg_vehicle
+    */
   std::vector<Pose> light_sensors_;
+  /**
+   * @brief A pointer to the motion_behavior of the bv
+   */
   MotionBehaviorDifferential * motion_behavior_{nullptr};
+  /**
+   * @brief The wheel velocity of the predator
+   */
   WheelVelocity wheel_velocity_;
+  /**
+   * @brief A pointer to the robot behavior (bv behavior) of the predator
+   */
   Behaviors *bv_behavior_;
+  /**
+   * @brief A pointer to the light behavior of the predator
+   */
   Behaviors *light_behavior_;
+  /**
+   * @brief A pointer to the food behavior of the predator
+   */
   Behaviors *food_behavior_;
+  /**
+   * @brief The closest braitenberg vehicle entity to the predator
+   */
   const ArenaEntity* closest_bv_entity_;
+  /**
+   * @brief The closest light entity to the predator
+   */
   const ArenaEntity* closest_light_entity_;
+  /**
+   * @brief The closest food entity to the predator
+   */
   const ArenaEntity* closest_food_entity_;
+  /**
+   * @brief The closest predator entity to the predator
+   */
   const ArenaEntity* closest_pred_entity_;
+  /**
+   * @brief The default speed of the braitenberg vehicle
+   */
   double defaultSpeed_;
+  /**
+   * @brief The timestepupdates time after it collides
+   */
   int collision_time_ = 0;
 };
 
