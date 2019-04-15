@@ -40,35 +40,35 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 | Functionality | Good | Okay | Help | Time |
 | ------------- | ---- |----- | ---- | ---- |
 | **__Priority Level 1__** |
-| Braitenberg Vehicle Love Behavior implemented and operational. |  |  |  |  |
-| Braitenberg Vehicle Explore Behavior implemented and operational. |  |  |  |  |
-| Braitenberg Vehicle Coward Behavior implemented and operational. |  |  |  |  |
-| Braitenberg Vehicle Aggression Behavior  implemented and operational. |  |  |  |  |
-| Braitenberg Vehicle None Behavior  implemented and operational. |  |  |  |  |
-| Strategy Pattern implemented and operates using Braitenberg Vehicle Behavior Classes. |  |  |  |  |
-| Braitenberg Vehicle (BV) sensors implemented within the BV class, and are operational (used in the simulation). |  |  |  |  |
-| The GUI includes an option to select robot/bv behavior. |  |  |  |  |
-| The bv wheel velocity is incorporated into the total wheel velocity |  |  |  |  |
-| “robot_behavior” in the JSON has been tested |  |  |  |  |
+| Braitenberg Vehicle Love Behavior implemented and operational. | X |  |  |  |
+| Braitenberg Vehicle Explore Behavior implemented and operational. | X |  |  |  |
+| Braitenberg Vehicle Coward Behavior implemented and operational. | X |  |  |  |
+| Braitenberg Vehicle Aggression Behavior  implemented and operational. | X |  |  |  |
+| Braitenberg Vehicle None Behavior  implemented and operational. | X |  |  |  |
+| Strategy Pattern implemented and operates using Braitenberg Vehicle Behavior Classes. | X |  |  |  |
+| Braitenberg Vehicle (BV) sensors implemented within the BV class, and are operational (used in the simulation). | X |  |  |  |
+| The GUI includes an option to select robot/bv behavior. | X |  |  |  |
+| The bv wheel velocity is incorporated into the total wheel velocity | X |  |  |  |
+| “robot_behavior” in the JSON has been tested | X |  |  |  |
 
 
 | Functionality | Good | Okay | Help | Time |
 | ------------- | ---- |----- | ---- | ---- |
 | **__Priority Level 2__** |
-| Observer Pattern implemented and operational (wheel velocities for the Braitenberg Vehicle "Subject" are displayed in real time in the simulation control panel). |  |  |  |  |
-| Simulation Control Panel updated to enable selection of any one Braitenberg Vehicle as the "Subject" whose wheel velocities are displayed. |  |  |  |  |
-| JSON file or files updated to include configuration of a Predator.  |  |  |  |  |
-| Predator class implemented and operational. |  |  |  |  |
-| Predator consumes Braitenberg Vehicles. |  |  |  |  |
-| Braitenberg vehicles turn into "ghosts" as specified in the Iteration 2 requirements document (Iteration2Requirements.md), when consumed. |  |  |  |  |
+| Observer Pattern implemented and operational (wheel velocities for the Braitenberg Vehicle "Subject" are displayed in real time in the simulation control panel). | X |  |  |  |
+| Simulation Control Panel updated to enable selection of any one Braitenberg Vehicle as the "Subject" whose wheel velocities are displayed. | X |  |  |  |
+| JSON file or files updated to include configuration of a Predator.  | X |  |  |  |
+| Predator class implemented and operational. | X |  |  |  |
+| Predator consumes Braitenberg Vehicles. | X |  |  |  |
+| Braitenberg vehicles turn into "ghosts" as specified in the Iteration 2 requirements document (Iteration2Requirements.md), when consumed. | X |  |  |  |
 
 
 | Functionality | Good | Okay | Help | Time |
 | -------- | -------- | -------- | -------- | --------- |
 | **__Priority Level 3__** |
-| Braitenberg Vehicle (BV) starvation functionality implemented and operational (BV's starve if they do not consume food after 600 simulation time steps). |  |  |  |   |
-| Upon starvation, Braitenberg vehicles turn into ghosts as specified in the Iteration 2 requirements document (Iteration2Requirements.md). |  |  |  |  |
-| The functionality to dynamically calculate Braitenberg Vehicle wheel velocities based on a weighted combination of wheel velocities is implemented and operational (or behaviors are dynamically modified). Note, you are to design and create the formula to dynamically combine the wheel velocities.  See the iteration 2 requirements (Iteration2Requiments.md) for ideas on how to do this.  |  |  |  |  |
+| Braitenberg Vehicle (BV) starvation functionality implemented and operational (BV's starve if they do not consume food after 600 simulation time steps). | X |  |  |   |
+| Upon starvation, Braitenberg vehicles turn into ghosts as specified in the Iteration 2 requirements document (Iteration2Requirements.md). | X |  |  |  |
+| The functionality to dynamically calculate Braitenberg Vehicle wheel velocities based on a weighted combination of wheel velocities is implemented and operational (or behaviors are dynamically modified). Note, you are to design and create the formula to dynamically combine the wheel velocities.  See the iteration 2 requirements (Iteration2Requiments.md) for ideas on how to do this.  | X |  |  |  |
 
 ### Documentation
 
@@ -78,39 +78,48 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 -Indicate the file, method, and line numbers associated with your implementation of dynamically calculated wheel velocities. If it is in multiple places, indicate where the primary functionality resides (e.g. “BraitenbergVehicle::Update on line 255 implements the dynamic equation using the coefficients that are set in BraitenbergVehicle::DetermineCoefficients”).
 
-- [ ] The information specified above regarding my implementation of dynamic wheel velocity caculation is as follows:
+- [ ] The information specified above regarding my implementation of dynamic wheel velocity calculation is as follows:
+
+ The approach for dynamically changing the wheel velocity is found in braitenberg_vehicle.cc BraitenbergVehicle::Update on line 122 implements the
+ dynamic equation for wheel velocites. There is a Behaviors pointer for
+ the dynamic behaviors on food, light, and braitenberg_vehicle (bv). If the starving time is greater than or equal to the hungry time, a variable that is defaulted to 300 or
+ something the user can change in the GUI as a slider, then the bv goes into a survival mode. It will set the robot behavior to None and Light Behavior to None and the only
+ sensor on is the food sensor. The BV checks to see if a food entity is close and if the distance is less than 100 it's food behavior will be aggressive. If the food is not
+ close the behavior for food is explore so the bv will continue moving around the Arena. If the hungry time is < starving time, the behaviors that the user is passed in will be the
+ dynamic_food_behavior, bv behavior, and light behavior.
+ The getWheelVelocity function is called then based on the dynamic behaviors.
 
 **__Insert the information requested above here__**
 
 #### Design Document
 
-- [ ] The final version of the design document includes a description of two different implementations that enable the observation of Braitenberg Vehicle wheel velocities as specified in the the requirements, and one of the implementations discussed should be the implementation of the Observer pattern that you used. Another possibility for comparision to your implementation is to compare it to another implementation of the observer pattern that you did not implement.  In any case, describe your implementation of the observer pattern and one alternative implementation and discuss them as specified in the requirements.
+- [ X] The final version of the design document includes a description of two different implementations that enable the observation of Braitenberg Vehicle wheel velocities as specified in the the requirements, and one of the implementations discussed should be the implementation of the Observer pattern that you used. Another possibility for comparision to your implementation is to compare it to another implementation of the observer pattern that you did not implement.  In any case, describe your implementation of the observer pattern and one alternative implementation and discuss them as specified in the requirements.
 - [ ] The final version of your design document for iteration 2 (named **__iteration2\_design.pdf__**) has been submitted via Canvas (See the Iteration 2 Final Design Document Item on Canvas for the submission link).
 
 
 #### UML
 
-- [ ] UML for project can be generated without errors using Doxygen,  and can be viewed in the docs directory.
+- [ X] UML for project can be generated without errors using Doxygen,  and can be viewed in the docs directory.
 
 
 #### Doxygen
 
-- [ ] All classes have a _brief_ description that appears in the Doxygen web page class list.
-- [ ] The Arena class is fully documented with respect to methods and member variables. In other words, in the html generated pages of Doxygen, the user can click on a class method and see more information about its purpose and parameters.
-- [ ] The BraitenbergVehicle class is fully documented with respect to methods and member variables.
-- [ ] All new and updated/refactored code (classes and methods) is fully documented with respect to methods and member variables.
-- [ ] A landing page that meets the requirements specified in the Iteration 2 Requirements (in the file Iteration2Requiements.md) exists in the file named **__mainpage.h__** and is in the src directory.
-- [ ] Doxygen successfully generates the main page (verify by running Doxygen and then opening the resulting **_index.html__** page).
+- [ X] All classes have a _brief_ description that appears in the Doxygen web page class list.
+- [ X] The Arena class is fully documented with respect to methods and member variables. In other words, in the html generated pages of Doxygen, the user can click on a class method and see more information about its purpose and parameters.
+- [ X] The BraitenbergVehicle class is fully documented with respect to methods and member variables.
+- [ X] All new and updated/refactored code (classes and methods) is fully documented with respect to methods and member variables.
+- [X ] A landing page that meets the requirements specified in the Iteration 2 Requirements (in the file Iteration2Requiements.md) exists in the file named **__mainpage.h__** and is in the src directory.
+- [ X] Doxygen successfully generates the main page (verify by running Doxygen and then opening the resulting **_index.html__** page).
 
 
 ### Linter and Git
 
-- [ ] All *.h and *.c files pass cpplint.
-- [ ] The code complies with naming conventions for Classes, ClassMethods, and class\_members\_.
-- [ ] There exists a history of git commit messages to show effort.
-- [ ] There exists a history of issues and branches to show effort.
-- [ ] Github issues include current unresolved bugs.
-- [ ] Github issues include unresolved feature enhancements and refactoring that is due for this iteration.
+- [X ] All *.h and *.c files pass cpplint.
+- [X ] The code complies with naming conventions for Classes, ClassMethods, and class\_members\_.
+- [ X] There exists a history of git commit messages to show effort.
+- [ X] There exists a history of issues and branches to show effort.
+- [X ] Github issues include current unresolved bugs.
+- [X ] Github issues include unresolved feature enhancements and refactoring that is due for this iteration.
 
 
 ## Ready For Submission
