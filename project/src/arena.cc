@@ -20,6 +20,7 @@
 #include "src/factory_bv.h"
 #include "src/factory_predator.h"
 #include "src/predator.h"
+#include "src/lib/picojson.h"
 
 /*******************************************************************************
  * Namespaces
