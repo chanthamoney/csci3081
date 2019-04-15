@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 15, 08:34:34 AM.
+Run on April 15, 12:13:01 PM.
 
 + Pass: Checkout devel branch.
 
@@ -59,7 +59,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-cffa5fdc961323d081a37ce0fd1215726d3bf3fe	refs/heads/devel
+eb196112fa5395c91b3166fc97b0cded805881f0	refs/heads/devel
 
 2ee4cba73676d59a59c3c4615e30330746aa4f33	refs/heads/docs
 
@@ -87,7 +87,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-0291793ccf230e14b264d3cea0f9a7b3ee0b1584	refs/heads/master
+fb2a66db16cfaafc44af591490c57095a6410964	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -167,68 +167,7 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 #### Style Tests
 
-+ Fail: Ensuring code follows style guide.
-
-<pre>cd src; make check-style
-make[1]: Entering directory '/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_02_Full_Feedback/repo-chant077/project/src'
-==== Checking style is correct ====
-/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_02_Full_Feedback/repo-chant077/cpplint/cpplint.py --root=.. *.cc *.h
-arena.cc:56:  Add #include <utility> for make_pair  [build/include_what_you_use] [4]
-Done processing arena.cc
-Done processing braitenberg_vehicle.cc
-Done processing controller.cc
-Done processing factory_bv.cc
-Done processing factory_food.cc
-Done processing factory_light.cc
-Done processing factory_predator.cc
-Done processing food.cc
-Done processing graphics_arena_viewer.cc
-Done processing light.cc
-Done processing main.cc
-Done processing motion_behavior.cc
-Done processing motion_behavior_differential.cc
-Done processing predator.cc
-Done processing rgb_color.cc
-Done processing aggressive.h
-Done processing arena_entity.h
-Done processing arena.h
-Done processing arena_immobile_entity.h
-Done processing arena_mobile_entity.h
-Done processing arena_viewer.h
-Done processing behavior_enum.h
-Done processing behaviors.h
-Done processing braitenberg_vehicle.h
-Done processing common.h
-Done processing controller.h
-Done processing coward.h
-Done processing entity_type.h
-Done processing explore.h
-Done processing factory_bv.h
-Done processing factory_entity.h
-Done processing factory_food.h
-Done processing factory_light.h
-Done processing factory_predator.h
-Done processing food.h
-Done processing graphics_arena_viewer.h
-Done processing light.h
-Done processing love.h
-Done processing mainpage.h
-Done processing motion_behavior_differential.h
-Done processing motion_behavior.h
-Done processing none.h
-Done processing observer.h
-Done processing params.h
-Done processing pose.h
-Done processing predator.h
-Done processing rgb_color.h
-Done processing wheel_velocity.h
-Total errors found: 1
-Makefile:162: recipe for target 'check-style' failed
-make[1]: *** [check-style] Error 1
-make[1]: Leaving directory '/classes/grades/Spring-2019/csci3081/dtorban/csci3081-grading-env/grading-scripts/grading/Proj_02_Full_Feedback/repo-chant077/project/src'
-Makefile:8: recipe for target 'check-style' failed
-make: *** [check-style] Error 2
-</pre>
++ Pass: Ensuring code follows style guide.
 
 
 
