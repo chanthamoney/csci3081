@@ -8,8 +8,6 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-// We use template as cookie cutter for different subject types
-// ABSTRACT CLASS SHOULD NOT HAVE KNOWLEDGE OF SPECFIC INFORMAITON
 #include <iostream>
 /*******************************************************************************
  * Namespaces
@@ -18,10 +16,25 @@ NAMESPACE_BEGIN(csci3081);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+ /**
+  * @brief A template Observer class for observing a subject
+  * The observer for the observing pattern
+  * The class is used as a cookie cutter for different types of obsevers
+  */
 template <class T>
 class Observer {
  public:
+   /**
+   *  @brief Observer Deconstructor.
+   */
   virtual ~Observer() = default;
+  /**
+  *  @brief UpdateState observes a type T attribute of the subject
+  *
+  *  @param[in] arg The pointer of arg of some type T
+  *
+  *  @return The updated value for the pointer of arg of type T
+  */
   virtual void UpdateState(const T* arg) = 0;
 };
 

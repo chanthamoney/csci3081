@@ -28,9 +28,9 @@ NAMESPACE_BEGIN(csci3081);
  ******************************************************************************/
 
  /**
- *  @brief A factory for the instantiation of the PredatorVehicle arena entity.
+ *  @brief A factory for the instantiation of the Predator arena entity.
  *
- *  The factory takes in a JSON object and creates a Predator Vehicle entity from
+ *  The factory takes in a JSON object and creates a Predator entity from
  *  the information that the JSON object passed through provides.
  */
 class factoryPredator : public factoryEntity {
@@ -43,9 +43,9 @@ class factoryPredator : public factoryEntity {
   *  @brief Create is the primary purpose of this factory.
   *  This function creates the Predator Vehicle from the JSON object.
   *
-  *  @param[in] config The pointer to the json_object with the configuration for the Predator vehicle.
+  *  @param[in] config The pointer to the json_object with the configuration for the Predator.
   *
-  *  @return A pointer to the PredatorVehicle object that was created.
+  *  @return A pointer to the Predator object that was created.
   */
   Predator* Create(json_object* config) override;
   /**

@@ -140,7 +140,9 @@ class ArenaEntity {
 
   int get_x_bound(void) const { return x_bound_; }
   int get_y_bound(void) const { return y_bound_; }
-
+  /**
+   * @brief Function to move the Arena entity to a randsom spot within the Arena's dimension
+   */
   void move_to_random_position(void) {
     int x, y;
     x = random_num(get_radius(), get_x_bound() - get_radius());

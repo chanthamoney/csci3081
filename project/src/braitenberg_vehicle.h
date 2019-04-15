@@ -40,20 +40,6 @@ NAMESPACE_BEGIN(csci3081);
 
 class BraitenbergVehicle : public ArenaMobileEntity {
  public:
-  void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
-      observer_ = o;
-  }
-
-  void UnregisterObserver() {
-      observer_ = nullptr;
-  }
-
-  void Notify(std::vector<WheelVelocity*>* arg) {
-      if (observer_ != nullptr) {
-          observer_->UpdateState(arg);
-        }
-  }
-
   /**
    * @brief Default constructor.
    */
@@ -194,31 +180,118 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @result Returns a double type of the velocity
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
-
+  /**
+   * @brief Register the observer that is observing the braitenberg_vehicle
+   *
+   * @param[in] o A pointer to an Observer of Wheel velocity pointers
+   *
+   * @param[out] Setting the observer to the o input
+   */
+  void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
+      observer_ = o;
+  }
+  /**
+   * @brief Unregister the observer that is observing the braitenberg_vehicle
+   *  Sets the observer_ to a nullptr
+   */
+  void UnregisterObserver() {
+      observer_ = nullptr;
+  }
+  /**
+   * @brief Notifies the observer of the Wheel Velocity
+   *
+   * @param[in] arg A pointer to a vector of wheel velocites in the order of light wheel
+   * velocity, food wheel velocity, and bv wheel velocity
+   *
+   */
+  void Notify(std::vector<WheelVelocity*>* arg) {
+      if (observer_ != nullptr) {
+          observer_->UpdateState(arg);
+        }
+  }
+  /**
+   * @brief Sets the hungry_time_ of the braitenberg vehicle so it knows when to
+   * changes its behavior to go hunt for food because of starvation
+   */
   void set_hungry_time(int ht) {
     hungry_time_ = ht;
   }
-
+  /**
+   * @brief When a Braitenberg Vehicle starving_time reaches 600 and when a
+   * predator touches the braitenberg vehicle it will die
+   * The color will become white and opacity will be somewhat transparent
+   * The behaviors towards other braitenberg vehicles, food, and light will
+   * become noneAdds
+   */
   void Die();
-
+  /**
+   * @brief When a braitenberg vehicle "collides" with a food entity
+   * it consumes the food and it's starving_time_ is set back to 0
+   */
   void ConsumeFood();
-
+  /**
+   * @brief The count of how many braitenberg vehicle there is. Used to Identify
+   * braitenberg vehicles.
+   */
   static int count;
 
  private:
+   /**
+    * @brief A vector for the pose of the light sensor on the braitenberg_vehicle
+    */
   std::vector<Pose> light_sensors_;
+  /**
+   * @brief A pointer to the motion_behavior of the bv
+   */
   MotionBehaviorDifferential * motion_behavior_{nullptr};
+  /**
+   * @brief The wheel velocity of the braitenberg vehicle
+   */
   WheelVelocity wheel_velocity_;
+  /**
+   * @brief A pointer to the robot behavior (bv behavior) of the braitenberg_vehicle
+   */
   Behaviors *bv_behavior_;
+  /**
+   * @brief A pointer to the light behavior of the briatenberg_vehicle
+   */
   Behaviors *light_behavior_;
+  /**
+   * @brief A pointer to the food behavior of the briatenberg_vehicle
+   */
   Behaviors *food_behavior_;
+  /**
+   * @brief The closest braitenberg vehicle entity to the braitenberg vehicle
+   */
   const ArenaEntity* closest_bv_entity_;
+  /**
+   * @brief The closest light entity to the braitenberg vehicle
+   */
   const ArenaEntity* closest_light_entity_;
+  /**
+   * @brief The closest food entity to the braitenberg vehicle
+   */
   const ArenaEntity* closest_food_entity_;
+  /**
+   * @brief The default speed of the braitenberg vehicle
+   */
   double defaultSpeed_;
+  /**
+   * @brief The timestepupdates time after it collides
+   */
   int collision_time_ = 0;
+  /**
+   * @brief The timestepupdate times before it starves at 600
+   */
   int starving_time_ = 0;
+  /**
+   * @brief The default hungry time before the braitenberg_vehicle goes to
+   * explore aggressively for food
+   */
   int hungry_time_ = 300;
+  /**
+   * @brief A pointer to an Observer of Wheel velocity pointers
+   */
   Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
 };
 
