@@ -166,6 +166,7 @@ class ArenaEntity {
     }
     set_position(x, y);
 
+    if (entity_config["x_bound"].is<double>() &&
       entity_config["y_bound"].is<double>()) {
         x_bound = entity_config["x_bound"].get<double>();
         y_bound = entity_config["y_bound"].get<double>();
