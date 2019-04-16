@@ -9,16 +9,16 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 ### Compilation and Execution
 
 
-- [ ]  cloned **fresh** from github onto a cselabs machine to test compilation, style compliance, and execution
-- [ ] Submission is on the **master** branch in the project folder of your repo
-- [ ] _/project_ folder exists   <<<< I think we can remove this one.
-- [ ] _/build_ is not in the repo
-- [ ] _/html_  and _/latex_ is not in _docs_
-- [ ] **__`make` from within _project_ completes without error.__**
-- [ ] `./../build/bin/arenaviewer` executes without assert or a seg fault
-- [ ] `./../build/bin/unittest` executes without a seg fault
-- [ ] **_"make check-style" reports no errors when run in the master branch._**
-- [ ] `doxygen docs/Doxyfile` compiles and creates the html pages for all classes without errors.
+- [x ]  cloned **fresh** from github onto a cselabs machine to test compilation, style compliance, and execution
+- [x ] Submission is on the **master** branch in the project folder of your repo
+- [x ] _/project_ folder exists   <<<< I think we can remove this one.
+- [ x] _/build_ is not in the repo
+- [ x] _/html_  and _/latex_ is not in _docs_
+- [ x] **__`make` from within _project_ completes without error.__**
+- [ x] `./../build/bin/arenaviewer` executes without assert or a seg fault
+- [ x] `./../build/bin/unittest` executes without a seg fault
+- [ x] **_"make check-style" reports no errors when run in the master branch._**
+- [ x] `doxygen docs/Doxyfile` compiles and creates the html pages for all classes without errors.
 
 
 ### Functionality Checklist
@@ -28,7 +28,7 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 >If your source code or unit tests **do not compile** or if there is an obvious **seg fault** in either the arenaviewer or the unit tests, **__YOU MUST MODIFY THE COMMENT NEXT TO THE CHECKBOX BELOW__** to let us know what the problem is or you will lose all points for that item.
 
-- [ ] I have compiled and executed both the source code and unit tests using a fresh clone of my repo. They compile and execute without segmentation faults.
+- [ x] I have compiled and executed both the source code and unit tests using a fresh clone of my repo. They compile and execute without segmentation faults.
 
 **__Next, please place an 'X' in the appropriate box for each requirement.__**
 
@@ -78,7 +78,7 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 -Indicate the file, method, and line numbers associated with your implementation of dynamically calculated wheel velocities. If it is in multiple places, indicate where the primary functionality resides (e.g. “BraitenbergVehicle::Update on line 255 implements the dynamic equation using the coefficients that are set in BraitenbergVehicle::DetermineCoefficients”).
 
-- [ ] The information specified above regarding my implementation of dynamic wheel velocity calculation is as follows:
+- [x ] The information specified above regarding my implementation of dynamic wheel velocity calculation is as follows:
 
  The approach for dynamically changing the wheel velocity is found in braitenberg_vehicle.cc BraitenbergVehicle::Update on line 122 implements the
  dynamic equation for wheel velocites. There is a Behaviors pointer for
@@ -94,7 +94,7 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 #### Design Document
 
 - [ X] The final version of the design document includes a description of two different implementations that enable the observation of Braitenberg Vehicle wheel velocities as specified in the the requirements, and one of the implementations discussed should be the implementation of the Observer pattern that you used. Another possibility for comparision to your implementation is to compare it to another implementation of the observer pattern that you did not implement.  In any case, describe your implementation of the observer pattern and one alternative implementation and discuss them as specified in the requirements.
-- [ ] The final version of your design document for iteration 2 (named **__iteration2\_design.pdf__**) has been submitted via Canvas (See the Iteration 2 Final Design Document Item on Canvas for the submission link).
+- [ x] The final version of your design document for iteration 2 (named **__iteration2\_design.pdf__**) has been submitted via Canvas (See the Iteration 2 Final Design Document Item on Canvas for the submission link).
 
 
 #### UML
@@ -127,8 +127,8 @@ Please ensure that this file is in your /docs folder. Place an 'x' in each of th
 
 When everything above is as you want it or the deadline is upon you, it is time to submit!
 
-- [ ] I pushed this file and any changes resulting from this checklist.
-- [ ] Everything is in the **__master__** branch.
+- [ x] I pushed this file and any changes resulting from this checklist.
+- [ x] Everything is in the **__master__** branch.
 
 _One more thing_ -- check that what you think you pushed was really pushed to github. If you can see it, we can see it. If you can't, we can't.
 

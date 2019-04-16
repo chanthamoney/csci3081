@@ -158,16 +158,39 @@ class ArenaEntity {
 
   virtual void LoadFromObject(json_object* config) {
     json_object entity_config = *config;
-    set_position(
-      entity_config["x"].get<double>(), entity_config["y"].get<double>());
+    double x, y, theta, radius, x_bound, y_bound;
+    if (entity_config["x"].is<double>() &&
+    entity_config["y"].is<double>()) {
+      x = entity_config["x"].get<double>();
+      y = entity_config["y"].get<double>();
+    }
+    set_position(x, y);
+
+      entity_config["y_bound"].is<double>()) {
+        x_bound = entity_config["x_bound"].get<double>();
+        y_bound = entity_config["y_bound"].get<double>();
+    }
+    x_bound_ = x_bound;
+    y_bound_ = y_bound;
+
     if (entity_config.find("theta") != entity_config.end()) {
-      pose_.theta = entity_config["theta"].get<double>();
+      if (entity_config["theta"].is<double>()) {
+        theta = entity_config["theta"].get<double>();
+        pose_.theta = theta;
+      } else if (entity_config["theta"].is<std::string>()) {
+        theta = std::stod(entity_config["theta"].get<std::string>());
+        pose_.theta = theta;
+      }
     }
     if (entity_config.find("r") != entity_config.end()) {
-      set_radius(entity_config["r"].get<double>());
+      if (entity_config["r"].is<double>()) {
+        radius = entity_config["r"].get<double>();
+        set_radius(radius);
+      } else if (entity_config["r"].is<std::string>()) {
+        radius = std::stod(entity_config["r"].get<std::string>());
+        set_radius(radius);
+      }
     }
-    x_bound_ = entity_config["x_bound"].get<double>();
-    y_bound_ = entity_config["y_bound"].get<double>();
   }
 
  protected:
