@@ -47,4 +47,3 @@ TEST_F(ArenaTest, Constructor) {
   EXPECT_EQ(arena->get_y_dim(), Y_DIM);
   EXPECT_GE((int)arena->get_entities().size(), 3) << "FAIL: Arena:Constructor - There should be at least 3 entities";
 };
-

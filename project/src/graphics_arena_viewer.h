@@ -11,10 +11,14 @@
  * Includes
  ******************************************************************************/
 #include <MinGfx-1.0/mingfx.h>
-
+#include <string>
+#include <vector>
 #include "src/arena.h"
 #include "src/controller.h"
 #include "src/common.h"
+#include "src/wheel_velocity.h"
+#include "src/observer.h"
+
 
 /*******************************************************************************
  * Namespaces
@@ -52,7 +56,8 @@ class Controller;
  *  Fill in the `Draw*()` methods to draw graphics on the screen using
  *  either the `nanovg` library or raw `OpenGL`.
  */
-class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
+class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer,
+public Observer<std::vector<WheelVelocity*>> {
  public:
   /**
    * @brief Constructor.
@@ -69,6 +74,15 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    * `delete` the contained Arena.
    */
   ~GraphicsArenaViewer() override { delete arena_; }
+  /**
+  *  @brief UpdateState observes the Wheel Velocity of the Braitenberg vehicle
+  *
+  * @param[in] arg A pointer to a vector of wheel velocites in the order of light wheel
+  * velocity, food wheel velocity, and bv wheel velocity
+  *
+  *  @return The updated value of the wheel velocities of the Braitenberg Vehicle
+  */
+  void UpdateState(__unused const std::vector<WheelVelocity*>* arg) override;
 
   /** Used to setup the 2D GUI. */
   void InitNanoGUI() override;
@@ -79,6 +93,14 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    * @param dt The new timestep.
    */
   void UpdateSimulation(double dt) override;
+
+  /**
+   * @brief Provides the corresponding index of a behavior type.
+   *
+   * @param type The name of the behavior
+   * @return the index position of a behavior type
+   */
+  int getIndexOfBehavior(const std::string& type);
 
   /**
    * @brief Handle the user pressing the pause button on the GUI.
@@ -220,7 +242,40 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    */
   GraphicsArenaViewer(const GraphicsArenaViewer &other) = delete;
 
+  /**
+   * @brief Takes in the wheel velocity and sets the light column's
+   * left and right wheel velocity in the GUI to the velocity value that was passed in.
+   *
+   *  @param[in] wv A pointer to the wheel velocity
+   *
+   */
+  void my_velocity_containers_light_(const WheelVelocity* wv);
+  /**
+   * @brief Takes in the wheel velocity and sets the food column's
+   * left and right wheel velocity in the GUI to the velocity value that was passed in.
+   *
+   *  @param[in] wv A pointer to the wheel velocity
+   *
+   */
+  void my_velocity_containers_food_(const WheelVelocity* wv);
+  /**
+   * @brief Takes in the wheel velocity and sets the bv column's
+   * left and right wheel velocity in the GUI to the velocity value that was passed in.
+   *
+   *  @param[in] wv A pointer to the wheel velocity
+   *
+   */
+  void my_velocity_containers_bv_(const WheelVelocity* wv);
+
  private:
+   /**
+    * @brief Draw the Arena using `nanogui`.
+    *
+    * This function requires an active `nanovg` drawing context (`ctx`), so it
+    * should probably only be called from with DrawUsingNanoVG.
+    *
+    * @param[in] ctx The `nanovg` context.
+    */
   void DrawArena(NVGcontext *ctx);
 
   /**
@@ -233,7 +288,11 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
    * @param[in] light The Light handle.
    */
   void DrawEntity(NVGcontext *ctx, const class ArenaEntity *const entity);
-
+  /**
+   * @brief Adding an entity panel to the GUI
+   *
+   * @param[in] panel The `nanogui` Widget we are adding to the GUI
+   */
   void AddEntityPanel(nanogui::Widget * panel);
 
   bool RunViewer() override;
@@ -249,6 +308,34 @@ class GraphicsArenaViewer : public mingfx::GraphicsApp, public ArenaViewer {
   bool nanogui_intialized_;
   nanogui::FormHelper* gui;
   nanogui::ref<nanogui::Window> window;
+  /**
+   * @brief A textbox for the light wheel velocity left component
+   */
+  nanogui::TextBox* light_value_left_{nullptr};
+  /**
+   * @brief A textbox for the light wheel velocity right component
+   */
+  nanogui::TextBox* light_value_right_{nullptr};
+  /**
+   * @brief A textbox for the food wheel velocity left component
+   */
+  nanogui::TextBox* food_value_left_{nullptr};
+  /**
+   * @brief A textbox for the food wheel velocity right component
+   */
+  nanogui::TextBox* food_value_right_{nullptr};
+  /**
+   * @brief A textbox for the bv wheel velocity left component
+   */
+  nanogui::TextBox* bv_value_left_{nullptr};
+  /**
+   * @brief A textbox for the bv wheel velocity right component
+   */
+  nanogui::TextBox* bv_value_right_{nullptr};
+  /**
+   * @brief A pointer to the entity that we are selecting/viewing
+   */
+  ArenaEntity* selected_entity{nullptr};
 };
 
 NAMESPACE_END(csci3081);

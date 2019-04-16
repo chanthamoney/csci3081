@@ -13,10 +13,20 @@ class FactoryFoodTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     food_factory = new  csci3081::factoryFood();
-    std::string json = "{\"type\": \"Food\", \"x\":200, \"y\":200, \"r\":20, \"theta\": 0.0 }";
     json_value * myconfig = new json_value();
-    std::string err = parse_json(myconfig, json);
-    config = myconfig->get<json_object>();
+    if(myconfig->is<json_object>()) {
+      config = myconfig->get<json_object>();
+    }
+    config.insert(std::make_pair("type", picojson::value("Food")));
+    double x, y, r, theta;
+    x = 200;
+    y = 200;
+    r = 20;
+    theta = 0.0;
+    config.insert(std::make_pair("x", picojson::value(x)));
+    config.insert(std::make_pair("y", picojson::value(y)));
+    config.insert(std::make_pair("r", picojson::value(r)));
+    config.insert(std::make_pair("theta", picojson::value(theta)));
     delete myconfig;
   }
  virtual void TearDown(){

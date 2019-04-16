@@ -58,6 +58,17 @@ class Food : public ArenaImmobileEntity {
   void TimestepUpdate(__unused unsigned int dt) override {
     Update();
   }
+  /**
+   * @brief Get the percentage of how much food is left in the food entity
+   */
+  int get_food_level() {
+    return static_cast<int>((static_cast<float>(food_level_) / 50.0)*100);
+  }
+  /**
+   * @brief When the braitenberg vehicle entity touches a food entity,
+   * the food enetiy gets consumed and loses some of it's food level
+   */
+  void Consume();
 
   /**
    * @brief Get the name of the Food for visualization purposes, and to
@@ -66,10 +77,18 @@ class Food : public ArenaImmobileEntity {
    * @return Name of the Food.
    */
   std::string get_name() const override { return "Food"; }
-
+  /**
+   * @brief The count of how many food entity there is. Used to Identify
+   * food entities.
+   */
   static int count;
 
  private:
+   /**
+    * @brief The level of food the food entity has. When it reaches 0 it will
+    * disappear and respwan in the arena
+    */
+  int food_level_ = 50;
 };
 
 NAMESPACE_END(csci3081);

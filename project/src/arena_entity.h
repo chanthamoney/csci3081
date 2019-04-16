@@ -134,21 +134,68 @@ class ArenaEntity {
   bool is_mobile(void) { return is_mobile_; }
 
   /**
+   * @brief Getter method for if an entity is dead or not.
+   */
+  bool isDead(void) const { return dead_; }
+
+  int get_x_bound(void) const { return x_bound_; }
+  int get_y_bound(void) const { return y_bound_; }
+  /**
+   * @brief Function to move the Arena entity to a randsom spot within the Arena's dimension
+   */
+  void move_to_random_position(void) {
+    int x, y;
+    x = random_num(get_radius(), get_x_bound() - get_radius());
+    y = random_num(get_radius(), get_y_bound() - get_radius());
+    set_position(x, y);
+  }
+
+
+  /**
    * @brief Setter method for indicating if entity can move or not.
    */
   void set_mobility(bool value) { is_mobile_ = value; }
 
   virtual void LoadFromObject(json_object* config) {
     json_object entity_config = *config;
-    set_position(
-      entity_config["x"].get<double>(), entity_config["y"].get<double>());
+    double x, y, theta, radius, x_bound, y_bound;
+    if (entity_config["x"].is<double>() &&
+    entity_config["y"].is<double>()) {
+      x = entity_config["x"].get<double>();
+      y = entity_config["y"].get<double>();
+    }
+    set_position(x, y);
+
+    if (entity_config["x_bound"].is<double>() &&
+      entity_config["y_bound"].is<double>()) {
+        x_bound = entity_config["x_bound"].get<double>();
+        y_bound = entity_config["y_bound"].get<double>();
+    }
+    x_bound_ = x_bound;
+    y_bound_ = y_bound;
+
     if (entity_config.find("theta") != entity_config.end()) {
-      pose_.theta = entity_config["theta"].get<double>();
+      if (entity_config["theta"].is<double>()) {
+        theta = entity_config["theta"].get<double>();
+        pose_.theta = theta;
+      } else if (entity_config["theta"].is<std::string>()) {
+        theta = std::stod(entity_config["theta"].get<std::string>());
+        pose_.theta = theta;
+      }
     }
     if (entity_config.find("r") != entity_config.end()) {
-      set_radius(entity_config["r"].get<double>());
+      if (entity_config["r"].is<double>()) {
+        radius = entity_config["r"].get<double>();
+        set_radius(radius);
+      } else if (entity_config["r"].is<std::string>()) {
+        radius = std::stod(entity_config["r"].get<std::string>());
+        set_radius(radius);
+      }
     }
   }
+
+ protected:
+  bool dead_{false};
 
  private:
   double radius_{DEFAULT_RADIUS};
@@ -157,6 +204,8 @@ class ArenaEntity {
   EntityType type_{kEntity};
   int id_{-1};
   bool is_mobile_{false};
+  double x_bound_{-1};
+  double y_bound_{-1};
 };
 
 NAMESPACE_END(csci3081);

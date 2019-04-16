@@ -21,10 +21,10 @@
  */
 
 // graphics
-#define X_DIM 1024
-#define Y_DIM 768
+#define X_DIM 1084
+#define Y_DIM 798
 #define TEXT_BOX_WIDTH 50
-#define GUI_MENU_WIDTH 190
+#define GUI_MENU_WIDTH 250
 #define COMBO_BOX_WIDTH 150
 #define GUI_MENU_GAP 10
 
@@ -46,7 +46,7 @@
 #define B_MIN_RAD 8
 #define B_MAX_RAD 14
 #define BRAITENBERG_COLLISION_DELTA 1
-#define BRAITENBERG_COLOR {122, 0, 25}
+#define BRAITENBERG_COLOR {122, 0, 25, 255}
 #define DEF_FOOD_BEHAV kLove
 #define DEF_LIGHT_BEHAV kCoward
 #define BRAITENBERG_SPEED_CONST .0025
@@ -54,6 +54,9 @@
 #define BRAITENBERG_TURNING_CONST 20
 #define BRAITENBERG_VEHICLE_COUNT 1
 #define BRAITENBERG_RATIO .5
+
+// predator
+#define PREDATOR_COLOR {101, 67, 33, 255}
 
 // light_sensor
 #define SENSOR_LIGHT_RAD 4

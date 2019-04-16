@@ -171,16 +171,31 @@ class Arena {
 
  private:
   // Dimensions of graphics window inside which entities must operate
+  /**
+   * @brief The x dimension of the arena's graphic window
+   */
   double x_dim_;
+  /**
+   * @brief The y dimension of the arena's graphic window
+   */
   double y_dim_;
 
   // All entities mobile and immobile.
+  /**
+   * @brief The vector of all ArenaEntites that are mobile and immobile
+   */
   std::vector<class ArenaEntity *> entities_;
 
   // A subset of the entities -- only those that can move (only Robot for now).
+  /**
+   * @brief The subset of the entites that are mobile
+   */
   std::vector<class ArenaMobileEntity *> mobile_entities_;
 
   // A set of all the light sensors that need to get info from entities
+  /**
+   * @brief The light sensors of the entities
+   */
   std::vector<class SensorLight *> light_sensors_;
 };
 

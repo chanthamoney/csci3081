@@ -1,5 +1,5 @@
 /**
- * @file food.cc
+ * @file factory_bv.cc
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
@@ -7,49 +7,36 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "src/food.h"
-#include "src/params.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
 
+#include "src/common.h"
+#include "src/entity_type.h"
+#include "src/factory_predator.h"
+#include "src/params.h"
+#include "src/pose.h"
+#include "src/rgb_color.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
 NAMESPACE_BEGIN(csci3081);
 
-int Food::count = 0;
-
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-Food::Food() : ArenaImmobileEntity() {
-  set_type(kFood);
-  set_color(FOOD_COLOR);
-  set_pose(FOOD_INIT_POS);
-  set_radius(FOOD_RADIUS);
 
-  // Set ID
-  count++;
-  set_id(count);
-}
+factoryPredator::factoryPredator() {}
 
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void Food::Reset() {
-  set_pose(FOOD_INIT_POS);
-} /* Reset */
-void Food::Consume() {
-  if (food_level_ <= 1) {
-    move_to_random_position();
-    food_level_ = 50;
-    RgbColor color = get_color();
-    color.a = 255;
-    set_color(color);
-  } else {
-    food_level_--;
-    RgbColor color = get_color();
-    color.a = 255 * (static_cast<double>(food_level_) / 50.0);
-    set_color(color);
-  }
+
+Predator* factoryPredator::Create(json_object* config) {
+  Predator * predator = new Predator;
+  predator->LoadFromObject(config);
+  return predator;
 }
 
 NAMESPACE_END(csci3081);

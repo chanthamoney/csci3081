@@ -1,11 +1,11 @@
 /**
- * @file braitenberg_vehicle.h
+ * @file predator.h
  *
  * @copyright 2017 3081 Staff, All rights reserved.
  */
 
-#ifndef SRC_BRAITENBERG_VEHICLE_H_
-#define SRC_BRAITENBERG_VEHICLE_H_
+#ifndef SRC_PREDATOR_H_
+#define SRC_PREDATOR_H_
 
 /*******************************************************************************
  * Includes
@@ -19,7 +19,6 @@
 #include "src/motion_behavior_differential.h"
 #include "src/wheel_velocity.h"
 #include "src/behaviors.h"
-#include "src/observer.h"
 
 /*******************************************************************************
  * Namespaces
@@ -30,20 +29,19 @@ NAMESPACE_BEGIN(csci3081);
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief Entity class to represent a BraitenbergVehicle.
+ * @brief Entity class to represent a Predator.
  *
- * A braitenberg vehicle is a simple machine that is used to show how simple
- * concepts (in this case wiring) can give way to complex looking behavior. In
- * this simulation, Braitenberg vehicles contain sensors, which can be hooked
- * up in four different ways, and thus they can exhibit four different behaviors
+ * A predator vehicle is similar to a BraitenbergVehicle, however, it has fixed
+ * behaviors. It is aggressive towards BraitenbergVehicle, coward towards light,
+ * and it has none behavior towards Food
  */
 
-class BraitenbergVehicle : public ArenaMobileEntity {
+class Predator : public ArenaMobileEntity {
  public:
   /**
    * @brief Default constructor.
    */
-  BraitenbergVehicle();
+  Predator();
 
   /**
    * Deleting the copy assignment and copy constructor. required now with
@@ -52,47 +50,48 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   /**
   *  @brief Deleting the copy constructor.
   */
-  BraitenbergVehicle(const BraitenbergVehicle & rhs) = delete;
+  Predator(const Predator & rhs) = delete;
   /**
   *  @brief Deleting the copy assignment.
   */
-  BraitenbergVehicle operator=(const BraitenbergVehicle & rhs) = delete;
+  Predator operator=(const Predator & rhs) = delete;
 
   /**
-   * @brief Update the BraitenbergVehicle's position and velocity after the
+   * @brief Update the Predator's position and velocity after the
    * specified duration has passed.
    *
    * @param dt The # of timesteps that have elapsed since the last update.
    */
   void TimestepUpdate(unsigned int dt) override;
   /**
-   * @brief Update the BraitenbergVehicle's wheel velocity based on the
+   * @brief Update the Predator's wheel velocity based on the
    * behaviors set by light_behavior_ and food_behavior_
    *
    */
   void Update() override;
 
   /**
-   * @brief Change the movement state of the BraitenbergVehicle.
-   * When a collision occurs, the BraitenbergVehicle will turn 180 degrees,
+   * @brief Change the movement state of the Predator.
+   * When a collision occurs, the Predator will turn 180 degrees,
    * move 20 timesteps, and then turn the heading 45 degrees (turn left).
    *
-   * @param[in] ent_type The type of ArenaEntity the BraitenbergVehicle collided with
-   * @param[in] object ArenaEntity object that the BraitenbergVehicle collided with
+   * @param[in] ent_type The type of ArenaEntity the Predator collided with
+   * @param[in] object ArenaEntity object that the Predator collided with
    *
    */
   void HandleCollision(EntityType ent_type,
                        ArenaEntity * object = NULL) override;
 
  /**
-  * @brief Senses or Identify, the entity that are in the range of the BraitenbergVehicle's
-  * sensor. Then this will update the closest_entity (either food or light).
+  * @brief Senses or Identify, the entity that are in the range of the Predator's
+  * sensor. Then this will update the closest_entity (either briatenberg vehicle
+  * or light).
   *
-  * @param[in] entity The AreanEntity that is sense by the BraitenbergVehicle.
+  * @param[in] entity The AreanEntity that is sense by the Predator.
   */
   void SenseEntity(const ArenaEntity& entity);
   /**
-   * @brief Get the name of the BraitenbergVehicle.
+   * @brief Get the name of the Predator.
    *
    * @return Returns a string
    */
@@ -111,16 +110,16 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   std::vector<Pose> get_light_sensors();
   /**
    * @brief Update the position and direction of the light sensor
-   * To match the direction that the BraitenbergVehicle is facing.
+   * To match the direction that the Predator is facing.
    *
    */
   void UpdateLightSensors();
   /**
    * @brief Takes in json_object and gets the configuration from the object.
-   * The configuration from the object consist of the Type of entity (BraitenbergVehicle),
-   * light_behavior, food_behavior, radius, x, y, and theta position.
+   * The configuration from the object consist of the Type of entity (Predator),
+   * radius, x, y, and theta position.
    *
-   * @param[in] entity_config The json_object pointer to the configuration that for the BraitenbergVehicle
+   * @param[in] entity_config The json_object pointer to the configuration that for the Predator
    */
   void LoadFromObject(json_object* entity_config) override;
   /**
@@ -162,7 +161,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   void set_food_behavior(Behaviors * behavior) { food_behavior_ = behavior; }
   /**
    * @brief Get the sensor reading from the left sensor.
-   * This returns the velocity speed from the left sensor of the BraitenbergVehicle
+   * This returns the velocity speed from the left sensor of the Predator
    * respect to an entity.
    *
    * @param[in] entity The entity in the Arean that the left sensor is inspecting.
@@ -172,7 +171,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   double get_sensor_reading_left(const ArenaEntity* entity);
   /**
    * @brief Get the sensor reading from the right sensor.
-   * This returns the velocity speed from the left sensor of the BraitenbergVehicle
+   * This returns the velocity speed from the left sensor of the Predator
    * respect to an entity.
    *
    * @param[in] entity The entity in the Arean that the right sensor is inspecting.
@@ -180,59 +179,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @result Returns a double type of the velocity
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
-  /**
-   * @brief Register the observer that is observing the braitenberg_vehicle
-   *
-   * @param[in] o A pointer to an Observer of Wheel velocity pointers
-   *
-   * @param[out] Setting the observer to the o input
-   */
-  void RegisterObserver(Observer<std::vector<WheelVelocity*>>* o) {
-      observer_ = o;
-  }
-  /**
-   * @brief Unregister the observer that is observing the braitenberg_vehicle
-   *  Sets the observer_ to a nullptr
-   */
-  void UnregisterObserver() {
-      observer_ = nullptr;
-  }
-  /**
-   * @brief Notifies the observer of the Wheel Velocity
-   *
-   * @param[in] arg A pointer to a vector of wheel velocites in the order of light wheel
-   * velocity, food wheel velocity, and bv wheel velocity
-   *
-   */
-  void Notify(std::vector<WheelVelocity*>* arg) {
-      if (observer_ != nullptr) {
-          observer_->UpdateState(arg);
-        }
-  }
-  /**
-   * @brief Sets the hungry_time_ of the braitenberg vehicle so it knows when to
-   * changes its behavior to go hunt for food because of starvation
-   */
-  void set_hungry_time(int ht) {
-    hungry_time_ = ht;
-  }
-  /**
-   * @brief When a Braitenberg Vehicle starving_time reaches 600 and when a
-   * predator touches the braitenberg vehicle it will die
-   * The color will become white and opacity will be somewhat transparent
-   * The behaviors towards other braitenberg vehicles, food, and light will
-   * become noneAdds
-   */
-  void Die();
-  /**
-   * @brief When a braitenberg vehicle "collides" with a food entity
-   * it consumes the food and it's starving_time_ is set back to 0
-   */
-  void ConsumeFood();
-  /**
-   * @brief The count of how many braitenberg vehicle there is. Used to Identify
-   * braitenberg vehicles.
-   */
+
   static int count;
 
  private:
@@ -245,33 +192,37 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   MotionBehaviorDifferential * motion_behavior_{nullptr};
   /**
-   * @brief The wheel velocity of the braitenberg vehicle
+   * @brief The wheel velocity of the predator
    */
   WheelVelocity wheel_velocity_;
   /**
-   * @brief A pointer to the robot behavior (bv behavior) of the braitenberg_vehicle
+   * @brief A pointer to the robot behavior (bv behavior) of the predator
    */
   Behaviors *bv_behavior_;
   /**
-   * @brief A pointer to the light behavior of the briatenberg_vehicle
+   * @brief A pointer to the light behavior of the predator
    */
   Behaviors *light_behavior_;
   /**
-   * @brief A pointer to the food behavior of the briatenberg_vehicle
+   * @brief A pointer to the food behavior of the predator
    */
   Behaviors *food_behavior_;
   /**
-   * @brief The closest braitenberg vehicle entity to the braitenberg vehicle
+   * @brief The closest braitenberg vehicle entity to the predator
    */
   const ArenaEntity* closest_bv_entity_;
   /**
-   * @brief The closest light entity to the braitenberg vehicle
+   * @brief The closest light entity to the predator
    */
   const ArenaEntity* closest_light_entity_;
   /**
-   * @brief The closest food entity to the braitenberg vehicle
+   * @brief The closest food entity to the predator
    */
   const ArenaEntity* closest_food_entity_;
+  /**
+   * @brief The closest predator entity to the predator
+   */
+  const ArenaEntity* closest_pred_entity_;
   /**
    * @brief The default speed of the braitenberg vehicle
    */
@@ -280,21 +231,8 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @brief The timestepupdates time after it collides
    */
   int collision_time_ = 0;
-  /**
-   * @brief The timestepupdate times before it starves at 600
-   */
-  int starving_time_ = 0;
-  /**
-   * @brief The default hungry time before the braitenberg_vehicle goes to
-   * explore aggressively for food
-   */
-  int hungry_time_ = 300;
-  /**
-   * @brief A pointer to an Observer of Wheel velocity pointers
-   */
-  Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
 };
 
 NAMESPACE_END(csci3081);
 
-#endif  // SRC_BRAITENBERG_VEHICLE_H_
+#endif  // SRC_PREDATOR_H_

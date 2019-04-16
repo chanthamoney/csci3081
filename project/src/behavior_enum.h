@@ -35,22 +35,6 @@ enum Behavior {
   kLove
 };
 
-inline Behavior get_behavior_type(const std::string& type) {
-  if (type == "Aggressive") {
-    return kAggressive;
-  }
-  if (type == "Love") {
-    return kLove;
-  }
-  if (type == "Coward") {
-    return kCoward;
-  }
-  if (type == "Explore") {
-    return kExplore;
-  }
-  return kNone;
-}
-
 NAMESPACE_END(csci3081);
 
 #endif  // SRC_BEHAVIOR_ENUM_H_
