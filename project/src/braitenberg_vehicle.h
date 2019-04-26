@@ -235,6 +235,9 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   static int count;
 
+  EntityType get_true_type() const { return get_type(); }
+
+
  private:
    /**
     * @brief A vector for the pose of the light sensor on the braitenberg_vehicle

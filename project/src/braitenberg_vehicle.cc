@@ -90,6 +90,7 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
   if (entity.get_type() == kLight) {
     closest_entity_ = &closest_light_entity_;
   } else if (entity.get_type() == kFood) {
+    // std::cout << " I SEE FOOD " << std::endl;
     closest_entity_ = &closest_food_entity_;
   } else if (entity.get_type() == kBraitenberg) {
     if (entity.get_id() != this->get_id() && !entity.isDead()) {
@@ -136,15 +137,19 @@ void BraitenbergVehicle::Update() {
   // Set dynamic behaviors based on internal measures
   if (starving_time_ >= hungry_time_) {
     bool food_close = true;
+    // std::cout << (closest_food_entity_->get_pose()).Length() << std::endl;
     if (closest_food_entity_ != nullptr) {
+      // std::cout << " I see food entity " << std::endl;
       double distance = (get_pose()-closest_food_entity_->get_pose()).Length();
-      food_close = distance < 100;
-
+      food_close = distance < 100; // TODO : CHANGE BACK TO 100?
+      // std::cout << (closest_food_entity_->get_pose()).Length() << std::endl;
     } else {
       food_close = false;
+      // std::cout << " I do not have closest food entity " << std::endl;
     }
 
     if (food_close) {
+      // std::cout << " I am going aggressive " << std::endl;
       dynamic_food_behavior = new Aggressive();
     } else {
       dynamic_food_behavior = new Explore();

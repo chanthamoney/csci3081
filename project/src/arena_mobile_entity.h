@@ -46,6 +46,7 @@ class ArenaMobileEntity : public ArenaEntity {
       is_moving_(true) {
         set_mobility(true);
   }
+
   ArenaMobileEntity(const ArenaMobileEntity& other) = delete;
   ArenaMobileEntity& operator=(const ArenaMobileEntity& other) = delete;
 

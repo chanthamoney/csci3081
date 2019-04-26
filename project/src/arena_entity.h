@@ -47,6 +47,10 @@ NAMESPACE_BEGIN(csci3081);
  * All arena entities are circular.
  *
  */
+
+ // TODO: write get real type in arena_entity
+ // TODO: write get type in sense entity
+
 class ArenaEntity {
  public:
   /**
@@ -122,7 +126,10 @@ class ArenaEntity {
 
   void set_radius(double radius) { radius_ = radius; }
 
-  EntityType get_type() const { return type_; }
+  virtual  EntityType get_type() const { return type_; }
+
+  EntityType get_true_type() const { return type_; }
+
   void set_type(EntityType et) { type_ = et; }
 
   int get_id() const { return id_; }

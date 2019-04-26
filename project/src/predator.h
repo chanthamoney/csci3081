@@ -180,9 +180,47 @@ class Predator : public ArenaMobileEntity {
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
 
+  const ArenaEntity * get_closest_bv_entity() { return closest_bv_entity_; };
+
+  const ArenaEntity * get_closest_light_entity() { return closest_light_entity_; };
+
+  const ArenaEntity * get_closest_food_entity() { return closest_food_entity_; };
+
+
+  int getStarvingTime() { return starving_time_; };
+  void setStarvingTime(int st) { starving_time_ = st; };
+
+//  EntityType get_type() const override;
+
+  void ConsumeBV();
+
+
+  void getDisguise();
+
+  void set_wv(WheelVelocity wheel_velocity) { wheel_velocity_ = wheel_velocity; }
+
   static int count;
 
- private:
+  EntityType get_type() const override { return disguised_;}
+
+  EntityType get_true_type() const { return kPredator; }
+
+  // void randomBehaviorBv() {
+  //   //choose a random behavior
+  // }
+
+  // void unwrapPredator();
+
+private:
+   /**
+    * @brief When a Braitenberg Vehicle starving_time reaches 600 and when a
+    * predator touches the braitenberg vehicle it will die
+    * The color will become white and opacity will be somewhat transparent
+    * The behaviors towards other braitenberg vehicles, food, and light will
+    * become noneAdds
+    */
+   void Die();
+
    /**
     * @brief A vector for the pose of the light sensor on the braitenberg_vehicle
     */
@@ -231,6 +269,16 @@ class Predator : public ArenaMobileEntity {
    * @brief The timestepupdates time after it collides
    */
   int collision_time_ = 0;
+
+  int starving_time_ = 0;
+  // bool array to tell if I was a diguised. Index 0 is food, 1 is light, 2 is bv.
+  bool possibleDisguised[3] = {false};
+
+  ArenaEntity * disguisedPredator_{nullptr};
+
+  EntityType disguised_{kPredator};
+
+
 };
 
 NAMESPACE_END(csci3081);
