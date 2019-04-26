@@ -45,18 +45,20 @@ class LightDecorator : public Light {
 
     void Update() override{
       if (predator_ != NULL) {
-      Pose pose = predator_->get_pose();
-
-      // Movement is always along the heading_angle (i.e. the hypotenuse)
-      double new_x =
-        pose.x + std::cos(pose.theta * M_PI / 180.0) *3;
-      double new_y =
-        pose.y + std::sin(pose.theta * M_PI / 180.0) *3;
-
-      /* Heading angle remaings the same */
-      pose.x = new_x;
-      pose.y = new_y;
-      predator_->set_pose(pose);
+        Light::set_pose(predator_->get_pose());
+        Light::Update();
+      // Pose pose = predator_->get_pose();
+      //
+      // // Movement is always along the heading_angle (i.e. the hypotenuse)
+      // double new_x =
+      //   pose.x + std::cos(pose.theta * M_PI / 180.0) *3;
+      // double new_y =
+      //   pose.y + std::sin(pose.theta * M_PI / 180.0) *3;
+      //
+      // /* Heading angle remaings the same */
+      // pose.x = new_x;
+      // pose.y = new_y;
+      // predator_->set_pose(pose);
     }
   }
 

@@ -272,12 +272,16 @@ void Predator::getDisguise() {
       randomNumber = random_num(0, 3);
   } //while we haven't been this disguised
   if(randomNumber == 0) {
-    FoodDecorator * FoodPredator = new FoodDecorator(this);
-    disguisedPredator_ = FoodPredator;
-    disguised_ = kFood;
+    // FoodDecorator * FoodPredator = new FoodDecorator(this);
+    // disguisedPredator_ = FoodPredator;
+    // disguised_ = kFood;
     // BvDecorator * BvPredator = new BvDecorator(this);
     // disguisedPredator_ = BvPredator;
     // disguised_ = kBraitenberg;
+
+    LightDecorator * LightPredator = new LightDecorator(this);
+    disguisedPredator_ = LightPredator;
+    disguised_ = kLight;
     possibleDisguised[0] = true;
   }
   else if ( randomNumber == 1) {
@@ -291,10 +295,14 @@ void Predator::getDisguise() {
   }
   else {
     //  random number is 3
-    BvDecorator * BvPredator = new BvDecorator(this);
-    disguisedPredator_ = BvPredator;
-    disguised_ = kBraitenberg;
+    // BvDecorator * BvPredator = new BvDecorator(this);
+    // disguisedPredator_ = BvPredator;
+    // disguised_ = kBraitenberg;
     possibleDisguised[2] = true;
+
+    LightDecorator * LightPredator = new LightDecorator(this);
+    disguisedPredator_ = LightPredator;
+    disguised_ = kLight;
 
   }
 }
