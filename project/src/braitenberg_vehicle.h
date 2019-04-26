@@ -109,6 +109,11 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @returns Returns a const vector<pose>
    */
   std::vector<Pose> get_light_sensors();
+
+  void set_light_sensors( std::vector<Pose> light_sens) {
+    light_sensors_ = light_sens;
+  }
+
   /**
    * @brief Update the position and direction of the light sensor
    * To match the direction that the BraitenbergVehicle is facing.
@@ -237,6 +242,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
 
   EntityType get_true_type() const { return get_type(); }
 
+  WheelVelocity get_wv() {return wheel_velocity_; }
 
  private:
    /**

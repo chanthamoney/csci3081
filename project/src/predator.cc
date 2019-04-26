@@ -61,7 +61,7 @@ void Predator::TimestepUpdate(__unused unsigned int dt) {
 
   // CHOOSING WHAT DIGUISE THE PREDATOR SHOULD WEAR
   std::cout << "STARVING TIME: " << starving_time_ << std::endl;
-  if(starving_time_ == 150) {
+  if(starving_time_ == 19) {
     getDisguise();
   }
    if ( starving_time_ == 300) {
@@ -104,8 +104,8 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
   } else if (entity.get_type() == kPredator) {
     if (entity.get_id() != this->get_id()) {
       closest_entity_ = &closest_pred_entity_;
-    }
-  } else if (entity.get_type() == kBraitenberg) {
+    } // to assert that the entity is a kBraitenberg and if its digused as kBraitenberg it shouldn't move
+  } else if (entity.get_type() == kBraitenberg && entity.get_true_type() != kPredator) {
     if (!entity.isDead()) {
       closest_entity_ = &closest_bv_entity_;
     }
@@ -171,7 +171,9 @@ void Predator::Update() {
   }
   // If we are disguised as bv call update and do bv's update
   else {
-    static_cast<BraitenbergVehicle*>(disguisedPredator_)->Update();
+    // static_cast<BraitenbergVehicle*>(disguisedPredator_)->Update();
+    disguisedPredator_->Update();
+  //  disguisedPredator_->TimestepUpdate(1);
   }
 }
 
@@ -231,6 +233,7 @@ void Predator::Die() {
   food_behavior_ = new None();
   light_behavior_ = new None();
   wheel_velocity_ = WheelVelocity(0, 0);
+  delete disguisedPredator_;
   disguisedPredator_ = nullptr;
   disguised_ = kPredator;
   set_radius(DEFAULT_RADIUS);
@@ -248,6 +251,7 @@ void Predator::ConsumeBV() {
   //unwrap predator
   if(disguisedPredator_ != nullptr) {
     //  unwrapPredator();
+    delete disguisedPredator_;
     disguisedPredator_ = nullptr;
     disguised_ = kPredator;
     set_color(PREDATOR_COLOR);

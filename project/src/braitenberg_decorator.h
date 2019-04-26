@@ -53,14 +53,14 @@ class BvDecorator : public BraitenbergVehicle {
         // TODO: BV
         double light_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_light_entity());
         double light_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_light_entity());
-        std::cout << "LIGHT LEFT " << light_left_sensor_reading << std::endl;
-        std::cout << "LIGHT RIGHT " << light_right_sensor_reading << std::endl;
 
         double food_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_food_entity());
         double food_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_food_entity());
 
         double bv_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_bv_entity());
         double bv_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_bv_entity());
+        std::cout << "BV LEFT " << bv_left_sensor_reading << std::endl;
+        std::cout << "BV RIGHT " << bv_right_sensor_reading << std::endl;
 
 
         if(dynamic_food_behavior_ == nullptr){
@@ -71,7 +71,7 @@ class BvDecorator : public BraitenbergVehicle {
         }
 
 
-        Behaviors * dynamic_bv_behavior = new None();
+        Behaviors * dynamic_bv_behavior = new Aggressive();
 
         if (dynamic_food_behavior_->getBehaviorType() == "Coward") {
           std::cout << "I am coward" << std::endl;
@@ -81,6 +81,10 @@ class BvDecorator : public BraitenbergVehicle {
           std::cout << "I am angry" << std::endl;
         }
 
+        if (dynamic_bv_behavior->getBehaviorType() == "Aggressive") {
+          std::cout << "I am bv aggressive" << std::endl;
+
+        }
         // Behaviors * dynamic_light_behavior = randomBehaviorBv();
 
         dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,

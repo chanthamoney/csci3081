@@ -126,6 +126,9 @@ void BraitenbergVehicle::Update() {
   Behaviors* dynamic_bv_behavior;
   Behaviors* dynamic_light_behavior;
 
+
+
+
   if (dead_) {
     std::vector<WheelVelocity*> emptyWVS {&bv_wheel_velocity,
                                      &light_wheel_velocity,
@@ -169,6 +172,8 @@ void BraitenbergVehicle::Update() {
                                  bv_right_sensor_reading,
                                  defaultSpeed_,
                                  &bv_wheel_velocity);
+
+  std::cout << " Light sensor in BV: " << bv_left_sensor_reading << std::endl;
 
   double light_left_sensor_reading =
    get_sensor_reading_left(closest_light_entity_);
