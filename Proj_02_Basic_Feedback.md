@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 26, 15:58:44 PM.
+Run on April 26, 16:08:40 PM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -65,7 +65,7 @@ b5991806668ccd065049dff06667f5f97acf9a16	refs/heads/feature/08-bv_starves
 
 4b87dba6bbc5a0708c397d5734a26d4d7cff4332	refs/heads/feature/09-dynamic_wheel_velocity_starving
 
-b9943866449a5cab8ea2ac0e01cb59c9eabe4b46	refs/heads/feature/10-decorator_pattern_predator
+16879f067feb4e990447f44d0fd256384e04af5f	refs/heads/feature/10-decorator_pattern_predator
 
 d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
@@ -73,7 +73,7 @@ d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-363adfe4fb1915049b71819e67b0888a48986e0f	refs/heads/master
+35041f33cb7d75a8b2118ff0d0bbe1c61309f2b2	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
 
@@ -104,17 +104,17 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 2)
 
 [OPEN issue #23] :  Factory pattern reads in CSV [enhancement]
 
+[OPEN issue #22] :  Add decorator pattern for predator [enhancement] 1
 
 
 
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 22)
 
-[CLOSED issue #22] :  Add decorator pattern for predator [enhancement] 1
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 21)
 
 [CLOSED issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
 
