@@ -109,6 +109,11 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @returns Returns a const vector<pose>
    */
   std::vector<Pose> get_light_sensors();
+
+  void set_light_sensors( std::vector<Pose> light_sens) {
+    light_sensors_ = light_sens;
+  }
+
   /**
    * @brief Update the position and direction of the light sensor
    * To match the direction that the BraitenbergVehicle is facing.
@@ -123,6 +128,14 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @param[in] entity_config The json_object pointer to the configuration that for the BraitenbergVehicle
    */
   void LoadFromObject(json_object* entity_config) override;
+
+  void set_no_disguise(bool disguiseBool) { noDisguise = disguiseBool; }
+  void set_bv_left_sensor_reading(double bv_ls) { bv_left_sensor_reading = bv_ls; }
+  void set_bv_right_sensor_reading(double bv_rs) {bv_right_sensor_reading = bv_rs;}
+  void set_light_left_sensor_reading(double l_ls) { light_left_sensor_reading = l_ls; }
+  void set_light_right_sensor_reading(double l_rs) {light_right_sensor_reading = l_rs;}
+  void set_food_left_sensor_reading(double f_ls) { food_left_sensor_reading = f_ls; }
+  void set_food_right_sensor_reading(double f_rs) { food_right_sensor_reading = f_rs;}
   /**
    * @brief Get the bv_behavior.
    *
@@ -235,6 +248,10 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   static int count;
 
+  EntityType get_true_type() const { return get_type(); }
+
+  WheelVelocity get_wv() {return wheel_velocity_; }
+
  private:
    /**
     * @brief A vector for the pose of the light sensor on the braitenberg_vehicle
@@ -293,6 +310,15 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @brief A pointer to an Observer of Wheel velocity pointers
    */
   Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
+
+  double bv_left_sensor_reading = 0.0;
+  double bv_right_sensor_reading = 0.0;
+  double light_left_sensor_reading = 0.0;
+  double light_right_sensor_reading = 0.0;
+  double food_left_sensor_reading = 0.0;
+  double food_right_sensor_reading = 0.0;
+
+  bool noDisguise = true;
 };
 
 NAMESPACE_END(csci3081);

@@ -16,7 +16,9 @@
 #include "src/love.h"
 #include "src/explore.h"
 #include "src/none.h"
-
+#include "src/food_decorator.h"
+#include "src/light_decorator.h"
+#include "src/braitenberg_decorator.h"
 class SensorLightLove;
 
 /*******************************************************************************
@@ -40,7 +42,7 @@ Predator::Predator() :
   light_sensors_.push_back(Pose());
   light_sensors_.push_back(Pose());
   set_color(PREDATOR_COLOR);
-  set_pose(ROBOT_INIT_POS);
+  set_pose(Pose(250, 250, 0));
 
   wheel_velocity_ = WheelVelocity(0, 0);
 
@@ -50,15 +52,38 @@ Predator::Predator() :
 }
 
 void Predator::TimestepUpdate(__unused unsigned int dt) {
+  starving_time_++;
+
+  // Checking if the predator is dead
+  if (!isDead() && disguised_ == kFood) {
+    Update();
+  }
+
+
+  // CHOOSING WHAT DIGUISE THE PREDATOR SHOULD WEAR
+  std::cout << "STARVING TIME: " << starving_time_ << std::endl;
+  if(starving_time_ == 150) {
+    getDisguise();
+  }
+   if ( starving_time_ == 300) {
+    getDisguise();
+  }
+   if (starving_time_ == 450) {
+    getDisguise();
+  }
+
   if (collision_time_ != 0) {
-    if (collision_time_ == 20) {
+    if (collision_time_ == 20 &&
+       (disguised_ == kPredator || disguised_ == kBraitenberg)) {
       set_heading(static_cast<int>((get_pose().theta - 135)) % 360);
       collision_time_ = 0;
     } else {
         collision_time_++;
     }
   }
-
+  if (starving_time_ == 600) {
+    Die();
+  }
   if (is_moving()) {
     motion_behavior_->UpdatePose(dt, wheel_velocity_);
   }
@@ -80,8 +105,8 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
   } else if (entity.get_type() == kPredator) {
     if (entity.get_id() != this->get_id()) {
       closest_entity_ = &closest_pred_entity_;
-    }
-  } else if (entity.get_type() == kBraitenberg) {
+    } // to assert that the entity is a kBraitenberg and if its digused as kBraitenberg it shouldn't move
+  } else if (entity.get_type() == kBraitenberg && entity.get_true_type() != kPredator) {
     if (!entity.isDead()) {
       closest_entity_ = &closest_bv_entity_;
     }
@@ -108,14 +133,21 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
 }
 
 void Predator::Update() {
+
   WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
+  WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
+
+  if (isDead()) {
+       bv_wheel_velocity = WheelVelocity(0, 0);
+       light_wheel_velocity = WheelVelocity(0, 0);
+      return;
+  }
+  if (!dead_ && disguised_ == kPredator) {
+
   double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
   double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
   bv_behavior_->getWheelVelocity(bv_left_sensor_reading,
     bv_right_sensor_reading, defaultSpeed_, &bv_wheel_velocity);
-
-
-  WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
 
   double light_left_sensor_reading =
    get_sensor_reading_left(closest_light_entity_);
@@ -125,63 +157,24 @@ void Predator::Update() {
   light_behavior_->getWheelVelocity(light_left_sensor_reading,
     light_right_sensor_reading, defaultSpeed_, &light_wheel_velocity);
 
-  WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
-  double food_left_sensor_reading =
-   get_sensor_reading_left(closest_food_entity_);
-  double food_right_sensor_reading =
-   get_sensor_reading_right(closest_food_entity_);
-  food_behavior_->getWheelVelocity(food_left_sensor_reading,
-    food_right_sensor_reading, defaultSpeed_, &food_wheel_velocity);
-
-  // FOOD, LIGHT, BV
-  // NNN, NNS, NSN, NSS, SNN, SNS, SSS
-  bool light_behavior_set, food_behavior_set, bv_behavior_set;
-  light_behavior_set = light_behavior_->getBehaviorType() != "None";
-  food_behavior_set = food_behavior_->getBehaviorType() != "None";
-  bv_behavior_set = bv_behavior_->getBehaviorType() != "None";
-  if (!light_behavior_set && food_behavior_set) {
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (bv_wheel_velocity.left + food_wheel_velocity.left)/2,
-        (bv_wheel_velocity.right + food_wheel_velocity.right)/2,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        food_wheel_velocity.left, food_wheel_velocity.right, defaultSpeed_);
-    }
-
-  } else if (light_behavior_set && !food_behavior_set) {
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
-        (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        light_wheel_velocity.left, light_wheel_velocity.right, defaultSpeed_);
-    }
-
-  } else if (light_behavior_set && food_behavior_set) {
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + food_wheel_velocity.left +
-          bv_wheel_velocity.left)/3,
-        (light_wheel_velocity.right + food_wheel_velocity.right +
-          bv_wheel_velocity.right)/3,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + food_wheel_velocity.left)/2,
-        (light_wheel_velocity.right + food_wheel_velocity.right)/2,
-        defaultSpeed_);
-    }
-  } else {
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(bv_wheel_velocity.left,
-        bv_wheel_velocity.right, defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(0, 0, defaultSpeed_);
-    }
+  wheel_velocity_ = WheelVelocity(
+    (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
+    (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
+    defaultSpeed_);
+  }
+  // If we are digusied as light or food just use timestep update (immobile)
+  else if (disguised_ == kFood) {
+    wheel_velocity_ = WheelVelocity(0, 0, 0);
+    disguisedPredator_->TimestepUpdate(1);
+  }
+  else if (disguised_ == kLight) {
+    disguisedPredator_->TimestepUpdate(1);
+  }
+  // If we are disguised as bv call update and do bv's update
+  else {
+    // static_cast<BraitenbergVehicle*>(disguisedPredator_)->Update();
+    disguisedPredator_->Update();
+  //  disguisedPredator_->TimestepUpdate(1);
   }
 }
 
@@ -231,63 +224,91 @@ void Predator::UpdateLightSensors() {
 void Predator::LoadFromObject(json_object* config) {
   ArenaEntity::LoadFromObject(config);
     json_object entity_config = *config;
-  // if (entity_config.find("light_behavior") != entity_config.end()) {
-  //   std::string type = entity_config["light_behavior"].get<std::string>();
-  //   if (type == "Aggressive") {
-  //     light_behavior_ = new Aggressive();
-  //   }
-  //   else if (type == "Love") {
-  //     light_behavior_ = new Love();
-  //   }
-  //   else if (type == "Coward") {
-  //     light_behavior_ = new Coward();
-  //   }
-  //   else if (type == "Explore") {
-  //     light_behavior_ = new Explore();
-  //   }
-  //   else {
-  //     light_behavior_ = new None();
-  //   }
-  // }
-  // if (entity_config.find("food_behavior") != entity_config.end()) {
-  //   std::string type = entity_config["food_behavior"].get<std::string>();
-  //   if (type == "Aggressive") {
-  //     food_behavior_ = new Aggressive();
-  //   }
-  //   else if (type == "Love") {
-  //     food_behavior_ = new Love();
-  //   }
-  //   else if (type == "Coward") {
-  //     food_behavior_ = new Coward();
-  //   }
-  //   else if (type == "Explore") {
-  //     food_behavior_ = new Explore();
-  //   }
-  //   else {
-  //     food_behavior_ = new None();
-  //   }
-  // }
-  //
-  // if (entity_config.find("bv_behavior") != entity_config.end()) {
-  //   std::string type = entity_config["bv_behavior"].get<std::string>();
-  //   if (type == "Aggressive") {
-  //     bv_behavior_ = new Aggressive();
-  //   }
-  //   else if (type == "Love") {
-  //     bv_behavior_ = new Love();
-  //   }
-  //   else if (type == "Coward") {
-  //     bv_behavior_ = new Coward();
-  //   }
-  //   else if (type == "Explore") {
-  //     bv_behavior_ = new Explore();
-  //   }
-  //   else {
-  //     bv_behavior_ = new None();
-  //   }
-  // }
-
   UpdateLightSensors();
+}
+
+void Predator::Die() {
+  dead_ = true;
+  set_color({220, 220, 220, 190});
+  bv_behavior_ = new None();
+  food_behavior_ = new None();
+  light_behavior_ = new None();
+  wheel_velocity_ = WheelVelocity(0, 0);
+  delete disguisedPredator_;
+  disguisedPredator_ = nullptr;
+  disguised_ = kPredator;
+  set_radius(DEFAULT_RADIUS);
+}
+
+
+// void Predator::unwrapPredator() {
+//   disguisedPredator_ = nullptr;
+//   disguised_ = kPredator;
+//   set_color(PREDATOR_COLOR);
+// }
+
+void Predator::ConsumeBV() {
+  starving_time_ = 0;
+  //unwrap predator
+  if(disguisedPredator_ != nullptr) {
+    //  unwrapPredator();
+    delete disguisedPredator_;
+    disguisedPredator_ = nullptr;
+    disguised_ = kPredator;
+    set_color(PREDATOR_COLOR);
+    possibleDisguised[0] = false;
+    possibleDisguised[1] = false;
+    possibleDisguised[2] = false;
+    set_radius(DEFAULT_RADIUS);
+  }
+
+}
+// TODO:
+// bool array to tell if I was a diguised. Index 0 is food, 1 is light, 2 is bv.
+// bool possibleDisguised[3] = {false};
+
+void Predator::getDisguise() {
+  int randomNumber = random_num(0, 3); //  get number between 0 and 2
+  while(possibleDisguised[randomNumber]) {
+      randomNumber = random_num(0, 3);
+  } //while we haven't been this disguised
+  if(randomNumber == 0) {
+    FoodDecorator * FoodPredator = new FoodDecorator(this);
+    disguised_ = kFood;
+    possibleDisguised[0] = true;
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = FoodPredator;
+    }
+    else {
+      disguisedPredator_ = FoodPredator;
+    }
+  }
+  else if (randomNumber == 1) {
+    LightDecorator * LightPredator = new LightDecorator(this);
+    disguised_ = kLight;
+    possibleDisguised[1] = true;
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = LightPredator;
+    }
+    else {
+        disguisedPredator_ = LightPredator;
+    }
+  }
+  else {
+    //  random number is 3
+    BvDecorator * BvPredator = new BvDecorator(this);
+    disguised_ = kBraitenberg;
+    possibleDisguised[2] = true;
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = BvPredator;
+    }
+    else{
+      disguisedPredator_ = BvPredator;
+    }
+  }
 }
 
 NAMESPACE_END(csci3081);
