@@ -58,10 +58,8 @@ void Predator::TimestepUpdate(__unused unsigned int dt) {
   if (!isDead() && disguised_ == kFood) {
     Update();
   }
-
-
   // CHOOSING WHAT DIGUISE THE PREDATOR SHOULD WEAR
-  std::cout << "STARVING TIME: " << starving_time_ << std::endl;
+  // std::cout << "STARVING TIME: " << starving_time_ << std::endl;
   if(starving_time_ == 150) {
     getDisguise();
   }
@@ -84,7 +82,7 @@ void Predator::TimestepUpdate(__unused unsigned int dt) {
   if (starving_time_ == 600) {
     Die();
   }
-  if (is_moving()) {
+  if (is_moving() && (disguised_ != kLight) && (disguised_ != kBraitenberg)) {
     motion_behavior_->UpdatePose(dt, wheel_velocity_);
   }
   UpdateLightSensors();
@@ -173,7 +171,7 @@ void Predator::Update() {
   // If we are disguised as bv call update and do bv's update
   else {
     // static_cast<BraitenbergVehicle*>(disguisedPredator_)->Update();
-    disguisedPredator_->Update();
+    disguisedPredator_->TimestepUpdate(1);
   //  disguisedPredator_->TimestepUpdate(1);
   }
 }

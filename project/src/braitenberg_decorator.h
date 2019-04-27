@@ -44,108 +44,106 @@ class BvDecorator : public BraitenbergVehicle {
       return kPredator;
     }
 
-    void Update() override {
+    void TimestepUpdate(__unused unsigned int dt) override {
       if ( predator_ != NULL) {
-        BraitenbergVehicle::set_pose(predator_->get_pose());
+        set_pose(predator_->get_pose());
 
-                  if(dynamic_food_behavior_ == nullptr){
-                    dynamic_food_behavior_ = getRandomBehavior();
-                    // dynamic_food_behavior_ = new None();
-                  }
-                  if(dynamic_light_behavior_ == nullptr) {
-                    dynamic_light_behavior_ = getRandomBehavior();
-                    // dynamic_light_behavior_ = new None();
-                  }
+        if(dynamic_food_behavior_ == nullptr){
+          dynamic_food_behavior_ = getRandomBehavior();
+          // dynamic_food_behavior_ = new None();
+        }
+        if(dynamic_light_behavior_ == nullptr) {
+          dynamic_light_behavior_ = getRandomBehavior();
+          // dynamic_light_behavior_ = new None();
+        }
 
-                  dynamic_bv_behavior_ = new Aggressive();
-                  set_bv_behavior(dynamic_bv_behavior_);
-                  set_food_behavior(dynamic_food_behavior_);
-                  set_light_behavior(dynamic_light_behavior_);
-                  set_no_disguise(false);
-                  BraitenbergVehicle::UpdateLightSensors();
-                   //
-                   double pred_light_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_light_entity());
-                   double pred_light_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_light_entity());
+        dynamic_bv_behavior_ = new Aggressive();
+        set_bv_behavior(dynamic_bv_behavior_);
+        set_food_behavior(dynamic_food_behavior_);
+        set_light_behavior(dynamic_light_behavior_);
+        set_no_disguise(false);
+        BraitenbergVehicle::UpdateLightSensors();
+         //
+         double pred_light_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_light_entity());
+         double pred_light_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_light_entity());
 
-                   double pred_food_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_food_entity());
-                   double pred_food_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_food_entity());
+         double pred_food_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_food_entity());
+         double pred_food_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_food_entity());
 
-                   double pred_bv_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_bv_entity());
-                   double pred_bv_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_bv_entity());
-                   // std::cout << "LEFT BV SENSOR DEC" << pred_bv_left_sensor_reading << std::endl;
-                   // std::cout << "RIGHT BV SENSOR " << pred_bv_right_sensor_reading << std::endl;
-                   // std::cout << "LEFT FOOD SENSOR " << pred_food_left_sensor_reading << std::endl;
-                   // std::cout << "RIGHT FOOD SENSOR " << pred_food_right_sensor_reading << std::endl;
-                   // std::cout << "LEFT LIGHT SENSOR " << pred_light_left_sensor_reading << std::endl;
-                   // std::cout << "RIGHT LIGHT SENSOR " << pred_light_right_sensor_reading << std::endl;
-                   set_bv_left_sensor_reading(pred_bv_left_sensor_reading);
-                   set_bv_right_sensor_reading(pred_bv_right_sensor_reading);
-                   set_food_left_sensor_reading(pred_food_left_sensor_reading);
-                   set_food_right_sensor_reading(pred_food_right_sensor_reading);
-                   set_light_left_sensor_reading(pred_light_left_sensor_reading);
-                   set_light_right_sensor_reading(pred_light_right_sensor_reading);
+         double pred_bv_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_bv_entity());
+         double pred_bv_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_bv_entity());
+         // std::cout << "LEFT BV SENSOR DEC" << pred_bv_left_sensor_reading << std::endl;
+         // std::cout << "RIGHT BV SENSOR " << pred_bv_right_sensor_reading << std::endl;
+         // std::cout << "LEFT FOOD SENSOR " << pred_food_left_sensor_reading << std::endl;
+         // std::cout << "RIGHT FOOD SENSOR " << pred_food_right_sensor_reading << std::endl;
+         // std::cout << "LEFT LIGHT SENSOR " << pred_light_left_sensor_reading << std::endl;
+         // std::cout << "RIGHT LIGHT SENSOR " << pred_light_right_sensor_reading << std::endl;
+         set_bv_left_sensor_reading(pred_bv_left_sensor_reading);
+         set_bv_right_sensor_reading(pred_bv_right_sensor_reading);
+         set_food_left_sensor_reading(pred_food_left_sensor_reading);
+         set_food_right_sensor_reading(pred_food_right_sensor_reading);
+         set_light_left_sensor_reading(pred_light_left_sensor_reading);
+         set_light_right_sensor_reading(pred_light_right_sensor_reading);
 
-                   if (dynamic_bv_behavior_->getBehaviorType() == "Aggressive") {
-                     std::cout << "I am angry bv" << std::endl;
-                   }
+       //   if (dynamic_bv_behavior_->getBehaviorType() == "Aggressive") {
+       //     std::cout << "I am angry bv" << std::endl;
+       //   }
+       //
+       //   if (dynamic_food_behavior_->getBehaviorType() == "Coward") {
+       //     std::cout << "I am coward food" << std::endl;
+       //   }
+       //
+       //   if (dynamic_food_behavior_->getBehaviorType() == "Aggressive") {
+       //     std::cout << "I am angry food" << std::endl;
+       //   }
+       //
+       //   if (dynamic_food_behavior_->getBehaviorType() == "Explore") {
+       //     std::cout << "I am explore food" << std::endl;
+       //
+       //   }
+       //
+       //  if (dynamic_food_behavior_->getBehaviorType() == "Love") {
+       //    std::cout << "I am Love food" << std::endl;
+       //
+       //  }
+       //
+       //   if (dynamic_food_behavior_->getBehaviorType() == "None") {
+       //     std::cout << "I am none food" << std::endl;
+       //   }
+       //
+       //   if (dynamic_light_behavior_->getBehaviorType() == "Coward") {
+       //     std::cout << "I am coward light" << std::endl;
+       //   }
+       //
+       //   if (dynamic_light_behavior_->getBehaviorType() == "Aggressive") {
+       //     std::cout << "I am angry light" << std::endl;
+       //   }
+       //
+       //   if (dynamic_light_behavior_->getBehaviorType() == "Explore") {
+       //     std::cout << "I am explore light" << std::endl;
+       //
+       //   }
+       //
+       //  if (dynamic_light_behavior_->getBehaviorType() == "Love") {
+       //    std::cout << "I am Love light" << std::endl;
+       //
+       //  }
+       //
+       // if (dynamic_light_behavior_->getBehaviorType() == "None") {
+       //   std::cout << "I am none light" << std::endl;
+       // }
 
-                   if (dynamic_food_behavior_->getBehaviorType() == "Coward") {
-                     std::cout << "I am coward food" << std::endl;
-                   }
+      BraitenbergVehicle::TimestepUpdate(1);
+      predator_->set_color(BraitenbergVehicle::get_color());
+      predator_->set_wv(BraitenbergVehicle::get_wv()); // TODO: ERROR I THINK IS IT STAYS ON THE LAST VELOCITY THAT IT HAD?
+      predator_->set_pose(get_pose());
 
-                   if (dynamic_food_behavior_->getBehaviorType() == "Aggressive") {
-                     std::cout << "I am angry food" << std::endl;
-                   }
-
-                   if (dynamic_food_behavior_->getBehaviorType() == "Explore") {
-                     std::cout << "I am explore food" << std::endl;
-
-                   }
-
-                  if (dynamic_food_behavior_->getBehaviorType() == "Love") {
-                    std::cout << "I am Love food" << std::endl;
-
-                  }
-
-                 if (dynamic_food_behavior_->getBehaviorType() == "None") {
-                   std::cout << "I am none food" << std::endl;
-                 }
-
-                 if (dynamic_light_behavior_->getBehaviorType() == "Coward") {
-                   std::cout << "I am coward light" << std::endl;
-                 }
-
-                 if (dynamic_light_behavior_->getBehaviorType() == "Aggressive") {
-                   std::cout << "I am angry light" << std::endl;
-                 }
-
-                 if (dynamic_light_behavior_->getBehaviorType() == "Explore") {
-                   std::cout << "I am explore light" << std::endl;
-
-                 }
-
-                if (dynamic_light_behavior_->getBehaviorType() == "Love") {
-                  std::cout << "I am Love light" << std::endl;
-
-                }
-
-               if (dynamic_light_behavior_->getBehaviorType() == "None") {
-                 std::cout << "I am none light" << std::endl;
-               }
-
-
-
-        BraitenbergVehicle::Update();
-        predator_->set_color(BraitenbergVehicle::get_color());
-        predator_->set_wv(BraitenbergVehicle::get_wv()); // TODO: ERROR I THINK IS IT STAYS ON THE LAST VELOCITY THAT IT HAD?
-        predator_->set_pose(get_pose());
-
-      }
+    }
   }
 
   Behaviors * getRandomBehavior() {
     std::cout <<"In Random Behavior" << std::endl;
-    int randomNumber = random_num(0, 4);
+    int randomNumber = random_num(0, 5);
     Behaviors * newBehavior;
     if (randomNumber == 0) {
       std::cout <<"In Random Behavior" << std::endl;

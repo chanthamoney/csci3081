@@ -56,7 +56,7 @@ class Food : public ArenaImmobileEntity {
    * @brief Only thing necessary is to update any subscribered sensors
    */
   void TimestepUpdate(__unused unsigned int dt) override {
-    std::cout << "HELP ME GOD" << std::endl;
+    // std::cout << "HELP ME GOD" << std::endl;
     Update();
   }
   /**
