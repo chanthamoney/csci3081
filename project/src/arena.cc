@@ -37,7 +37,6 @@ Arena::Arena(): x_dim_(X_DIM),
       mobile_entities_(),
       light_sensors_() {
     AddEntity(new Light());
-// TODO: maybe ?     // AddEntity(new Food());
     AddEntity(new BraitenbergVehicle());
     AddEntity(new Predator());
 }
@@ -202,14 +201,18 @@ void Arena::UpdateEntitiesTimestep() {
 
         // lights and braitenberg vehicles do not collide
         // nothing collides with food, but bv's call consume() if they do
-        if ((ent2->get_true_type() == kBraitenberg && ent1->get_true_type() == kLight) ||
-            (ent2->get_true_type() == kLight && ent1->get_true_type() == kBraitenberg)) {
+        if ((ent2->get_true_type() == kBraitenberg &&
+        ent1->get_true_type() == kLight) ||
+            (ent2->get_true_type() == kLight &&
+             ent1->get_true_type() == kBraitenberg)) {
           continue;
         }
 
         // lights and predator vehicles do not collide
-        if ((ent2->get_true_type() == kPredator && ent1->get_true_type() == kLight) ||
-            (ent2->get_true_type() == kLight && ent1->get_true_type() == kPredator)) {
+        if ((ent2->get_true_type() == kPredator
+        && ent1->get_true_type() == kLight) ||
+            (ent2->get_true_type() == kLight &&
+             ent1->get_true_type() == kPredator)) {
           continue;
         }
 

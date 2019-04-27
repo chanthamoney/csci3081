@@ -48,9 +48,6 @@ NAMESPACE_BEGIN(csci3081);
  *
  */
 
- // TODO: write get real type in arena_entity
- // TODO: write get type in sense entity
-
 class ArenaEntity {
  public:
   /**
@@ -217,4 +214,4 @@ class ArenaEntity {
 
 NAMESPACE_END(csci3081);
 
-#endif /* SRC_ARENA_ENTITY_H_ */
+#endif  // SRC_ARENA_ENTITY_H_

@@ -110,7 +110,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   std::vector<Pose> get_light_sensors();
 
-  void set_light_sensors( std::vector<Pose> light_sens) {
+  void set_light_sensors(std::vector<Pose> light_sens) {
     light_sensors_ = light_sens;
   }
 
@@ -129,13 +129,27 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    */
   void LoadFromObject(json_object* entity_config) override;
 
-  void set_no_disguise(bool disguiseBool) { noDisguise = disguiseBool; }
-  void set_bv_left_sensor_reading(double bv_ls) { bv_left_sensor_reading = bv_ls; }
-  void set_bv_right_sensor_reading(double bv_rs) {bv_right_sensor_reading = bv_rs;}
-  void set_light_left_sensor_reading(double l_ls) { light_left_sensor_reading = l_ls; }
-  void set_light_right_sensor_reading(double l_rs) {light_right_sensor_reading = l_rs;}
-  void set_food_left_sensor_reading(double f_ls) { food_left_sensor_reading = f_ls; }
-  void set_food_right_sensor_reading(double f_rs) { food_right_sensor_reading = f_rs;}
+  void set_no_disguise(bool disguiseBool) {
+    noDisguise = disguiseBool;
+  }
+  void set_bv_left_sensor_reading(double bv_ls) {
+    bv_left_sensor_reading = bv_ls;
+  }
+  void set_bv_right_sensor_reading(double bv_rs) {
+    bv_right_sensor_reading = bv_rs;
+  }
+  void set_light_left_sensor_reading(double l_ls) {
+    light_left_sensor_reading = l_ls;
+  }
+  void set_light_right_sensor_reading(double l_rs) {
+    light_right_sensor_reading = l_rs;
+  }
+  void set_food_left_sensor_reading(double f_ls) {
+    food_left_sensor_reading = f_ls;
+  }
+  void set_food_right_sensor_reading(double f_rs) {
+    food_right_sensor_reading = f_rs;
+  }
   /**
    * @brief Get the bv_behavior.
    *

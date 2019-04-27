@@ -1,5 +1,10 @@
-#ifndef FOOD_DECORATOR_H_
-#define FOOD_DECORATOR_H_
+/**
+ * @file food_decorator.h
+ *
+ * @copyright 2017 3081 Staff, All rights reserved.
+ */
+#ifndef SRC_FOOD_DECORATOR_H_
+#define SRC_FOOD_DECORATOR_H_
 
 #include <iostream>
 #include <string>
@@ -12,15 +17,11 @@ NAMESPACE_BEGIN(csci3081);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+class Predator;
 class FoodDecorator : public Food {
-  public:
+ public:
     FoodDecorator() {}
-    FoodDecorator(Predator *predator) : predator_(predator) {
-       predator->set_color(FOOD_COLOR);
-       predator->set_radius(FOOD_RADIUS);
-       // predator->set_mobility(false);
-       // predator->set_speed(0);
-     }
+    explicit FoodDecorator(Predator *predator);
 
     ~FoodDecorator() {}
 
@@ -37,28 +38,16 @@ class FoodDecorator : public Food {
      *
      * @return Name of the entity.
      */
-    std::string get_name() const override { return predator_->get_name(); }
+    std::string get_name() const override;
 
     EntityType get_PredatorType() {
       return kPredator;
     }
 
-
- // /**
- //  * @brief Only thing necessary is to update any subscribered sensors
- //  */
- // void TimestepUpdate(__unused unsigned int dt) override {
- //   predator_->setStarvingTime(predator_->getStarvingTime() + 1);
- //   setStarvingTime(predator_->getStarvingTime());
- //   std::cout << getStarvingTime() << std::endl;
- //   Update();
- // }
-
-
-  private:
+ private:
   Predator* predator_{nullptr};
-  };
+};
 
-  NAMESPACE_END(csci3081);
+NAMESPACE_END(csci3081);
 
-#endif /* FOOD_DECORATOR_H_ */
+#endif  // SRC_FOOD_DECORATOR_H_

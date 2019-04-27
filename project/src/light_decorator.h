@@ -1,5 +1,10 @@
-#ifndef LIGHT_DECORATOR_H_
-#define LIGHT_DECORATOR_H_
+/**
+ * @file light_decorator.h
+ *
+ * @copyright 2017 3081 Staff, All rights reserved.
+ */
+#ifndef SRC_LIGHT_DECORATOR_H_
+#define SRC_LIGHT_DECORATOR_H_
 
 #include <iostream>
 #include <string>
@@ -12,16 +17,11 @@ NAMESPACE_BEGIN(csci3081);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+class Predator;
 class LightDecorator : public Light {
-  public:
+ public:
     LightDecorator() {}
-    LightDecorator(Predator *predator) : predator_(predator) {
-       predator->set_color(LIGHT_COLOR);
-       predator->set_radius(LIGHT_RADIUS);
-       // predator->set_mobility(false);
-       // predator->set_speed(0);
-     }
-
+    explicit LightDecorator(Predator *predator);
     ~LightDecorator() {}
 
     /**
@@ -37,39 +37,18 @@ class LightDecorator : public Light {
      *
      * @return Name of the entity.
      */
-    std::string get_name() const override { return predator_->get_name(); }
+    std::string get_name() const override;
 
     EntityType get_PredatorType() {
       return kPredator;
     }
 
-    void TimestepUpdate(__unused unsigned int dt) override{
-      if (predator_ != NULL) {
-        Light::set_pose(predator_->get_pose());
-        Light::TimestepUpdate(dt);
-        predator_->set_pose(get_pose());
-        //
-        // Pose pose = predator_->get_pose();
-        //
-        // // Movement is always along the heading_angle (i.e. the hypotenuse)
-        // double new_x =
-        //   pose.x + std::cos(pose.theta * M_PI / 180.0) *3;
-        // double new_y =
-        //   pose.y + std::sin(pose.theta * M_PI / 180.0) *3;
-        //
-        // /* Heading angle remaings the same */
-        // pose.x = new_x;
-        // pose.y = new_y;
-        // predator_->set_pose(pose);
-    }
-  }
+    void TimestepUpdate(__unused unsigned int dt) override;
 
-
-
-  private:
+ private:
   Predator* predator_{nullptr};
-  };
+};
 
   NAMESPACE_END(csci3081);
 
-#endif /* FOOD_DECORATOR_H_ */
+#endif  // SRC_LIGHT_DECORATOR_H_

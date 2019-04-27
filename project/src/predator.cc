@@ -16,9 +16,7 @@
 #include "src/love.h"
 #include "src/explore.h"
 #include "src/none.h"
-#include "src/food_decorator.h"
-#include "src/light_decorator.h"
-#include "src/braitenberg_decorator.h"
+
 class SensorLightLove;
 
 /*******************************************************************************
@@ -60,13 +58,13 @@ void Predator::TimestepUpdate(__unused unsigned int dt) {
   }
   // CHOOSING WHAT DIGUISE THE PREDATOR SHOULD WEAR
   // std::cout << "STARVING TIME: " << starving_time_ << std::endl;
-  if(starving_time_ == 150) {
+  if (starving_time_ == 150) {
     getDisguise();
   }
-   if ( starving_time_ == 300) {
+  if (starving_time_ == 300) {
     getDisguise();
   }
-   if (starving_time_ == 450) {
+  if (starving_time_ == 450) {
     getDisguise();
   }
 
@@ -103,8 +101,9 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
   } else if (entity.get_type() == kPredator) {
     if (entity.get_id() != this->get_id()) {
       closest_entity_ = &closest_pred_entity_;
-    } // to assert that the entity is a kBraitenberg and if its digused as kBraitenberg it shouldn't move
-  } else if (entity.get_type() == kBraitenberg && entity.get_true_type() != kPredator) {
+    }
+  } else if (entity.get_type() == kBraitenberg &&
+  entity.get_true_type() != kPredator) {
     if (!entity.isDead()) {
       closest_entity_ = &closest_bv_entity_;
     }
@@ -131,17 +130,14 @@ void Predator::SenseEntity(const ArenaEntity& entity) {
 }
 
 void Predator::Update() {
-
   WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
   WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
-
   if (isDead()) {
        bv_wheel_velocity = WheelVelocity(0, 0);
        light_wheel_velocity = WheelVelocity(0, 0);
       return;
   }
   if (!dead_ && disguised_ == kPredator) {
-
   double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
   double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
   bv_behavior_->getWheelVelocity(bv_left_sensor_reading,
@@ -159,17 +155,14 @@ void Predator::Update() {
     (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
     (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
     defaultSpeed_);
-  }
-  // If we are digusied as light or food just use timestep update (immobile)
-  else if (disguised_ == kFood) {
+  } else if (disguised_ == kFood) {
+    // If we are digusied as light or food just use timestep update (immobile)
     wheel_velocity_ = WheelVelocity(0, 0, 0);
     disguisedPredator_->TimestepUpdate(1);
-  }
-  else if (disguised_ == kLight) {
+  } else if (disguised_ == kLight) {
     disguisedPredator_->TimestepUpdate(1);
-  }
-  // If we are disguised as bv call update and do bv's update
-  else {
+  } else {
+    // If we are disguised as bv call update and do bv's update
     // static_cast<BraitenbergVehicle*>(disguisedPredator_)->Update();
     disguisedPredator_->TimestepUpdate(1);
   //  disguisedPredator_->TimestepUpdate(1);
@@ -238,18 +231,9 @@ void Predator::Die() {
   set_radius(DEFAULT_RADIUS);
 }
 
-
-// void Predator::unwrapPredator() {
-//   disguisedPredator_ = nullptr;
-//   disguised_ = kPredator;
-//   set_color(PREDATOR_COLOR);
-// }
-
 void Predator::ConsumeBV() {
   starving_time_ = 0;
-  //unwrap predator
-  if(disguisedPredator_ != nullptr) {
-    //  unwrapPredator();
+  if (disguisedPredator_ != nullptr) {
     delete disguisedPredator_;
     disguisedPredator_ = nullptr;
     disguised_ = kPredator;
@@ -259,51 +243,42 @@ void Predator::ConsumeBV() {
     possibleDisguised[2] = false;
     set_radius(DEFAULT_RADIUS);
   }
-
 }
-// TODO:
-// bool array to tell if I was a diguised. Index 0 is food, 1 is light, 2 is bv.
-// bool possibleDisguised[3] = {false};
 
 void Predator::getDisguise() {
-  int randomNumber = random_num(0, 3); //  get number between 0 and 2
-  while(possibleDisguised[randomNumber]) {
+  int randomNumber = random_num(0, 3);
+  while (possibleDisguised[randomNumber]) {
       randomNumber = random_num(0, 3);
-  } //while we haven't been this disguised
-  if(randomNumber == 0) {
+  }
+  if (randomNumber == 0) {
     FoodDecorator * FoodPredator = new FoodDecorator(this);
     disguised_ = kFood;
     possibleDisguised[0] = true;
-    if(disguisedPredator_ != nullptr) {
+    if (disguisedPredator_ != nullptr) {
       delete disguisedPredator_;
       disguisedPredator_ = FoodPredator;
-    }
-    else {
+    } else {
       disguisedPredator_ = FoodPredator;
     }
-  }
-  else if (randomNumber == 1) {
+  } else if (randomNumber == 1) {
     LightDecorator * LightPredator = new LightDecorator(this);
     disguised_ = kLight;
     possibleDisguised[1] = true;
-    if(disguisedPredator_ != nullptr) {
+    if (disguisedPredator_ != nullptr) {
       delete disguisedPredator_;
       disguisedPredator_ = LightPredator;
-    }
-    else {
+    } else {
         disguisedPredator_ = LightPredator;
     }
-  }
-  else {
+  } else {
     //  random number is 3
     BvDecorator * BvPredator = new BvDecorator(this);
     disguised_ = kBraitenberg;
     possibleDisguised[2] = true;
-    if(disguisedPredator_ != nullptr) {
+    if (disguisedPredator_ != nullptr) {
       delete disguisedPredator_;
       disguisedPredator_ = BvPredator;
-    }
-    else{
+    } else {
       disguisedPredator_ = BvPredator;
     }
   }
