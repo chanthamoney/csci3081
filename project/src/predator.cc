@@ -53,6 +53,7 @@ Predator::Predator() :
 
 void Predator::TimestepUpdate(__unused unsigned int dt) {
   starving_time_++;
+
   // Checking if the predator is dead
   if (!isDead() && disguised_ == kFood) {
     Update();
@@ -61,7 +62,7 @@ void Predator::TimestepUpdate(__unused unsigned int dt) {
 
   // CHOOSING WHAT DIGUISE THE PREDATOR SHOULD WEAR
   std::cout << "STARVING TIME: " << starving_time_ << std::endl;
-  if(starving_time_ == 19) {
+  if(starving_time_ == 150) {
     getDisguise();
   }
    if ( starving_time_ == 300) {
@@ -167,7 +168,7 @@ void Predator::Update() {
     disguisedPredator_->TimestepUpdate(1);
   }
   else if (disguised_ == kLight) {
-    disguisedPredator_->Update();
+    disguisedPredator_->TimestepUpdate(1);
   }
   // If we are disguised as bv call update and do bv's update
   else {
@@ -272,38 +273,41 @@ void Predator::getDisguise() {
       randomNumber = random_num(0, 3);
   } //while we haven't been this disguised
   if(randomNumber == 0) {
-    // FoodDecorator * FoodPredator = new FoodDecorator(this);
-    // disguisedPredator_ = FoodPredator;
-    // disguised_ = kFood;
-    // BvDecorator * BvPredator = new BvDecorator(this);
-    // disguisedPredator_ = BvPredator;
-    // disguised_ = kBraitenberg;
-
-    LightDecorator * LightPredator = new LightDecorator(this);
-    disguisedPredator_ = LightPredator;
-    disguised_ = kLight;
+    FoodDecorator * FoodPredator = new FoodDecorator(this);
+    disguised_ = kFood;
     possibleDisguised[0] = true;
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = FoodPredator;
+    }
+    else {
+      disguisedPredator_ = FoodPredator;
+    }
   }
-  else if ( randomNumber == 1) {
+  else if (randomNumber == 1) {
     LightDecorator * LightPredator = new LightDecorator(this);
-    disguisedPredator_ = LightPredator;
     disguised_ = kLight;
-    // BvDecorator * BvPredator = new BvDecorator(this);
-    // disguisedPredator_ = BvPredator;
-    // disguised_ = kBraitenberg;
     possibleDisguised[1] = true;
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = LightPredator;
+    }
+    else {
+        disguisedPredator_ = LightPredator;
+    }
   }
   else {
     //  random number is 3
-    // BvDecorator * BvPredator = new BvDecorator(this);
-    // disguisedPredator_ = BvPredator;
-    // disguised_ = kBraitenberg;
+    BvDecorator * BvPredator = new BvDecorator(this);
+    disguised_ = kBraitenberg;
     possibleDisguised[2] = true;
-
-    LightDecorator * LightPredator = new LightDecorator(this);
-    disguisedPredator_ = LightPredator;
-    disguised_ = kLight;
-
+    if(disguisedPredator_ != nullptr) {
+      delete disguisedPredator_;
+      disguisedPredator_ = BvPredator;
+    }
+    else{
+      disguisedPredator_ = BvPredator;
+    }
   }
 }
 

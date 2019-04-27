@@ -43,34 +43,27 @@ class LightDecorator : public Light {
       return kPredator;
     }
 
-    void Update() override{
+    void TimestepUpdate(__unused unsigned int dt) override{
       if (predator_ != NULL) {
-        Light::set_pose(predator_->get_pose());
-        Light::Update();
-      // Pose pose = predator_->get_pose();
-      //
-      // // Movement is always along the heading_angle (i.e. the hypotenuse)
-      // double new_x =
-      //   pose.x + std::cos(pose.theta * M_PI / 180.0) *3;
-      // double new_y =
-      //   pose.y + std::sin(pose.theta * M_PI / 180.0) *3;
-      //
-      // /* Heading angle remaings the same */
-      // pose.x = new_x;
-      // pose.y = new_y;
-      // predator_->set_pose(pose);
+        // Light::set_pose(predator_->get_pose());
+        // Light::TimestepUpdate(dt);
+        // predator_->set_pose(get_pose());
+
+        Pose pose = predator_->get_pose();
+
+        // Movement is always along the heading_angle (i.e. the hypotenuse)
+        double new_x =
+          pose.x + std::cos(pose.theta * M_PI / 180.0) *3;
+        double new_y =
+          pose.y + std::sin(pose.theta * M_PI / 180.0) *3;
+
+        /* Heading angle remaings the same */
+        pose.x = new_x;
+        pose.y = new_y;
+        predator_->set_pose(pose);
     }
   }
 
- // /**
- //  * @brief Only thing necessary is to update any subscribered sensors
- //  */
- // void TimestepUpdate(__unused unsigned int dt) override {
- //   predator_->setStarvingTime(predator_->getStarvingTime() + 1);
- //   setStarvingTime(predator_->getStarvingTime());
- //   std::cout << getStarvingTime() << std::endl;
- //   Update();
- // }
 
 
   private:

@@ -179,12 +179,20 @@ void Arena::UpdateEntitiesTimestep() {
         // if a predator collides with bv, call kill on bv
         if (ent1->get_true_type() == kBraitenberg &&
             ent2->get_true_type() == kPredator) {
-          static_cast<BraitenbergVehicle*>(ent1)->Die();
-          static_cast<Predator*>(ent2)->ConsumeBV();
+          if ((ent2->isDead())) {
+            continue;
+          } else {
+            static_cast<BraitenbergVehicle*>(ent1)->Die();
+            static_cast<Predator*>(ent2)->ConsumeBV();
+          }
         } else if (ent1->get_true_type() == kPredator &&
                    ent2->get_true_type() == kBraitenberg) {
-          static_cast<BraitenbergVehicle*>(ent2)->Die();
-          static_cast<Predator*>(ent1)->ConsumeBV();
+         if ((ent1->isDead())) {
+           continue;
+         } else {
+           static_cast<BraitenbergVehicle*>(ent2)->Die();
+           static_cast<Predator*>(ent1)->ConsumeBV();
+         }
         }
 
         // nothing collides with food, but bv's call consume() if they do

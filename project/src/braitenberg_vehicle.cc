@@ -93,7 +93,7 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
     // std::cout << " I SEE FOOD " << std::endl;
     closest_entity_ = &closest_food_entity_;
   } else if (entity.get_type() == kBraitenberg) {
-    if (entity.get_id() != this->get_id() && !entity.isDead()) {
+    if (entity.get_id() != this->get_id() && !entity.isDead() && (entity.get_true_type() != kPredator)) {
       closest_entity_ = &closest_bv_entity_;
     }
   }
@@ -119,12 +119,15 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
 }
 
 void BraitenbergVehicle::Update() {
+
+
   WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
   WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
   WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
   Behaviors* dynamic_food_behavior;
   Behaviors* dynamic_bv_behavior;
   Behaviors* dynamic_light_behavior;
+
 
 
 
@@ -164,21 +167,29 @@ void BraitenbergVehicle::Update() {
     dynamic_bv_behavior = bv_behavior_;
     dynamic_light_behavior = light_behavior_;
   }
+  // if not the predator is in disugse get new sensor readings
+  if(noDisguise) {
+    bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
+    bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
+    light_left_sensor_reading =
+     get_sensor_reading_left(closest_light_entity_);
+    light_right_sensor_reading =
+     get_sensor_reading_right(closest_light_entity_);
+    std::cout << " Left non predator sensor in with no BV: " << bv_left_sensor_reading << std::endl;
+    food_left_sensor_reading =
+      get_sensor_reading_left(closest_food_entity_);
+    food_right_sensor_reading =
+      get_sensor_reading_right(closest_food_entity_);
+  }
 
-
-  double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
-  double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
   dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,
                                  bv_right_sensor_reading,
                                  defaultSpeed_,
                                  &bv_wheel_velocity);
 
-  std::cout << " Light sensor in BV: " << bv_left_sensor_reading << std::endl;
+  // std::cout << " Light sensor in BV: " << bv_left_sensor_reading << std::endl;
 
-  double light_left_sensor_reading =
-   get_sensor_reading_left(closest_light_entity_);
-  double light_right_sensor_reading =
-   get_sensor_reading_right(closest_light_entity_);
+
 
   dynamic_light_behavior->getWheelVelocity(light_left_sensor_reading,
                                     light_right_sensor_reading,
@@ -186,10 +197,7 @@ void BraitenbergVehicle::Update() {
                                     &light_wheel_velocity);
 
 
-  double food_left_sensor_reading =
-    get_sensor_reading_left(closest_food_entity_);
-  double food_right_sensor_reading =
-    get_sensor_reading_right(closest_food_entity_);
+
 
   dynamic_food_behavior->getWheelVelocity(food_left_sensor_reading,
                                    food_right_sensor_reading,

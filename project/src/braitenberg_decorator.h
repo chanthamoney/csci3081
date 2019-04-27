@@ -46,124 +46,101 @@ class BvDecorator : public BraitenbergVehicle {
 
     void Update() override {
       if ( predator_ != NULL) {
-        WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
-        WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
-        WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
+        BraitenbergVehicle::set_pose(predator_->get_pose());
 
-        // TODO: BV
-        double light_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_light_entity());
-        double light_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_light_entity());
+                  if(dynamic_food_behavior_ == nullptr){
+                    dynamic_food_behavior_ = getRandomBehavior();
+                    // dynamic_food_behavior_ = new None();
+                  }
+                  if(dynamic_light_behavior_ == nullptr) {
+                    dynamic_light_behavior_ = getRandomBehavior();
+                    // dynamic_light_behavior_ = new None();
+                  }
 
-        double food_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_food_entity());
-        double food_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_food_entity());
+                  dynamic_bv_behavior_ = new Aggressive();
+                  set_bv_behavior(dynamic_bv_behavior_);
+                  set_food_behavior(dynamic_food_behavior_);
+                  set_light_behavior(dynamic_light_behavior_);
+                  set_no_disguise(false);
+                  BraitenbergVehicle::UpdateLightSensors();
+                   //
+                   double pred_light_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_light_entity());
+                   double pred_light_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_light_entity());
 
-        double bv_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_bv_entity());
-        double bv_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_bv_entity());
-        std::cout << "BV LEFT " << bv_left_sensor_reading << std::endl;
-        std::cout << "BV RIGHT " << bv_right_sensor_reading << std::endl;
+                   double pred_food_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_food_entity());
+                   double pred_food_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_food_entity());
+
+                   double pred_bv_left_sensor_reading = predator_->get_sensor_reading_left(predator_->get_closest_bv_entity());
+                   double pred_bv_right_sensor_reading = predator_->get_sensor_reading_right(predator_->get_closest_bv_entity());
+                   // std::cout << "LEFT BV SENSOR DEC" << pred_bv_left_sensor_reading << std::endl;
+                   // std::cout << "RIGHT BV SENSOR " << pred_bv_right_sensor_reading << std::endl;
+                   // std::cout << "LEFT FOOD SENSOR " << pred_food_left_sensor_reading << std::endl;
+                   // std::cout << "RIGHT FOOD SENSOR " << pred_food_right_sensor_reading << std::endl;
+                   // std::cout << "LEFT LIGHT SENSOR " << pred_light_left_sensor_reading << std::endl;
+                   // std::cout << "RIGHT LIGHT SENSOR " << pred_light_right_sensor_reading << std::endl;
+                   set_bv_left_sensor_reading(pred_bv_left_sensor_reading);
+                   set_bv_right_sensor_reading(pred_bv_right_sensor_reading);
+                   set_food_left_sensor_reading(pred_food_left_sensor_reading);
+                   set_food_right_sensor_reading(pred_food_right_sensor_reading);
+                   set_light_left_sensor_reading(pred_light_left_sensor_reading);
+                   set_light_right_sensor_reading(pred_light_right_sensor_reading);
+
+                   if (dynamic_bv_behavior_->getBehaviorType() == "Aggressive") {
+                     std::cout << "I am angry bv" << std::endl;
+                   }
+
+                   if (dynamic_food_behavior_->getBehaviorType() == "Coward") {
+                     std::cout << "I am coward food" << std::endl;
+                   }
+
+                   if (dynamic_food_behavior_->getBehaviorType() == "Aggressive") {
+                     std::cout << "I am angry food" << std::endl;
+                   }
+
+                   if (dynamic_food_behavior_->getBehaviorType() == "Explore") {
+                     std::cout << "I am explore food" << std::endl;
+
+                   }
+
+                  if (dynamic_food_behavior_->getBehaviorType() == "Love") {
+                    std::cout << "I am Love food" << std::endl;
+
+                  }
+
+                 if (dynamic_food_behavior_->getBehaviorType() == "None") {
+                   std::cout << "I am none food" << std::endl;
+                 }
+
+                 if (dynamic_light_behavior_->getBehaviorType() == "Coward") {
+                   std::cout << "I am coward light" << std::endl;
+                 }
+
+                 if (dynamic_light_behavior_->getBehaviorType() == "Aggressive") {
+                   std::cout << "I am angry light" << std::endl;
+                 }
+
+                 if (dynamic_light_behavior_->getBehaviorType() == "Explore") {
+                   std::cout << "I am explore light" << std::endl;
+
+                 }
+
+                if (dynamic_light_behavior_->getBehaviorType() == "Love") {
+                  std::cout << "I am Love light" << std::endl;
+
+                }
+
+               if (dynamic_light_behavior_->getBehaviorType() == "None") {
+                 std::cout << "I am none light" << std::endl;
+               }
 
 
-        if(dynamic_food_behavior_ == nullptr){
-          dynamic_food_behavior_ = getRandomBehavior();
-        }
-        if(dynamic_light_behavior_ == nullptr) {
-          dynamic_light_behavior_ = getRandomBehavior();
-        }
 
+        BraitenbergVehicle::Update();
+        predator_->set_color(BraitenbergVehicle::get_color());
+        predator_->set_wv(BraitenbergVehicle::get_wv()); // TODO: ERROR I THINK IS IT STAYS ON THE LAST VELOCITY THAT IT HAD?
+        predator_->set_pose(get_pose());
 
-        Behaviors * dynamic_bv_behavior = new Aggressive();
-
-        if (dynamic_food_behavior_->getBehaviorType() == "Coward") {
-          std::cout << "I am coward" << std::endl;
-        }
-
-        if (dynamic_food_behavior_->getBehaviorType() == "Aggressive") {
-          std::cout << "I am angry" << std::endl;
-        }
-
-        if (dynamic_bv_behavior->getBehaviorType() == "Aggressive") {
-          std::cout << "I am bv aggressive" << std::endl;
-
-        }
-        // Behaviors * dynamic_light_behavior = randomBehaviorBv();
-
-        dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,
-                                               bv_right_sensor_reading,
-                                               5,
-                                               &bv_wheel_velocity);
-        dynamic_light_behavior_->getWheelVelocity(light_left_sensor_reading,
-                                                 light_right_sensor_reading,
-                                                 5,
-                                                 &light_wheel_velocity);
-        dynamic_food_behavior_->getWheelVelocity(food_left_sensor_reading,
-                                              food_right_sensor_reading,
-                                              5,
-                                              &food_wheel_velocity);
-
-
-      // FOOD, LIGHT, BV
-      // NNN, NNS, NSN, NSS, SNN, SNS, SSS
-      bool light_behavior_set, food_behavior_set, bv_behavior_set;
-      light_behavior_set = dynamic_light_behavior_->getBehaviorType() != "None";
-      food_behavior_set = dynamic_food_behavior_->getBehaviorType() != "None";
-      bv_behavior_set = dynamic_bv_behavior->getBehaviorType() != "None";
-
-      if (!light_behavior_set && food_behavior_set) {
-        predator_->set_color({0, 0, 255});
-
-        if (bv_behavior_set) {
-        predator_->set_wv(WheelVelocity(
-            (bv_wheel_velocity.left + food_wheel_velocity.left)/2,
-            (bv_wheel_velocity.right + food_wheel_velocity.right)/2,
-            5));
-        } else {
-          predator_->set_wv(WheelVelocity(
-            food_wheel_velocity.left, food_wheel_velocity.right, 5));
-        }
-        // if the BV has the light sensor on but not the food sensor
-      } else if (light_behavior_set && !food_behavior_set) {
-        predator_->set_color({255, 204, 51});
-
-        if (bv_behavior_set) {
-          predator_->set_wv(WheelVelocity(
-            (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
-            (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
-            5));
-        } else {
-        predator_->set_wv(WheelVelocity(
-            light_wheel_velocity.left, light_wheel_velocity.right, 5));
-        }
-        // if the BV has the light sensor and food sensor on
-      } else if (light_behavior_set && food_behavior_set) {
-        predator_->set_color({122, 0, 25});
-
-        if (bv_behavior_set) {
-          predator_->set_wv(WheelVelocity(
-            (light_wheel_velocity.left + food_wheel_velocity.left +
-               bv_wheel_velocity.left)/3,
-            (light_wheel_velocity.right + food_wheel_velocity.right +
-               bv_wheel_velocity.right)/3,
-            5));
-        } else {
-          predator_->set_wv(WheelVelocity(
-            (light_wheel_velocity.left + food_wheel_velocity.left)/2,
-            (light_wheel_velocity.right + food_wheel_velocity.right)/2,
-            5));
-        }
-        // if the BV has no sensors on or just the robot behavior sensor
-      } else {
-        predator_->set_color({122, 0, 25});
-
-        if (bv_behavior_set) {
-          predator_->set_wv(WheelVelocity(bv_wheel_velocity.left,
-            bv_wheel_velocity.right, 5));
-        } else {
-          predator_->set_wv(WheelVelocity(0, 0, 5));
-        }
       }
-
-     }
-
   }
 
   Behaviors * getRandomBehavior() {
@@ -194,6 +171,7 @@ class BvDecorator : public BraitenbergVehicle {
   Predator* predator_{nullptr};
   Behaviors * dynamic_food_behavior_{nullptr};
   Behaviors * dynamic_light_behavior_{nullptr};
+  Behaviors * dynamic_bv_behavior_{nullptr};
   };
 
   NAMESPACE_END(csci3081);
