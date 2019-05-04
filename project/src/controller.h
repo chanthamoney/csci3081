@@ -13,6 +13,10 @@
 #include <nanogui/nanogui.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <sstream>
 
 #include "src/arena.h"
 #include "src/common.h"
@@ -69,6 +73,23 @@ class Controller {
 
   Controller &operator=(const Controller &other) = delete;
   // Controller (const Controller &control) = delete;
+
+
+  // Add quotes around the string
+  std::string add_quotes(std::string word);
+
+
+  // To determine if quotes should be put around the parsed word
+  inline bool in_number_set(std::string word);
+
+
+bool checkCSV(std::string filename);
+
+bool checkJSON(std::string filename);
+
+std::string adapterCSV(char **argv);
+
+
  private:
   double last_dt{0};
   Arena* arena_{nullptr};
