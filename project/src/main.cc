@@ -16,6 +16,10 @@
  * Non-Member Functions
  ******************************************************************************/
 int main(__unused int argc, __unused char **argv) {
+  if (argc > 4 || argc == 3 || argc < 2) {
+    std::cout << "Incorrect Command Line Arguments" << std::endl;
+    return 1;
+  }
   // The controller creates both the arena and viewer
   auto *controller = new csci3081::Controller(argc, argv);
 
