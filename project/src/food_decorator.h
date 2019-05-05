@@ -18,13 +18,30 @@ NAMESPACE_BEGIN(csci3081);
  * Class Definitions
  ******************************************************************************/
 class Predator;
+/**
+ * @brief A Food decorator class
+ *
+ * The class is used to decorate a predator with Food object
+ * functionality by wrapping the predator in this decorator
+ *
+ */
 class FoodDecorator : public Food {
  public:
+   /**
+    * @brief Default constructor.
+    */
     FoodDecorator() {}
+    /**
+     * @brief FoodDecorator's constructor given a pointer to a Predator object
+     *
+     * @param[in] predator The Predator pointer that is going to be decorated
+     *
+     */
     explicit FoodDecorator(Predator *predator);
-
+    /**
+     * @brief FoodDecorator's destructor. `delete` FoodDecorator created.
+     */
     ~FoodDecorator() {}
-
     /**
     *  @brief Deleting the copy constructor.
     */
@@ -40,11 +57,10 @@ class FoodDecorator : public Food {
      */
     std::string get_name() const override;
 
-    EntityType get_PredatorType() {
-      return kPredator;
-    }
-
  private:
+  /**
+   * @brief A pointer to the predator that is decorated
+   */
   Predator* predator_{nullptr};
 };
 

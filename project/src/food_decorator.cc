@@ -19,11 +19,6 @@ FoodDecorator::FoodDecorator(Predator *predator) : predator_(predator) {
        predator->set_radius(FOOD_RADIUS);
 }
 
-/**
- * @brief Get the name of the underlying arena entity
- *
- * @return Name of the entity.
- */
 std::string FoodDecorator::get_name() const { return predator_->get_name(); }
 
 NAMESPACE_END(csci3081);

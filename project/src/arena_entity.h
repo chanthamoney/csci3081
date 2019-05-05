@@ -87,8 +87,8 @@ class ArenaEntity {
    */
   virtual std::string get_name() const = 0;
 
-
   const Pose &get_pose() const { return pose_; }
+
   void set_pose(const Pose &pose) { pose_ = pose; }
 
   /**

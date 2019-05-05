@@ -20,11 +20,6 @@ BvDecorator::BvDecorator(Predator *predator) : predator_(predator) {
        predator->set_radius(DEFAULT_RADIUS);
 }
 
-/**
- * @brief Get the name of the underlying arena entity
- *
- * @return Name of the entity.
- */
 std::string BvDecorator::get_name() const {
   return predator_->get_name();
 }
@@ -82,6 +77,26 @@ void BvDecorator::TimestepUpdate(__unused unsigned int dt)  {
     predator_->set_wv(BraitenbergVehicle::get_wv());
     predator_->set_pose(get_pose());
   }
+}
+
+Behaviors * BvDecorator::getRandomBehavior() {
+  // std::cout <<"In Random Behavior" << std::endl;
+  int randomNumber = random_num(0, 5);
+  Behaviors * newBehavior;
+  if (randomNumber == 0) {
+    // std::cout <<"In Random Behavior" << std::endl;
+    newBehavior = new Aggressive();
+  } else if (randomNumber == 1) {
+    newBehavior = new Coward();
+  } else if (randomNumber == 2) {
+    newBehavior = new Explore();
+  } else if (randomNumber == 3) {
+    newBehavior = new Love();
+  } else {
+    // std::cout <<"In Random Behavior" << std::endl;
+    newBehavior = new None();
+  }
+  return newBehavior;
 }
 
 NAMESPACE_END(csci3081);
