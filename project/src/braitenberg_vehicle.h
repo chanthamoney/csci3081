@@ -46,10 +46,6 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   BraitenbergVehicle();
 
   /**
-   * Deleting the copy assignment and copy constructor. required now with
-   *  inclusion of references to sensors and motion_handler/behavior
-   */
-  /**
   *  @brief Deleting the copy constructor.
   */
   BraitenbergVehicle(const BraitenbergVehicle & rhs) = delete;
@@ -109,11 +105,14 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @returns Returns a const vector<pose>
    */
   std::vector<Pose> get_light_sensors();
-
+  /**
+   * @brief Set the light sensorsfor bv.
+   *
+   * @param[in] light_sens The new light sensors
+   */
   void set_light_sensors(std::vector<Pose> light_sens) {
     light_sensors_ = light_sens;
   }
-
   /**
    * @brief Update the position and direction of the light sensor
    * To match the direction that the BraitenbergVehicle is facing.
@@ -128,25 +127,60 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @param[in] entity_config The json_object pointer to the configuration that for the BraitenbergVehicle
    */
   void LoadFromObject(json_object* entity_config) override;
-
+  /**
+   * @brief Set a flag to know if the BraitenbergVehicle is a disguised Predator
+   *
+   * @param[in] disguiseBool The boolean value of whether the BraitenbergVehicle is
+   * disguised or not
+   */
   void set_no_disguise(bool disguiseBool) {
     noDisguise = disguiseBool;
   }
+  /**
+   * @brief Set the left sensor reading for sensing other BraitenbergVehicles
+   *
+   * @param[in] bv_ls The new left BraitenbergVehicle sensor value.
+   */
   void set_bv_left_sensor_reading(double bv_ls) {
     bv_left_sensor_reading = bv_ls;
   }
+  /**
+   * @brief Set the right sensor reading for sensing other BraitenbergVehicles
+   *
+   * @param[in] bv_rs The new right BraitenbergVehicle sensor value.
+   */
   void set_bv_right_sensor_reading(double bv_rs) {
     bv_right_sensor_reading = bv_rs;
   }
+  /**
+   * @brief Set the left sensor reading for sensing Light entities
+   *
+   * @param[in] l_ls The new left Light sensor value.
+   */
   void set_light_left_sensor_reading(double l_ls) {
     light_left_sensor_reading = l_ls;
   }
+  /**
+   * @brief Set the right sensor reading for sensing Light entities
+   *
+   * @param[in] l_rs The new right Light sensor value.
+   */
   void set_light_right_sensor_reading(double l_rs) {
     light_right_sensor_reading = l_rs;
   }
+  /**
+   * @brief Set the left sensor reading for sensing Food entities
+   *
+   * @param[in] f_ls The new left Food sensor value.
+   */
   void set_food_left_sensor_reading(double f_ls) {
     food_left_sensor_reading = f_ls;
   }
+  /**
+   * @brief Set the right sensor reading for sensing Food entities
+   *
+   * @param[in] f_rs The new right Food sensor value.
+   */
   void set_food_right_sensor_reading(double f_rs) {
     food_right_sensor_reading = f_rs;
   }
@@ -239,6 +273,10 @@ class BraitenbergVehicle : public ArenaMobileEntity {
   /**
    * @brief Sets the hungry_time_ of the braitenberg vehicle so it knows when to
    * changes its behavior to go hunt for food because of starvation
+   *
+   * @param[in] ht The new hungry_time_
+   *
+   * @result hungry_time_ is now set to ht
    */
   void set_hungry_time(int ht) {
     hungry_time_ = ht;
@@ -248,7 +286,7 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * predator touches the braitenberg vehicle it will die
    * The color will become white and opacity will be somewhat transparent
    * The behaviors towards other braitenberg vehicles, food, and light will
-   * become noneAdds
+   * become none
    */
   void Die();
   /**
@@ -261,9 +299,21 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * braitenberg vehicles.
    */
   static int count;
-
+  /**
+   * @brief Get the true type of arena entity
+   *
+   * For example, if the diguised predator is diguised as a BraitenbergVehicle
+   * entity get_true_type() will return kPredator while
+   * get_type() will return kBraitenberg
+   *
+   * @return The true type of the entity.
+   */
   EntityType get_true_type() const { return get_type(); }
-
+  /**
+   * @brief Get the wheel_velocity of the entity
+   *
+   * @return the wheel_velocity
+   */
   WheelVelocity get_wv() {return wheel_velocity_; }
 
  private:
@@ -324,14 +374,33 @@ class BraitenbergVehicle : public ArenaMobileEntity {
    * @brief A pointer to an Observer of Wheel velocity pointers
    */
   Observer<std::vector<WheelVelocity*>>* observer_{nullptr};
-
+  /**
+   * @brief The left sensor reading for sensing other BraitenbergVehicle entity
+   */
   double bv_left_sensor_reading = 0.0;
+  /**
+   * @brief The right sensor reading for sensing other BraitenbergVehicle entity
+   */
   double bv_right_sensor_reading = 0.0;
+  /**
+   * @brief The left sensor reading for sensing Light entity
+   */
   double light_left_sensor_reading = 0.0;
+  /**
+   * @brief The right sensor reading for sensing Light entity
+   */
   double light_right_sensor_reading = 0.0;
+  /**
+   * @brief The left sensor reading for sensing Food entity
+   */
   double food_left_sensor_reading = 0.0;
+  /**
+   * @brief The right sensor reading for sensing Food entity
+   */
   double food_right_sensor_reading = 0.0;
-
+  /**
+   * @brief The flag for telling whether the entity is diguised or not
+   */
   bool noDisguise = true;
 };
 

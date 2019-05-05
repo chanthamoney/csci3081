@@ -76,19 +76,47 @@ class Controller {
 
 
   // Add quotes around the string
+  /**
+   * @brief Add quotes around the to_string
+   *
+   * @param[in] word The word to add quotes around
+   */
   std::string add_quotes(std::string word);
 
 
   // To determine if quotes should be put around the parsed word
+  /**
+   * @brief To determine if quotes should be put around the parsed word
+   *
+   * @param[in] word The word to determine add quotes around
+   */
   inline bool in_number_set(std::string word);
-
-
-bool checkCSV(std::string filename);
-
-bool checkJSON(std::string filename);
-
-std::string adapterCSV(char **argv);
-
+  /**
+   * @brief To determine if the file passed through is a CSV file
+   *
+   * @param[in] filename The name of the file
+   *
+   * @return a boolean value depending on if the filename is a CSV file (true)
+   * or not (false)
+   */
+  bool checkCSV(std::string filename);
+  /**
+   * @brief To determine if the file passed through is a json file
+   *
+   * @param[in] filename The name of the file
+   *
+   * @return a boolean value depending on if the filename is a json file (true)
+   * or not (false)
+   */
+  bool checkJSON(std::string filename);
+  /**
+   * @brief From the CSV file adapts the file and transform it to a json string
+   *
+   * @param[in] argv The arguments passed in
+   *
+   * @return a json string from the CSV file
+   */
+  std::string adapterCSV(char **argv);
 
  private:
   double last_dt{0};

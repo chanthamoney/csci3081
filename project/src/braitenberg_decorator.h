@@ -23,13 +23,30 @@ NAMESPACE_BEGIN(csci3081);
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
-
 class Predator;
+/**
+ * @brief A BraitenbergVehicle decorator class
+ *
+ * The class is used to decorate a predator with BraitenbergVehicle
+ * functionality by wrapping the predator in this decorator
+ *
+ */
 class BvDecorator : public BraitenbergVehicle {
  public:
+   /**
+    * @brief Default constructor.
+    */
     BvDecorator() {}
+    /**
+     * @brief BvDecorator's constructor given a pointer to a Predator object
+     *
+     * @param[in] predator The Predator pointer that is going to be decorated
+     *
+     */
     explicit BvDecorator(Predator *predator);
-
+    /**
+     * @brief BvDecorator's destructor. `delete` BvDecorators created.
+     */
     ~BvDecorator() {}
 
     /**
@@ -46,37 +63,38 @@ class BvDecorator : public BraitenbergVehicle {
      * @return Name of the entity.
      */
     std::string get_name() const override;
-
-    EntityType get_PredatorType() {
-      return kPredator;
-    }
-
+    /**
+     * @brief Update the decorated Predator position and velocity after the
+     * specified duration has passed in order to mimic a BraitenbergVehicle's
+     * movement.
+     *
+     * @param dt The # of timesteps that have elapsed since the last update.
+     */
     void TimestepUpdate(__unused unsigned int dt) override;
-
-    Behaviors * getRandomBehavior() {
-      // std::cout <<"In Random Behavior" << std::endl;
-      int randomNumber = random_num(0, 5);
-      Behaviors * newBehavior;
-      if (randomNumber == 0) {
-        // std::cout <<"In Random Behavior" << std::endl;
-        newBehavior = new Aggressive();
-      } else if (randomNumber == 1) {
-        newBehavior = new Coward();
-      } else if (randomNumber == 2) {
-        newBehavior = new Explore();
-      } else if (randomNumber == 3) {
-        newBehavior = new Love();
-      } else {
-        // std::cout <<"In Random Behavior" << std::endl;
-        newBehavior = new None();
-      }
-      return newBehavior;
-    }
+    /**
+     * @brief Get the random behavior for the decorated Predator
+     *
+     * @return a random Behavior.
+     */
+    Behaviors * getRandomBehavior();
 
  private:
+    /**
+     * @brief A pointer to the predator that is decorated
+     */
     Predator* predator_{nullptr};
+    /**
+     * @brief A pointer to the food behavior of the decorated predator
+     */
     Behaviors * dynamic_food_behavior_{nullptr};
+    /**
+     * @brief A pointer to the light behavior of the decorated predator
+     */
     Behaviors * dynamic_light_behavior_{nullptr};
+    /**
+     * @brief A pointer to the BraitenbergVehicle behavior of the
+     * decorated predator
+     */
     Behaviors * dynamic_bv_behavior_{nullptr};
 };
 

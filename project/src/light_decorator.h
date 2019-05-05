@@ -18,12 +18,29 @@ NAMESPACE_BEGIN(csci3081);
  * Class Definitions
  ******************************************************************************/
 class Predator;
+/**
+ * @brief A Light decorator class
+ *
+ * The class is used to decorate a predator with Light object
+ * functionality by wrapping the predator in this decorator
+ */
 class LightDecorator : public Light {
  public:
+   /**
+    * @brief Default constructor.
+    */
     LightDecorator() {}
+    /**
+     * @brief LightDecorator's constructor given a pointer to a Predator object
+     *
+     * @param[in] predator The Predator pointer that is going to be decorated
+     *
+     */
     explicit LightDecorator(Predator *predator);
+    /**
+     * @brief LightDecorator's destructor. `delete` LightDecorators created.
+     */
     ~LightDecorator() {}
-
     /**
     *  @brief Deleting the copy constructor.
     */
@@ -39,13 +56,18 @@ class LightDecorator : public Light {
      */
     std::string get_name() const override;
 
-    EntityType get_PredatorType() {
-      return kPredator;
-    }
-
+    /**
+     * @brief Update the decorated Predator position and velocity after the specified
+     * duration has passed in order to mimic a Light's movement
+     *
+     * @param dt The # of timesteps that have elapsed since the last update.
+     */
     void TimestepUpdate(__unused unsigned int dt) override;
 
  private:
+  /**
+   * @brief A pointer to the predator that is decorated
+   */
   Predator* predator_{nullptr};
 };
 
