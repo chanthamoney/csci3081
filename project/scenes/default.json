@@ -2,7 +2,5 @@
   "width": 500,
   "height": 500,
   "entities": [
-      {"type": "Braitenberg", "x":270, "y":270, "r":15, "theta": 215, "light_behavior": "None", "food_behavior": "Explore" },
-      {"type": "Food", "x":200, "y":200, "r":20, "theta": 0.0 },
-      {"type": "Light", "x":150, "y":300, "r":25 } ]
+    {"type": "Predator", "x":300, "y":380, "r":15, "theta": 270.0 } ]
 }

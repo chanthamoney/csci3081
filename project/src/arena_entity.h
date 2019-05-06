@@ -47,6 +47,7 @@ NAMESPACE_BEGIN(csci3081);
  * All arena entities are circular.
  *
  */
+
 class ArenaEntity {
  public:
   /**
@@ -86,8 +87,8 @@ class ArenaEntity {
    */
   virtual std::string get_name() const = 0;
 
-
   const Pose &get_pose() const { return pose_; }
+
   void set_pose(const Pose &pose) { pose_ = pose; }
 
   /**
@@ -122,7 +123,10 @@ class ArenaEntity {
 
   void set_radius(double radius) { radius_ = radius; }
 
-  EntityType get_type() const { return type_; }
+  virtual  EntityType get_type() const { return type_; }
+
+  EntityType get_true_type() const { return type_; }
+
   void set_type(EntityType et) { type_ = et; }
 
   int get_id() const { return id_; }
@@ -210,4 +214,4 @@ class ArenaEntity {
 
 NAMESPACE_END(csci3081);
 
-#endif /* SRC_ARENA_ENTITY_H_ */
+#endif  // SRC_ARENA_ENTITY_H_

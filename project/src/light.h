@@ -63,6 +63,8 @@ class Light : public ArenaMobileEntity {
 
   static int count;
 
+  EntityType get_true_type() const { return get_type(); }
+
  private:
   MotionBehaviorDifferential motion_behavior_;
 };

@@ -19,7 +19,9 @@
 #include "src/motion_behavior_differential.h"
 #include "src/wheel_velocity.h"
 #include "src/behaviors.h"
-
+#include "src/food_decorator.h"
+#include "src/light_decorator.h"
+#include "src/braitenberg_decorator.h"
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -179,10 +181,78 @@ class Predator : public ArenaMobileEntity {
    * @result Returns a double type of the velocity
    */
   double get_sensor_reading_right(const ArenaEntity* entity);
-
+  /**
+   * @brief Get the closest BraitenbergVehicle entity
+   *
+   * @result Returns a pointer to the closest BraitenbergVehicle entity
+   */
+  const ArenaEntity * get_closest_bv_entity() { return closest_bv_entity_; }
+  /**
+   * @brief Get the closest Light entity
+   *
+   * @result Returns a pointer to the closest Light entity
+   */
+  const ArenaEntity * get_closest_light_entity() {
+    return closest_light_entity_;
+  }
+  /**
+   * @brief Get the closest Food entity
+   *
+   * @result Returns a pointer to the closest Food entity
+   */
+  const ArenaEntity * get_closest_food_entity() {
+    return closest_food_entity_;
+  }
+  /**
+   * @brief When a Predator "collides" with a BraitenbergVehicle entity
+   * it consumes the BraitenbergVehicle and it's starving_time_ is set back to 0
+   */
+  void ConsumeBV();
+  /**
+   * @brief Get a random decorator to decorate the Predator with and set the
+   * disguisedPredator_ pointer to that newly disguised predator
+   */
+  void getDisguise();
+  /**
+   * @brief Sets the wheel_velocity_ of the predator
+   *
+   * @param[in] wheel_velocity The new wheel_velocity of the Predator
+   *
+   * @result wheel_velocity_ of the predator is set to the wheel_velocity
+   *
+   */
+  void set_wv(WheelVelocity wheel_velocity) { wheel_velocity_ = wheel_velocity;}
+  /**
+   * @brief The count of how many Predator there is. Used to Identify
+   * Predators.
+   */
   static int count;
+  /**
+   * @brief Returns the type of entity the predator
+   * For example if the predator is disguised as a Food, it will return food
+   * @returns The predator's type
+   */
+  EntityType get_type() const override { return disguised_; }
+  /**
+   * @brief Get the true type of arena entity
+   *
+   * For example, if the diguised predator is diguised as a BraitenbergVehicle
+   * entity get_true_type() will return kPredator while
+   * get_type() will return kBraitenberg
+   *
+   * @return The true type of the entity.
+   */
+  EntityType get_true_type() const { return kPredator; }
 
  private:
+   /**
+    * @brief When a Predator starving_time reaches 600 it will die
+    * The color will become white and opacity will be somewhat transparent
+    * The behaviors towards other braitenberg vehicles, food, and light will
+    * become none
+    */
+  void Die();
+
    /**
     * @brief A vector for the pose of the light sensor on the braitenberg_vehicle
     */
@@ -231,6 +301,29 @@ class Predator : public ArenaMobileEntity {
    * @brief The timestepupdates time after it collides
    */
   int collision_time_ = 0;
+  /**
+   * @brief The timestepupdate times before it starves at 600
+   */
+  int starving_time_ = 0;
+
+  // bool array to tell if I was a diguised.
+  // Index 0 is food, 1 is light, 2 is bv.
+  /**
+   * @brief The boolean array to determine what disguised the predator has
+   * decorated itself as
+   *
+   * Index 0 is food, 1 is light, 2 is BraitenbergVehicle
+   *
+   */
+  bool possibleDisguised[3] = {false};
+  /**
+   * @brief A pointer to the disguised predator
+   */
+  ArenaEntity * disguisedPredator_{nullptr};
+  /**
+   * @brief The type that the predator is disguised as
+   */
+  EntityType disguised_{kPredator};
 };
 
 NAMESPACE_END(csci3081);

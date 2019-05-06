@@ -33,7 +33,8 @@
   { 200, 200, 0}
 #define DEFAULT_COLOR \
   { 255, 255, 255 }
-#define DEFAULT_RADIUS 20
+#define DEFAULT_RADIUS 15
+#define DEFAULT_PREDATOR_RADIUS 15
 
 // mobile entity
 #define STARTING_VELOCITY 0.0

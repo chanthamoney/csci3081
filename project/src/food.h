@@ -56,6 +56,7 @@ class Food : public ArenaImmobileEntity {
    * @brief Only thing necessary is to update any subscribered sensors
    */
   void TimestepUpdate(__unused unsigned int dt) override {
+    // std::cout << "HELP ME GOD" << std::endl;
     Update();
   }
   /**
@@ -82,6 +83,9 @@ class Food : public ArenaImmobileEntity {
    * food entities.
    */
   static int count;
+
+  EntityType get_true_type() const { return get_type(); }
+
 
  private:
    /**

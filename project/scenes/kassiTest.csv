@@ -1,0 +1,10 @@
+type,x,y,r,theta,light_behavior,food_behavior
+Braitenberg,120,300,15,270.0,None,Aggressive
+Braitenberg,220,300,15,270.0,None,Love
+Braitenberg,320,300,15,270.0,None,Explore
+Braitenberg,420,300,15,270.0,None,Coward
+Food,100,100,30,0.0
+Food,300,500,20,0.0
+Food,500,100,20,0.0
+Light,100,250,30
+Light,500,350,30

@@ -50,29 +50,35 @@ BraitenbergVehicle::BraitenbergVehicle() :
 }
 
 void BraitenbergVehicle::TimestepUpdate(__unused unsigned int dt) {
-  starving_time_++;
-  if (isDead()) {
-    WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
-    WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
-    WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
-    std::vector<WheelVelocity*> emptyWVS {&bv_wheel_velocity,
-                                     &light_wheel_velocity,
-                                     &food_wheel_velocity};
-    Notify(&emptyWVS);
-    return;
-  }
+  if (!noDisguise) {
+    Update();
+  } else {
+    starving_time_++;
 
-  if (collision_time_ != 0) {
-    if (collision_time_ == 20) {
-      set_heading(static_cast<int>((get_pose().theta - 135)) % 360);
-      collision_time_ = 0;
-    } else {
-        collision_time_++;
+    if (isDead()) {
+      WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
+      WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
+      WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
+      std::vector<WheelVelocity*> emptyWVS {&bv_wheel_velocity,
+                                       &light_wheel_velocity,
+                                       &food_wheel_velocity};
+      Notify(&emptyWVS);
+      return;
+    }
+
+    if (collision_time_ != 0) {
+      if (collision_time_ == 20) {
+        set_heading(static_cast<int>((get_pose().theta - 135)) % 360);
+        collision_time_ = 0;
+      } else {
+          collision_time_++;
+      }
+    }
+    if (starving_time_ == 600) {
+      Die();
     }
   }
-  if (starving_time_ == 600) {
-    Die();
-  }
+
   if (is_moving()) {
     motion_behavior_->UpdatePose(dt, wheel_velocity_);
   }
@@ -90,9 +96,11 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
   if (entity.get_type() == kLight) {
     closest_entity_ = &closest_light_entity_;
   } else if (entity.get_type() == kFood) {
+    // std::cout << " I SEE FOOD " << std::endl;
     closest_entity_ = &closest_food_entity_;
   } else if (entity.get_type() == kBraitenberg) {
-    if (entity.get_id() != this->get_id() && !entity.isDead()) {
+    if (entity.get_id() != this->get_id() && !entity.isDead() &&
+     (entity.get_true_type() != kPredator)) {
       closest_entity_ = &closest_bv_entity_;
     }
   }
@@ -118,139 +126,146 @@ void BraitenbergVehicle::SenseEntity(const ArenaEntity& entity) {
 }
 
 void BraitenbergVehicle::Update() {
-  WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
-  WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
-  WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
-  Behaviors* dynamic_food_behavior;
-  Behaviors* dynamic_bv_behavior;
-  Behaviors* dynamic_light_behavior;
+    WheelVelocity bv_wheel_velocity = WheelVelocity(0, 0);
+    WheelVelocity light_wheel_velocity = WheelVelocity(0, 0);
+    WheelVelocity food_wheel_velocity = WheelVelocity(0, 0);
+    Behaviors* dynamic_food_behavior;
+    Behaviors* dynamic_bv_behavior;
+    Behaviors* dynamic_light_behavior;
+    // if the bv has no disguise basically a regular bv
+    if (noDisguise) {
+      if (dead_) {
+        std::vector<WheelVelocity*> emptyWVS {&bv_wheel_velocity,
+                                         &light_wheel_velocity,
+                                         &food_wheel_velocity};
+        Notify(&emptyWVS);
+        return;
+      }
 
-  if (dead_) {
-    std::vector<WheelVelocity*> emptyWVS {&bv_wheel_velocity,
-                                     &light_wheel_velocity,
-                                     &food_wheel_velocity};
-    Notify(&emptyWVS);
-    return;
-  }
+      // Set dynamic behaviors based on internal measures
+      if (starving_time_ >= hungry_time_) {
+        bool food_close = true;
+        if (closest_food_entity_ != nullptr) {
+          // std::cout << " I see food entity " << std::endl;
+          double distance =
+          (get_pose()-closest_food_entity_->get_pose()).Length();
+          food_close = distance < 100;
+        } else {
+          food_close = false;
+          // std::cout << " I do not have closest food entity " << std::endl;
+        }
 
-  // Set dynamic behaviors based on internal measures
-  if (starving_time_ >= hungry_time_) {
-    bool food_close = true;
-    if (closest_food_entity_ != nullptr) {
-      double distance = (get_pose()-closest_food_entity_->get_pose()).Length();
-      food_close = distance < 100;
+        if (food_close) {
+          // std::cout << " I am going aggressive " << std::endl;
+          dynamic_food_behavior = new Aggressive();
+        } else {
+          dynamic_food_behavior = new Explore();
+        }
+        dynamic_bv_behavior = new None();
+        dynamic_light_behavior = new None();
+      } else {
+        dynamic_food_behavior = food_behavior_;
+        dynamic_bv_behavior = bv_behavior_;
+        dynamic_light_behavior = light_behavior_;
+      }
+      // if not the predator is in disugse get new sensor readings
 
+      bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
+      bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
+      light_left_sensor_reading =
+       get_sensor_reading_left(closest_light_entity_);
+      light_right_sensor_reading =
+       get_sensor_reading_right(closest_light_entity_);
+      food_left_sensor_reading =
+        get_sensor_reading_left(closest_food_entity_);
+      food_right_sensor_reading =
+        get_sensor_reading_right(closest_food_entity_);
     } else {
-      food_close = false;
+      dynamic_food_behavior = food_behavior_;
+      dynamic_bv_behavior = bv_behavior_;
+      dynamic_light_behavior = light_behavior_;
     }
-
-    if (food_close) {
-      dynamic_food_behavior = new Aggressive();
-    } else {
-      dynamic_food_behavior = new Explore();
-    }
-    dynamic_bv_behavior = new None();
-    dynamic_light_behavior = new None();
-  } else {
-    dynamic_food_behavior = food_behavior_;
-    dynamic_bv_behavior = bv_behavior_;
-    dynamic_light_behavior = light_behavior_;
-  }
-
-
-  double bv_left_sensor_reading = get_sensor_reading_left(closest_bv_entity_);
-  double bv_right_sensor_reading = get_sensor_reading_right(closest_bv_entity_);
-  dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,
-                                 bv_right_sensor_reading,
-                                 defaultSpeed_,
-                                 &bv_wheel_velocity);
-
-  double light_left_sensor_reading =
-   get_sensor_reading_left(closest_light_entity_);
-  double light_right_sensor_reading =
-   get_sensor_reading_right(closest_light_entity_);
-
-  dynamic_light_behavior->getWheelVelocity(light_left_sensor_reading,
-                                    light_right_sensor_reading,
-                                    defaultSpeed_,
-                                    &light_wheel_velocity);
-
-
-  double food_left_sensor_reading =
-    get_sensor_reading_left(closest_food_entity_);
-  double food_right_sensor_reading =
-    get_sensor_reading_right(closest_food_entity_);
-
-  dynamic_food_behavior->getWheelVelocity(food_left_sensor_reading,
-                                   food_right_sensor_reading,
+    dynamic_bv_behavior->getWheelVelocity(bv_left_sensor_reading,
+                                   bv_right_sensor_reading,
                                    defaultSpeed_,
-                                   &food_wheel_velocity);
+                                   &bv_wheel_velocity);
 
-  std::vector<WheelVelocity*> wvs {&light_wheel_velocity,
-                                   &food_wheel_velocity,
-                                   &bv_wheel_velocity};
-  Notify(&wvs);
+    dynamic_light_behavior->getWheelVelocity(light_left_sensor_reading,
+                                      light_right_sensor_reading,
+                                      defaultSpeed_,
+                                      &light_wheel_velocity);
 
-  // FOOD, LIGHT, BV
-  // NNN, NNS, NSN, NSS, SNN, SNS, SSS
-  bool light_behavior_set, food_behavior_set, bv_behavior_set;
-  light_behavior_set = dynamic_light_behavior->getBehaviorType() != "None";
-  food_behavior_set = dynamic_food_behavior->getBehaviorType() != "None";
-  bv_behavior_set = dynamic_bv_behavior->getBehaviorType() != "None";
-  // if the BV has the food sensor on but not the light sensor
-  if (!light_behavior_set && food_behavior_set) {
-    set_color({0, 0, 255});
-
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (bv_wheel_velocity.left + food_wheel_velocity.left)/2,
-        (bv_wheel_velocity.right + food_wheel_velocity.right)/2,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        food_wheel_velocity.left, food_wheel_velocity.right, defaultSpeed_);
+    dynamic_food_behavior->getWheelVelocity(food_left_sensor_reading,
+                                     food_right_sensor_reading,
+                                     defaultSpeed_,
+                                     &food_wheel_velocity);
+    if (noDisguise) {
+      std::vector<WheelVelocity*> wvs {&light_wheel_velocity,
+                                       &food_wheel_velocity,
+                                       &bv_wheel_velocity};
+      Notify(&wvs);
     }
-    // if the BV has the light sensor on but not the food sensor
-  } else if (light_behavior_set && !food_behavior_set) {
-    set_color({255, 204, 51});
 
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
-        (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        light_wheel_velocity.left, light_wheel_velocity.right, defaultSpeed_);
-    }
-    // if the BV has the light sensor and food sensor on
-  } else if (light_behavior_set && food_behavior_set) {
-    set_color({122, 0, 25});
+    // FOOD, LIGHT, BV
+    // NNN, NNS, NSN, NSS, SNN, SNS, SSS
+    bool light_behavior_set, food_behavior_set, bv_behavior_set;
+    light_behavior_set = dynamic_light_behavior->getBehaviorType() != "None";
+    food_behavior_set = dynamic_food_behavior->getBehaviorType() != "None";
+    bv_behavior_set = dynamic_bv_behavior->getBehaviorType() != "None";
+    // if the BV has the food sensor on but not the light sensor
+    if (!light_behavior_set && food_behavior_set) {
+      set_color({0, 0, 255});
 
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + food_wheel_velocity.left +
-           bv_wheel_velocity.left)/3,
-        (light_wheel_velocity.right + food_wheel_velocity.right +
-           bv_wheel_velocity.right)/3,
-        defaultSpeed_);
-    } else {
-      wheel_velocity_ = WheelVelocity(
-        (light_wheel_velocity.left + food_wheel_velocity.left)/2,
-        (light_wheel_velocity.right + food_wheel_velocity.right)/2,
-        defaultSpeed_);
-    }
-    // if the BV has no sensors on or just the robot behavior sensor
-  } else {
-    set_color({122, 0, 25});
+      if (bv_behavior_set) {
+        wheel_velocity_ = WheelVelocity(
+          (bv_wheel_velocity.left + food_wheel_velocity.left)/2,
+          (bv_wheel_velocity.right + food_wheel_velocity.right)/2,
+          defaultSpeed_);
+      } else {
+        wheel_velocity_ = WheelVelocity(
+          food_wheel_velocity.left, food_wheel_velocity.right, defaultSpeed_);
+      }
+      // if the BV has the light sensor on but not the food sensor
+    } else if (light_behavior_set && !food_behavior_set) {
+      set_color({255, 204, 51});
 
-    if (bv_behavior_set) {
-      wheel_velocity_ = WheelVelocity(bv_wheel_velocity.left,
-        bv_wheel_velocity.right, defaultSpeed_);
+      if (bv_behavior_set) {
+        wheel_velocity_ = WheelVelocity(
+          (light_wheel_velocity.left + bv_wheel_velocity.left)/2,
+          (light_wheel_velocity.right + bv_wheel_velocity.right)/2,
+          defaultSpeed_);
+      } else {
+        wheel_velocity_ = WheelVelocity(
+          light_wheel_velocity.left, light_wheel_velocity.right, defaultSpeed_);
+      }
+      // if the BV has the light sensor and food sensor on
+    } else if (light_behavior_set && food_behavior_set) {
+      set_color({122, 0, 25});
+
+      if (bv_behavior_set) {
+        wheel_velocity_ = WheelVelocity(
+          (light_wheel_velocity.left + food_wheel_velocity.left +
+             bv_wheel_velocity.left)/3,
+          (light_wheel_velocity.right + food_wheel_velocity.right +
+             bv_wheel_velocity.right)/3,
+          defaultSpeed_);
+      } else {
+        wheel_velocity_ = WheelVelocity(
+          (light_wheel_velocity.left + food_wheel_velocity.left)/2,
+          (light_wheel_velocity.right + food_wheel_velocity.right)/2,
+          defaultSpeed_);
+      }
+      // if the BV has no sensors on or just the robot behavior sensor
     } else {
-      wheel_velocity_ = WheelVelocity(0, 0, defaultSpeed_);
+      set_color({122, 0, 25});
+
+      if (bv_behavior_set) {
+        wheel_velocity_ = WheelVelocity(bv_wheel_velocity.left,
+          bv_wheel_velocity.right, defaultSpeed_);
+      } else {
+        wheel_velocity_ = WheelVelocity(0, 0, defaultSpeed_);
+      }
     }
-  }
 }
 
 std::string BraitenbergVehicle::get_name() const {
