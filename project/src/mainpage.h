@@ -43,13 +43,13 @@
  * \subsection Food
  * The food entity inherits from the ArenaImmobileEntity class. This entity is a stationary stimuli that the BraitenbergVehicle[s] can exhibts behavior towards.
  * When a BraitenbergVehicle "collides" with the food entity its opacity will decrease (to show it has been eaten) until it completly disapears and moves to a random position.
+ * \subsection BraitenbergVehicle
+ * The BraitenbergVehicle entity inheritsfrom the ArenaMobileEntity class. This entity can exhibit behaviors towards light, food and other BraitenbergVehicle[s]. Depending on the hungry time
+ * inputed in the Graphics Window, the braitenberg vehicle behavior can change into an aggressive food mode when the BraitenbergVehicle is starving.
  * \subsection Predator
  * The predator entity is simply a BraitenbergVehicle with fixed behaviors towards light and predator. Towards light the predator is coward and towards BraitenbergVehicle it is aggressive.
  * The predator entity utilzies the Decorator pattern in order to decorate itself with either a light, food, or BraitenbergVehicle decorator in order to trick BraitenbergVehicle[s].
  * If the predator collides with a BraitenbergVehicle it will "eat" the vehicle and that vehicle will die and turn into a ghost.
- * \subsection BraitenbergVehicle
- * The BraitenbergVehicle entity inheritsfrom the ArenaMobileEntity class. This entity can exhibit behaviors towards light, food and other BraitenbergVehicle[s]. Depending on the hungry time
- * inputed in the Graphics Window, the braitenberg vehicle behavior can change into an aggressive food mode when the BraitenbergVehicle is starving.
  * \section GraphicsArenaViewer
  * To make graphics the simulator has the GraphicsArenaViewer class. In this class the library MinGfx and nanogui is used to include
  * buttons for controlling the simulator and is used to draw the entities (food, light, etc). All graphics related changes
