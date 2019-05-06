@@ -1,6 +1,6 @@
 ### Feedback for Proj 02
 
-Run on April 15, 23:39:44 PM.
+Run on April 27, 00:33:53 AM.
 
 
 ***Note: This is just the basic feedback.  The full feedback is run daily as a batch process (click link below)***
@@ -43,7 +43,7 @@ Commits found=152
 
 83877c2fbe2a1d93a93506f585244762a4391dd7	refs/heads/chore
 
-6d1c4ab3513b5b595ec0d11a28012c485936ee1c	refs/heads/devel
+2595ed8844eb669878202d86e7c235e263fc7637	refs/heads/devel
 
 82c0c9f1b8aea2038ad774bc03aad494d498a83d	refs/heads/docs
 
@@ -65,15 +65,19 @@ b5991806668ccd065049dff06667f5f97acf9a16	refs/heads/feature/08-bv_starves
 
 4b87dba6bbc5a0708c397d5734a26d4d7cff4332	refs/heads/feature/09-dynamic_wheel_velocity_starving
 
+e8e77e18f15abd4046a8d0903edcf16990e8c4de	refs/heads/feature/10-decorator_pattern_predator
+
 d5bd187ee73715e9cab54f52f780158b0468f33c	refs/heads/fix/01-compilation-errors
 
 3cf8b8d837f15174e697560e3716cbeb0922e720	refs/heads/fix/01-entity_pass_through_entity
 
 2ec4c2d34c6b052a5d99e3bfa3a2ac7d16cc280f	refs/heads/fix/03-unit_test_compiliation
 
-e105faed5f29e28d49d6251eab233f646fa82040	refs/heads/master
+87e42c629696edbd4d8630e37e679ae27b7e58b8	refs/heads/master
 
 5dc19be958aad25b249b7fb45190b80f6f32999f	refs/heads/pre-release/iteration1
+
+6d1c4ab3513b5b595ec0d11a28012c485936ee1c	refs/heads/pre-release/iteration2
 
 1b3ebd50426b265ad53f46c40a112dae613a0814	refs/heads/refactor/01-adding-json-object
 
@@ -82,6 +86,8 @@ c3c21c56c0ce281df73641979d47865c588200d7	refs/heads/refactor/02-update_robot_col
 33863dcd20bdab078691bb470272409df3acc055	refs/heads/refactor/04-implement_strategy_pattern
 
 5bca29e9c2ac9e682796fe49deccffdb175ed090	refs/heads/release/iteration1
+
+a67ca66e2467e75c21939da7a2a2820be5fefca2	refs/heads/release/iteration2
 
 a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
@@ -98,9 +104,17 @@ a0d90722755dffa0bb40d8e7a7acae7b27f8ed3e	refs/heads/release/iteration2-prelim1
 
 + Pass: Configuring GHI
 
-+ Pass: Run ghi for total number of open issues in Github repo (Found: 0)
++ Pass: Run ghi for total number of open issues in Github repo (Found: 1)
 
-+ Pass: Run ghi for total number of closed issues in Github repo (Found: 21)
+[OPEN issue #23] :  Factory pattern reads in CSV [enhancement]
+
+
+
+
+
++ Pass: Run ghi for total number of closed issues in Github repo (Found: 22)
+
+[CLOSED issue #22] :  Add decorator pattern for predator [enhancement] 1
 
 [CLOSED issue #21] :  Calculate wheel velocity of BV based on dynamically weighted combos [enhancement]
 
