@@ -144,6 +144,7 @@ bool Controller::checkJSON(std::string filename) {
   }
 }
 
+// For adaptCSV, the x and y dim need to be provided as arguments
 std::string Controller::adapterCSV(char **argv) {
   //
   // if(argc != 4){

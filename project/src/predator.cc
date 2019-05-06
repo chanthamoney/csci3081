@@ -228,7 +228,7 @@ void Predator::Die() {
   delete disguisedPredator_;
   disguisedPredator_ = nullptr;
   disguised_ = kPredator;
-  set_radius(DEFAULT_RADIUS);
+  set_radius(DEFAULT_PREDATOR_RADIUS);
 }
 
 void Predator::ConsumeBV() {
@@ -241,7 +241,7 @@ void Predator::ConsumeBV() {
     possibleDisguised[0] = false;
     possibleDisguised[1] = false;
     possibleDisguised[2] = false;
-    set_radius(DEFAULT_RADIUS);
+    set_radius(DEFAULT_PREDATOR_RADIUS);
   }
 }
 
