@@ -87,9 +87,8 @@
  * picojson. The LoadFromObject function from ArenaEntity utilzies the json.
  * For more information on picojson view this github: https://github.com/kazuho/picojson \n
  *
- * After a sucessful complitation, a json file can be used to load ArenaEntity[s] into the Arena.
- * For example, ./build/bin/arenaviewer scenes/2_lights_4_bots.json
- * or ./build/bin/arenaviewer "json file"
+ * After a sucessful complitation, a json file can be used to load ArenaEntity[s] into the Arena. However, the user must include the x and y dimension of the Arena.
+ * For example, ./build/bin/arenaviewer xdim ydim scenes/2_lights_4_bots.json
  * If the file is a CSV file to load ArenaEntity[s] into the Arena, the user must include the x and y dimension of the Arena
  * For example, ./build/bin/areanviewer xdim ydim ConfigurationFile.csv
  * The recommended x and y dimension is 600 600.
