@@ -124,6 +124,8 @@ class Controller {
   ArenaViewer* viewer_{nullptr};
   std::vector<ArenaViewer*> viewers_;
   json_value* config_;
+  double x_dim_ = 600.0;
+  double y_dim_ = 600.0;
 };
 
 NAMESPACE_END(csci3081);
