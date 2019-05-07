@@ -1,6 +1,4 @@
 {
-  "width": 600,
-  "height": 600,
   "entities": [
       {"type": "Braitenberg", "x":300, "y":280, "r":15, "theta": 270.0, "light_behavior": "Aggressive"},
       {"type": "Braitenberg", "x":220, "y":280, "r":15, "theta": 270.0, "light_behavior": "Aggressive"},

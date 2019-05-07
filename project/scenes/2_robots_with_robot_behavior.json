@@ -1,6 +1,4 @@
 {
-  "width": 500,
-  "height": 500,
   "entities": [
       {"type": "Braitenberg", "x":270, "y":270, "r":15, "theta": 215, "light_behavior": "None", "food_behavior": "Explore" },
       {"type": "Braitenberg", "x":370, "y":270, "r":15, "theta": 215, "light_behavior": "None", "food_behavior": "Explore", "robot_behavior": "Aggressive" },
