@@ -54,10 +54,12 @@ class Arena {
    * @brief Arena's constructor given a JSON Object
    *
    * @param[in] arena_object The json_object to set up Arena
+   * @param[in]  y The x dim of arena
+   * @param[in]  x The y dim of arena
    *
    * Initialize all private variables and entities.
    */
-  explicit Arena(json_object arena_object);
+  explicit Arena(json_object arena_object, double x, double y);
 
   /**
    * @brief Arena's destructor. `delete` all entities created.

@@ -41,13 +41,14 @@ Arena::Arena(): x_dim_(X_DIM),
     AddEntity(new Predator());
 }
 
-Arena::Arena(json_object arena_object): x_dim_(X_DIM),
-      y_dim_(Y_DIM),
+Arena::Arena(json_object arena_object, double x_dim, double y_dim):
+      x_dim_(x_dim),
+      y_dim_(y_dim),
       entities_(),
       mobile_entities_(),
       light_sensors_() {
-  x_dim_ = arena_object["width"].get<double>();
-  y_dim_ = arena_object["height"].get<double>();
+  //  x_dim_ = arena_object["width"].get<double>();
+  //  y_dim_ = arena_object["height"].get<double>();
   json_array& entities = arena_object["entities"].get<json_array>();
   for (unsigned int f = 0; f < entities.size(); f++) {
     json_object& entity_config = entities[f].get<json_object>();

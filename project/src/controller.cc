@@ -27,6 +27,8 @@ NAMESPACE_BEGIN(csci3081);
 
 Controller::Controller(int argc, char **argv) :
   last_dt(0), viewers_(), config_(NULL) {
+    x_dim_ = 1.0*std::stoi(argv[1]);
+    y_dim_ = 1.0*std::stoi(argv[2]);
     if (argc == 4 && checkCSV(argv[3])) {
       std::string json = adapterCSV(argv);
       config_ = new json_value();
@@ -36,10 +38,10 @@ Controller::Controller(int argc, char **argv) :
        delete config_;
        config_ = NULL;
     } else {
-      arena_ = new Arena(config_->get<json_object>());
+      arena_ = new Arena(config_->get<json_object>(), x_dim_, y_dim_);
         }
-    }  else if (argc > 1 && checkJSON(argv[1])) {
-    std::ifstream t(std::string(argv[1]).c_str());
+    }  else if (argc > 1 && checkJSON(argv[3])) {
+    std::ifstream t(std::string(argv[3]).c_str());
     std::string str((std::istreambuf_iterator<char>(t)),
                    std::istreambuf_iterator<char>());
     std::string json = str;
@@ -50,7 +52,7 @@ Controller::Controller(int argc, char **argv) :
       delete config_;
       config_ = NULL;
     } else {
-      arena_ = new Arena(config_->get<json_object>());
+      arena_ = new Arena(config_->get<json_object>(), x_dim_, y_dim_);
     }
   }
   if (!config_) {
@@ -105,7 +107,7 @@ void Controller::Reset() {
     delete (arena_);
   }
   if (config_) {
-    arena_ = new Arena(config_->get<json_object>());
+    arena_ = new Arena(config_->get<json_object>(), x_dim_, y_dim_);
   } else {
     arena_ = new Arena();
   }
