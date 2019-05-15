@@ -1,8 +1,8 @@
-### Partial Assessment for Project Iteration 02 - Combined (Graded By: Dan Orban)
+### Partial Assessment for Project Iteration 02 - Combined (Graded By: Lakshya Goel)
 
 #### Total score: _39.5_ / _44.5_
 
-Run on May 09, 12:40:12 PM.
+Run on May 15, 17:52:23 PM.
 
 
 #### Partial Combined Scores (44.5% of Iteration 2 Grade)
